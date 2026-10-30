@@ -17,9 +17,11 @@ import {
   ROOT,
   augmentationBlock,
   buildCorrectionContext,
+  containsBannedTerm,
   stripCitationMarkers,
   writeJson,
 } from './lib/session-content.js'
+import { printUsageSummary } from './lib/usage.js'
 
 interface SportFacts {
   gamesContext: string
@@ -144,6 +146,9 @@ async function fetchSportFacts(
       if (typeof parsed.gamesContext !== 'string' || typeof parsed.parisRecap !== 'string') {
         throw new Error('Response missing required fields')
       }
+      if (containsBannedTerm(parsed.gamesContext) || containsBannedTerm(parsed.parisRecap)) {
+        throw new Error('Response used a trademarked term')
+      }
       return {
         gamesContext: stripCitationMarkers(parsed.gamesContext),
         parisRecap: stripCitationMarkers(parsed.parisRecap),
@@ -254,6 +259,7 @@ async function main() {
     merged[sport] = facts
   }
 
+  printUsageSummary()
   writeJson(SPORT_FACTS_PATH, merged)
   console.log(`Wrote ${Object.keys(updated).length} sport(s) to src/data/sport-facts.json`)
 }

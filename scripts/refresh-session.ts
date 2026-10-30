@@ -25,7 +25,10 @@ import {
   fetchGrounding,
   generateScoring,
   generateWriting,
+  scoringInputHash,
+  writingInputHash,
 } from './lib/session-content.js'
+import { printUsageSummary } from './lib/usage.js'
 
 interface ParsedArgs {
   sessionId?: string
@@ -245,6 +248,7 @@ async function main() {
           blurb: writing.blurb,
           potentialContendersIntro: writing.potentialContendersIntro || undefined,
           potentialContenders: writing.potentialContenders,
+          inputHash: writingInputHash(session, grounding ?? undefined, args.writingModel),
         },
       ],
       {
@@ -294,7 +298,8 @@ async function main() {
     console.log(
       `  ✓ Sig${sc.significance.score} Exp${sc.experience.score} Star${sc.starPower.score} Uniq${sc.uniqueness.score} Dem${sc.demand.score} = ${sc.aggregate}`,
     )
-    await upsertScoring([{ sessionId: session.id, scorecard: scoring.scorecard }], {
+    const inputHash = scoringInputHash(session, grounding ?? undefined, writing, args.scoringModel)
+    await upsertScoring([{ sessionId: session.id, scorecard: scoring.scorecard, inputHash }], {
       model: args.scoringModel,
       promptVersion: SCORING_VERSION,
       generatedAt: new Date().toISOString(),
@@ -302,6 +307,8 @@ async function main() {
   } else {
     console.log('\n=== Stage 3: Scoring (skipped) ===')
   }
+
+  printUsageSummary()
 
   if (writing) {
     console.log(`\n--- Current blurb ---\n${writing.blurb}\n---------------------`)

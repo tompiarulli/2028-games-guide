@@ -3,11 +3,13 @@ import Anthropic from '@anthropic-ai/sdk'
 import pLimit from 'p-limit'
 
 import {
+  type GroundingEntry,
   chunk as chunkList,
+  markGroundingChecked,
   readAllSessions,
+  readGroundingForSession,
   readStageStatus,
   upsertGrounding,
-  type StageStatus,
 } from './lib/content-store.js'
 import {
   ANTHROPIC_GROUNDING_DEFAULT_MODEL,
@@ -15,10 +17,12 @@ import {
   GROUNDING_VERSION,
   type GroundingData,
   type GroundingJob,
+  type PreviousBrief,
   buildCorrectionContext,
   fetchGroundingBatch,
   fetchGroundingViaBatches,
 } from './lib/session-content.js'
+import { printUsageSummary } from './lib/usage.js'
 
 // Sync (--no-batch) web-search turns run ~1-3 minutes each; 3 in flight keeps
 // tier-1 input TPM comfortable once search results land in context.
@@ -47,10 +51,26 @@ function groupBySport<T extends { sport: string }>(items: T[]): Map<string, T[]>
   return groups
 }
 
-function needsGrounding(status: StageStatus | undefined, forceAll: boolean): boolean {
-  if (forceAll) return true
-  if (!status) return true
-  return (status.groundingPromptVersion ?? -1) < GROUNDING_VERSION
+// Due when forced, missing, on an old prompt version, or (with --stale-days)
+// not grounded or re-checked within that many days.
+function needsGrounding(
+  entry: GroundingEntry | null,
+  forceAll: boolean,
+  staleBefore: string | null,
+): boolean {
+  if (forceAll || !entry) return true
+  if (entry.promptVersion < GROUNDING_VERSION) return true
+  if (!staleBefore) return false
+  return (entry.checkedAt ?? entry.generatedAt) < staleBefore
+}
+
+function previousBrief(entry: GroundingEntry | null): PreviousBrief | undefined {
+  if (!entry?.facts || entry.facts.length === 0) return undefined
+  return {
+    facts: entry.facts,
+    newsTitles: entry.relatedNews.map((n) => n.title),
+    gatheredAt: entry.generatedAt,
+  }
 }
 
 async function main() {
@@ -60,6 +80,11 @@ async function main() {
   const noBatch = process.argv.includes('--no-batch')
   const sportFilter = getArgValue('--sport')
   const concurrency = parsePositiveInt(getArgValue('--concurrency'), DEFAULT_CONCURRENCY)
+  // Without previous briefs, every target gets a full brief from scratch.
+  const usePrevious = !process.argv.includes('--no-previous')
+  const staleDaysArg = getArgValue('--stale-days')
+  const staleDays = staleDaysArg ? parsePositiveInt(staleDaysArg, 0) : 0
+  const staleBefore = staleDays ? new Date(Date.now() - staleDays * 86_400_000).toISOString() : null
 
   const anthropicKey = process.env.ANTHROPIC_API_KEY
   if (!dryRun && !anthropicKey) {
@@ -71,14 +96,22 @@ async function main() {
   console.log(`Grounding: anthropic ${model} + web search  ${mode}`)
 
   const sessions = readAllSessions()
-  const stageStatus = readStageStatus()
   console.log(`Loaded ${sessions.length} sessions from src/data/sessions.json`)
 
   const targets = sessions.filter((s) => {
     if (sportFilter && s.sport !== sportFilter) return false
-    return needsGrounding(stageStatus.get(s.id), forceAll)
+    return needsGrounding(readGroundingForSession(s.id), forceAll, staleBefore)
   })
-  console.log(`${targets.length} session(s) need grounding`)
+  const previous = new Map<string, PreviousBrief>()
+  if (usePrevious) {
+    for (const s of targets) {
+      const brief = previousBrief(readGroundingForSession(s.id))
+      if (brief) previous.set(s.id, brief)
+    }
+  }
+  console.log(
+    `${targets.length} session(s) need grounding (${previous.size} re-checked against their previous brief)`,
+  )
 
   if (dryRun) {
     for (const s of targets) console.log(`  [dry-run] ${s.id} (${s.sport})`)
@@ -96,23 +129,38 @@ async function main() {
         sessionIds: batch.map((s) => s.id),
         sport,
       })
-      jobs.push({ sport, batch, extraInstructions })
+      jobs.push({ sport, batch, extraInstructions, previous })
     }
   }
   console.log(`${jobs.length} batch(es) across ${sports.length} sport(s)`)
 
   const client = new Anthropic({ apiKey: anthropicKey! })
 
-  const save = (results: GroundingData[]) =>
-    upsertGrounding(
-      results.map((g) => ({
+  let changedTotal = 0
+  let unchangedTotal = 0
+  // Briefs with no material change keep their stored facts (and generatedAt),
+  // so writing and scoring see identical inputs and skip those sessions.
+  const save = async (results: GroundingData[]) => {
+    const meta = {
+      model,
+      promptVersion: GROUNDING_VERSION,
+      generatedAt: new Date().toISOString(),
+    }
+    const changed = results.filter((g) => g.materialChange !== false)
+    const unchanged = results.filter((g) => g.materialChange === false).map((g) => g.id)
+    changedTotal += changed.length
+    unchangedTotal += unchanged.length
+    await upsertGrounding(
+      changed.map((g) => ({
         sessionId: g.id,
         facts: g.groundingFacts,
         relatedNews: g.relatedNews,
         sources: g.sources,
       })),
-      { model, promptVersion: GROUNDING_VERSION, generatedAt: new Date().toISOString() },
+      meta,
     )
+    await markGroundingChecked(unchanged, meta)
+  }
 
   if (noBatch) {
     const limit = pLimit(concurrency)
@@ -126,6 +174,7 @@ async function main() {
             job.sport,
             model,
             job.extraInstructions,
+            job.previous,
           )
           await save(results)
           done += 1
@@ -157,6 +206,9 @@ async function main() {
       },
     })
   }
+
+  printUsageSummary()
+  console.log(`\nUpdated ${changedTotal} brief(s); ${unchangedTotal} had no material change`)
 
   const finalStatus = readStageStatus()
   const grounded = [...finalStatus.values()].filter(

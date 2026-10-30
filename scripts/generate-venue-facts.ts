@@ -16,9 +16,11 @@ import {
   ROOT,
   augmentationBlock,
   buildCorrectionContext,
+  containsBannedTerm,
   stripCitationMarkers,
   writeJson,
 } from './lib/session-content.js'
+import { printUsageSummary } from './lib/usage.js'
 
 interface VenueFacts {
   capacity?: number
@@ -133,6 +135,9 @@ async function fetchVenueFacts(
       ) {
         throw new Error('Response missing required fields')
       }
+      const text = [parsed.location, parsed.iconicMoments, parsed.spectatorExperience]
+      if (typeof parsed.changes2028 === 'string') text.push(parsed.changes2028)
+      if (text.some(containsBannedTerm)) throw new Error('Response used a trademarked term')
       const out: VenueFacts = {
         location: stripCitationMarkers(parsed.location),
         iconicMoments: stripCitationMarkers(parsed.iconicMoments),
@@ -246,6 +251,7 @@ async function main() {
     merged[venue] = facts
   }
 
+  printUsageSummary()
   writeJson(VENUE_FACTS_PATH, merged)
   console.log(`Wrote ${Object.keys(updated).length} venue(s) to src/data/venue-facts.json`)
 }

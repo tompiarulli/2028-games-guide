@@ -7,6 +7,7 @@ import type {
 } from '@anthropic-ai/sdk/resources/messages'
 
 import type { ContentSource } from '../../src/types/session.js'
+import { recordUsage } from './usage.js'
 
 // Research stages (sport facts, venue facts, session grounding) run Claude with
 // the server-side web search tool. Web search citations are always on, and
@@ -103,6 +104,7 @@ export async function runResearch(
   const content: ContentBlock[] = []
   for (let i = 0; i <= MAX_CONTINUATIONS; i++) {
     const response = await client.messages.stream({ ...params, messages }).finalMessage()
+    recordUsage(response.model, response.usage, false)
     content.push(...response.content)
     if (response.stop_reason === 'refusal') {
       throw new Error(`Refused (${response.stop_details?.category ?? 'no category'})`)

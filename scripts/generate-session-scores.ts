@@ -3,26 +3,27 @@ import Anthropic from '@anthropic-ai/sdk'
 import pLimit from 'p-limit'
 
 import {
+  backfillInputHashes,
   chunk as chunkList,
   readAllSessions,
   readGroundingForSession,
   readStageStatus,
   readWritingForSession,
   upsertScoring,
-  type StageStatus,
 } from './lib/content-store.js'
+import { planScoring } from './lib/freshness.js'
 import {
   ANTHROPIC_SCORING_DEFAULT_MODEL,
   type GroundingData,
   SCORING_BATCH_SIZE,
   SCORING_VERSION,
   type ScoringJob,
-  WRITING_VERSION,
   type WritingData,
   buildCorrectionContext,
   generateScoring,
   generateScoringViaBatches,
 } from './lib/session-content.js'
+import { printUsageSummary } from './lib/usage.js'
 
 const DEFAULT_CONCURRENCY = 2
 
@@ -49,12 +50,6 @@ function groupBySport<T extends { sport: string }>(items: T[]): Map<string, T[]>
   return groups
 }
 
-function needsScoring(status: StageStatus | undefined, forceAll: boolean): boolean {
-  if (forceAll) return true
-  if (!status) return true
-  return (status.scoringPromptVersion ?? -1) < SCORING_VERSION
-}
-
 async function main() {
   const scoringModel = getArgValue('--anthropic-model') ?? ANTHROPIC_SCORING_DEFAULT_MODEL
   const forceAll = process.argv.includes('--force')
@@ -74,25 +69,20 @@ async function main() {
 
   const sessions = readAllSessions()
   const sessionMap = new Map(sessions.map((s) => [s.id, s]))
-  const stageStatus = readStageStatus()
   console.log(`Loaded ${sessions.length} sessions from src/data/sessions.json`)
 
-  const targets = sessions.filter((s) => {
-    if (sportFilter && s.sport !== sportFilter) return false
-    const st = stageStatus.get(s.id)
-    if (!needsScoring(st, forceAll)) return false
-    // Require writing at current version — scoring depends on session-content.
-    return (st?.writingPromptVersion ?? -1) >= WRITING_VERSION
-  })
-  const blocked = sessions.filter((s) => {
-    if (sportFilter && s.sport !== sportFilter) return false
-    const st = stageStatus.get(s.id)
-    return needsScoring(st, forceAll) && (st?.writingPromptVersion ?? -1) < WRITING_VERSION
-  })
-  console.log(`${targets.length} session(s) ready for scoring`)
-  if (blocked.length > 0) {
-    console.log(`${blocked.length} session(s) blocked — run pnpm generate:session-content first`)
+  const scoped = sportFilter ? sessions.filter((s) => s.sport === sportFilter) : sessions
+  const plan = planScoring(scoped, scoringModel, forceAll)
+  const targets = plan.targets
+  console.log(
+    `${targets.length} session(s) to score, ${plan.unchanged} unchanged since their last run`,
+  )
+  if (plan.blocked.length > 0) {
+    console.log(
+      `${plan.blocked.length} session(s) blocked — run pnpm generate:session-content first`,
+    )
   }
+  if (!dryRun) await backfillInputHashes('scoring', plan.backfill)
 
   if (dryRun) {
     for (const s of targets) console.log(`  [dry-run] ${s.id} (${s.sport})`)
@@ -158,7 +148,11 @@ async function main() {
           )
           const toUpsert = results
             .filter((r) => sessionMap.has(r.id))
-            .map((r) => ({ sessionId: r.id, scorecard: r.scorecard }))
+            .map((r) => ({
+              sessionId: r.id,
+              scorecard: r.scorecard,
+              inputHash: plan.hashes.get(r.id),
+            }))
           await upsertScoring(toUpsert, {
             model: scoringModel,
             promptVersion: SCORING_VERSION,
@@ -189,7 +183,11 @@ async function main() {
           const got = new Set<string>()
           for (const r of results) {
             if (!sessionMap.has(r.id)) continue
-            toUpsert.push({ sessionId: r.id, scorecard: r.scorecard })
+            toUpsert.push({
+              sessionId: r.id,
+              scorecard: r.scorecard,
+              inputHash: plan.hashes.get(r.id),
+            })
             got.add(r.id)
             scored += 1
           }
@@ -213,6 +211,7 @@ async function main() {
   const scored = [...finalStatus.values()].filter(
     (s) => (s.scoringPromptVersion ?? -1) >= SCORING_VERSION,
   ).length
+  printUsageSummary()
   console.log(`\nDone: ${scored} scored (v${SCORING_VERSION})`)
 }
 
