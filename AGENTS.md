@@ -23,12 +23,20 @@ Six independent scripts; each reads JSON output of upstream stages and writes on
 - `pnpm generate:paris-medals` — Rescrape Olympedia into `src/data/paris-2024-medals.json`. One-off; run only when medal data needs refreshing.
 - `pnpm generate:sport-facts` — Regenerate `src/data/sport-facts.json` per sport via Claude with web search, anchored on `paris-2024-medals.json`. Extra flag: `--force` regenerates even when `parisRecap` already populated.
 - `pnpm generate:venue-facts` — Regenerate `src/data/venue-facts.json` per venue via Claude with web search (capacity, history, spectator experience, 2028 changes). Filter: `--venue=<name>`.
-- `pnpm generate:session-facts` — Per-session Claude + web search grounding → `src/data/session-facts.json` (facts, related news, sources). Flags: `--no-batch`, `--concurrency=<n>` (with `--no-batch`), `--anthropic-model=<m>`.
+- `pnpm generate:session-facts` — Per-session Claude + web search grounding → `src/data/session-facts.json` (facts, related news, sources). Flags: `--stale-days=<n>` (re-check briefs older than n days), `--no-previous` (write briefs from scratch instead of re-checking the stored one), `--no-batch`, `--concurrency=<n>` (with `--no-batch`), `--anthropic-model=<m>`.
 - `pnpm generate:session-content` — Per-session Anthropic writing → `src/data/session-content.json` (blurb, contenders). Requires `session-facts.json` populated. Flags: `--no-batch`, `--anthropic-model=<m>`.
 - `pnpm generate:session-scores` — Per-session Anthropic scoring → `src/data/session-scores.json` (ratings + scorecard). Requires `session-content.json` populated. Flags: `--no-batch`, `--anthropic-model=<m>`.
 - `pnpm refresh <sessionId>` — Refresh grounding+writing+scoring for a single session with an optional `--prompt "..."` correction. Flags: `--skip-grounding|writing|scoring`.
 
 All paid API calls require `ANTHROPIC_API_KEY` in `.env`. Research stages (sport, venue, and session facts) use Claude's server-side web search tool ($10 per 1,000 searches plus tokens) and return results through a strict record tool — see `scripts/lib/claude-research.ts`. Session grounding, writing, and scoring use prompt caching and Messages Batches (50% token discount) by default — see `scripts/lib/session-content.ts` for the batching helpers. A batched grounding request whose search turn pauses can't be resumed, so it fails and stays due for the next run; rerun, or use `--no-batch` for stragglers.
+
+Cost controls (see `scripts/lib/freshness.ts` and `scripts/lib/usage.ts`):
+
+- Grounding re-checks send each session's stored brief; when Claude reports no material change, the stored facts and `generatedAt` stay put and only `checkedAt` moves. Briefs written before a session's current session/sport corrections (tracked by `correctionsHash`) are rewritten from scratch instead.
+- Writing and scoring store an input hash per session and skip sessions whose inputs are unchanged; `--force` overrides.
+- Every script prints a usage summary with an estimated cost.
+- Reader-facing output containing a trademarked term is rejected in code and retried on the next run.
+- Sport and venue facts are stable — don't put them in scheduled runs. A scheduled refresh is `generate:session-facts --stale-days=<n>`, then `generate:session-content`, `generate:session-scores`, and `pnpm format`.
 
 #### Persistent corrections
 

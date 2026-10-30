@@ -37,6 +37,11 @@ export interface GroundingEntry {
   model: string
   promptVersion: number
   generatedAt: string
+  // Last time grounding re-checked this session and found no material change.
+  // generatedAt only moves when the facts themselves change.
+  checkedAt?: string
+  // groundingCorrectionsHash() of the corrections this brief was written with.
+  correctionsHash?: string
 }
 
 export interface WritingEntry {
@@ -47,6 +52,8 @@ export interface WritingEntry {
   promptVersion: number
   batchId: string | null
   generatedAt: string
+  // writingInputHash() of the inputs this entry was generated from.
+  inputHash?: string
 }
 
 export interface ScoringEntry {
@@ -63,6 +70,8 @@ export interface ScoringEntry {
   promptVersion: number
   batchId: string | null
   generatedAt: string
+  // scoringInputHash() of the inputs this entry was generated from.
+  inputHash?: string
 }
 
 export interface GroundingUpsert {
@@ -70,6 +79,7 @@ export interface GroundingUpsert {
   facts: string[] | null
   relatedNews: RelatedNews[]
   sources: ContentSource[] | undefined
+  correctionsHash?: string
 }
 
 export interface WritingUpsert {
@@ -77,11 +87,13 @@ export interface WritingUpsert {
   blurb: string
   potentialContendersIntro: string | undefined
   potentialContenders: Contender[]
+  inputHash?: string
 }
 
 export interface ScoringUpsert {
   sessionId: string
   scorecard: Scorecard
+  inputHash?: string
 }
 
 export interface StageStatus {
@@ -231,10 +243,48 @@ export function upsertGrounding(rows: GroundingUpsert[], meta: StageMetadata): P
         model: meta.model,
         promptVersion: meta.promptVersion,
         generatedAt: meta.generatedAt,
+        correctionsHash: r.correctionsHash,
       }
     }
     groundingCache = sortedKeys(cache)
     writeJsonAtomic(SESSION_FACTS_PATH, groundingCache)
+  })
+}
+
+// Grounding re-checked these sessions and found nothing material: keep the
+// stored facts, news, sources, and generatedAt; record the check.
+export function markGroundingChecked(sessionIds: string[], meta: StageMetadata): Promise<void> {
+  if (sessionIds.length === 0) return Promise.resolve()
+  return enqueueWrite(() => {
+    const cache = loadGrounding()
+    for (const id of sessionIds) {
+      const entry = cache[id]
+      if (!entry) continue
+      cache[id] = {
+        ...entry,
+        model: meta.model,
+        promptVersion: meta.promptVersion,
+        checkedAt: meta.generatedAt,
+      }
+    }
+    writeJsonAtomic(SESSION_FACTS_PATH, cache)
+  })
+}
+
+// Records input hashes for entries that are already current, without
+// regenerating them (first run after hashes were introduced).
+export function backfillInputHashes(
+  stage: 'writing' | 'scoring',
+  hashes: Map<string, string>,
+): Promise<void> {
+  if (hashes.size === 0) return Promise.resolve()
+  return enqueueWrite(() => {
+    const cache: Record<string, { inputHash?: string }> =
+      stage === 'writing' ? loadWriting() : loadScoring()
+    for (const [id, hash] of hashes) {
+      if (cache[id]) cache[id].inputHash = hash
+    }
+    writeJsonAtomic(stage === 'writing' ? SESSION_CONTENT_PATH : SESSION_SCORES_PATH, cache)
   })
 }
 
@@ -251,6 +301,7 @@ export function upsertWriting(rows: WritingUpsert[], meta: StageMetadata): Promi
         promptVersion: meta.promptVersion,
         batchId: meta.batchId ?? null,
         generatedAt: meta.generatedAt,
+        inputHash: r.inputHash,
       }
     }
     writingCache = sortedKeys(cache)
@@ -276,6 +327,7 @@ export function upsertScoring(rows: ScoringUpsert[], meta: StageMetadata): Promi
         promptVersion: meta.promptVersion,
         batchId: meta.batchId ?? null,
         generatedAt: meta.generatedAt,
+        inputHash: r.inputHash,
       }
     }
     scoringCache = sortedKeys(cache)

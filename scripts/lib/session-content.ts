@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import { mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -38,6 +39,7 @@ import {
   type ParisMedalEvent,
   type ParisMedalsData,
 } from './paris-medals.js'
+import { recordUsage } from './usage.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 export const ROOT = resolve(__dirname, '..', '..')
@@ -70,10 +72,14 @@ export const SCORING_VERSION = 6
 export const MAX_RETRIES = 3
 export const RETRY_DELAY_MS = 5000
 export const MAX_NEWS_ITEMS = 10
-export const GROUNDING_BATCH_SIZE = 10
+// Sessions of one sport share most of their searches (same athletes, same
+// rankings), so larger batches cut duplicate searches and repeated context.
+export const GROUNDING_BATCH_SIZE = 20
 // Web search cap per grounding request ($10 per 1,000 searches). A batch request
 // covers up to GROUNDING_BATCH_SIZE sessions of one sport.
-export const GROUNDING_BATCH_MAX_SEARCHES = 10
+export const GROUNDING_BATCH_MAX_SEARCHES = 15
+// Room for up to 20 full briefs in one record_grounding call, plus thinking.
+const GROUNDING_BATCH_MAX_TOKENS = 32000
 export const GROUNDING_SINGLE_MAX_SEARCHES = 5
 export const WRITING_BATCH_SIZE = 15
 export const SCORING_BATCH_SIZE = 15
@@ -107,6 +113,17 @@ export interface GroundingData {
   groundingFacts: string[]
   relatedNews: RelatedNews[]
   sources?: ContentSource[]
+  // Set by grounding when a previous brief was supplied: false means nothing
+  // material changed and the stored brief should be kept as-is.
+  materialChange?: boolean
+}
+
+// The stored brief for a session, fed back into grounding so Claude can report
+// "no material change" instead of rewording the same facts.
+export interface PreviousBrief {
+  facts: string[]
+  newsTitles: string[]
+  gatheredAt: string
 }
 
 export interface WritingData {
@@ -126,9 +143,10 @@ export interface ScoringData {
 const GROUNDING_SESSION_SCHEMA = {
   type: 'object',
   additionalProperties: false,
-  required: ['id', 'groundingFacts', 'relatedNews'],
+  required: ['id', 'materialChange', 'groundingFacts', 'relatedNews'],
   properties: {
     id: { type: 'string' },
+    materialChange: { type: 'boolean' },
     groundingFacts: {
       type: 'array',
       items: { type: 'string' },
@@ -189,6 +207,14 @@ export const BANNED_TRADEMARK_TERMS = [
   'Citius Altius Fortius',
 ] as const
 
+// Code-level backstop for the prompt rule below: the models occasionally use
+// these terms anyway, so reader-facing output that contains one is rejected.
+const BANNED_TERM_PATTERN = /\b(?:olympi\w*|paralympi\w*|la ?28|citius altius fortius)\b/i
+
+export function containsBannedTerm(text: string): boolean {
+  return BANNED_TERM_PATTERN.test(text)
+}
+
 const BANNED_TERMS_BLOCK = `
 TRADEMARK RESTRICTION — CRITICAL:
 The following terms are trademarked and must NEVER appear in your output, in any form (including as adjectives, in compound words, or in quotes):
@@ -219,6 +245,8 @@ For each session you will return:
    Each bullet must be standalone and fact-shaped — no opinion, no superlatives, no prose flourish. If uncertain, hedge plainly ("Ohtani has not publicly confirmed whether he will play in the 2028 Games as of Oct 2025.").
 
 2. relatedNews — 0 to ${MAX_NEWS_ITEMS} recent news articles directly relevant to this session. Pull only from your search results. Include title, one-sentence summary of why it matters, sourceName, canonical sourceUrl, ISO publishedDate (YYYY-MM-DD), and 1-4 kebab-case tags. Prioritize 2028 Games-specific news, then recent form of probable contenders. Skip generic sport news. Empty array is fine if nothing fits.
+
+3. materialChange — Some sessions include a "Previous brief" gathered earlier. For those, research whether anything material has changed since then: new results or rankings, roster, injury, or retirement news, schedule or venue changes, or new relevant articles. If nothing material has changed, set materialChange to false and return empty groundingFacts and relatedNews; the previous brief is kept as-is. If something has changed, set materialChange to true and return a complete, updated brief, carrying forward previous facts that are still accurate. A session without a previous brief always gets materialChange true and a full brief.
 
 Rules:
 - Do not fabricate URLs, titles, dates, or outlets. If you don't have a source, don't include the fact.
@@ -399,10 +427,21 @@ export function buildVenueContext(sessions: SessionSource[]): string {
   return out
 }
 
+function previousBriefBlock(previous: PreviousBrief | undefined): string {
+  if (!previous || previous.facts.length === 0) return ''
+  let out = `- Previous brief (gathered ${previous.gatheredAt.slice(0, 10)}):\n`
+  for (const fact of previous.facts) out += `  - ${fact}\n`
+  if (previous.newsTitles.length > 0) {
+    out += `  - Previous news: ${previous.newsTitles.join('; ')}\n`
+  }
+  return out
+}
+
 export function buildGroundingPrompt(
   session: SessionSource,
   sport: string,
   extraInstructions?: string,
+  previous?: PreviousBrief,
 ): string {
   let prompt = buildSportContext(sport)
   prompt += buildParisMedalsBlock(session)
@@ -412,7 +451,9 @@ export function buildGroundingPrompt(
   prompt += `- Description: ${session.desc}\n`
   prompt += `- Round: ${session.rt}\n`
   prompt += `- Venue: ${session.venue}\n`
-  prompt += `- Date/Time: ${session.date}, ${session.time}\n\n`
+  prompt += `- Date/Time: ${session.date}, ${session.time}\n`
+  prompt += previousBriefBlock(previous)
+  prompt += '\n'
   prompt += `Use current web search to find facts relevant to THIS session's event, round, venue, and likely contenders. Prioritize 2028 Games-specific news, then 2024-2026 performance and status updates for probable contenders. Prefer official games organizing body, international federation, team, and reputable sports-news sources.\n\n`
   prompt += augmentationBlock(extraInstructions)
   prompt += `Record one entry in sessions, with id ${session.id}.`
@@ -423,6 +464,7 @@ export function buildBatchGroundingPrompt(
   sessions: SessionSource[],
   sport: string,
   extraInstructions?: string,
+  previous?: Map<string, PreviousBrief>,
 ): string {
   let prompt = buildSportContext(sport)
   prompt += `### Sessions (${sessions.length}) — ground each\n\n`
@@ -434,12 +476,13 @@ export function buildBatchGroundingPrompt(
     prompt += `- Date/Time: ${s.date}, ${s.time}\n`
     const paris = buildParisMedalsBlock(s)
     if (paris) prompt += paris
+    prompt += previousBriefBlock(previous?.get(s.id))
     prompt += '\n'
   }
   prompt += `Use current web search to find facts relevant to EACH session's event, round, venue, and likely contenders. Prioritize 2028 Games-specific news, then 2024-2026 performance and status updates for probable contenders. Prefer official games organizing body, international federation, team, and reputable sports-news sources.\n\n`
   prompt += `Return per-session groundingFacts and relatedNews — each session should have its own facts and news specific to its event and round type. Finals need different facts than prelims.\n\n`
   prompt += augmentationBlock(extraInstructions)
-  prompt += `Record ${sessions.length} entries in sessions (one per session id above), each with id, groundingFacts, relatedNews.`
+  prompt += `Record ${sessions.length} entries in sessions (one per session id above), each with id, materialChange, groundingFacts, relatedNews.`
   return prompt
 }
 
@@ -523,6 +566,8 @@ export function normalizeRelatedNews(items: unknown, sessionId: string): Related
       : []
 
     if (!title || !sourceUrl || !publishedDate) continue
+    // Titles are real headlines and stay verbatim; summaries are ours.
+    if (containsBannedTerm(summary)) continue
     let parsedUrl: URL
     try {
       parsedUrl = new URL(sourceUrl)
@@ -552,15 +597,26 @@ export function normalizeRelatedNews(items: unknown, sessionId: string): Related
 
 // Pulls per-session entries out of a record_grounding call. Entries for ids
 // outside the request are dropped; every entry shares the turn's search sources.
-function parseGroundingMessage(content: ContentBlock[], sessionIds: Set<string>): GroundingData[] {
+function parseGroundingMessage(
+  content: ContentBlock[],
+  sessionIds: Set<string>,
+  previousIds: Set<string>,
+): GroundingData[] {
   const record = extractRecord(content, RECORD_GROUNDING_TOOL.name) as { sessions?: unknown }
   const items = Array.isArray(record.sessions) ? record.sessions : []
   const sources = extractSearchSources(content)
   const results: GroundingData[] = []
   for (const raw of items) {
     if (!raw || typeof raw !== 'object') continue
-    const item = raw as { id?: unknown; groundingFacts?: unknown; relatedNews?: unknown }
+    const item = raw as {
+      id?: unknown
+      materialChange?: unknown
+      groundingFacts?: unknown
+      relatedNews?: unknown
+    }
     if (typeof item.id !== 'string' || !sessionIds.has(item.id)) continue
+    // "No change" only counts when there was a previous brief to keep.
+    const materialChange = item.materialChange !== false || !previousIds.has(item.id)
     const facts = Array.isArray(item.groundingFacts)
       ? item.groundingFacts
           .filter((f): f is string => typeof f === 'string' && f.trim().length > 0)
@@ -571,6 +627,7 @@ function parseGroundingMessage(content: ContentBlock[], sessionIds: Set<string>)
       groundingFacts: facts,
       relatedNews: normalizeRelatedNews(item.relatedNews, item.id),
       sources,
+      materialChange,
     })
   }
   return results
@@ -581,17 +638,25 @@ function buildGroundingRequest(
   sport: string,
   model: string,
   extraInstructions?: string,
+  previous?: Map<string, PreviousBrief>,
 ): MessageCreateParamsNonStreaming {
   const single = sessions.length === 1
   return buildResearchParams({
     model,
     system: GROUNDING_SYSTEM_PROMPT,
     prompt: single
-      ? buildGroundingPrompt(sessions[0], sport, extraInstructions)
-      : buildBatchGroundingPrompt(sessions, sport, extraInstructions),
+      ? buildGroundingPrompt(sessions[0], sport, extraInstructions, previous?.get(sessions[0].id))
+      : buildBatchGroundingPrompt(sessions, sport, extraInstructions, previous),
     recordTool: RECORD_GROUNDING_TOOL,
     maxSearches: single ? GROUNDING_SINGLE_MAX_SEARCHES : GROUNDING_BATCH_MAX_SEARCHES,
+    maxTokens: single ? undefined : GROUNDING_BATCH_MAX_TOKENS,
   })
+}
+
+function previousIdsFor(sessions: SessionSource[], previous?: Map<string, PreviousBrief>) {
+  return new Set(
+    sessions.filter((s) => (previous?.get(s.id)?.facts.length ?? 0) > 0).map((s) => s.id),
+  )
 }
 
 export async function fetchGrounding(
@@ -611,15 +676,17 @@ export async function fetchGroundingBatch(
   sport: string,
   model: string,
   extraInstructions?: string,
+  previous?: Map<string, PreviousBrief>,
 ): Promise<GroundingData[]> {
   if (sessions.length === 0) return []
-  const params = buildGroundingRequest(sessions, sport, model, extraInstructions)
+  const params = buildGroundingRequest(sessions, sport, model, extraInstructions, previous)
   const sessionIds = new Set(sessions.map((s) => s.id))
+  const previousIds = previousIdsFor(sessions, previous)
   const ids = sessions.map((s) => s.id).join(',')
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
       const content = await runResearch(client, params)
-      return parseGroundingMessage(content, sessionIds)
+      return parseGroundingMessage(content, sessionIds, previousIds)
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
       console.error(`    Grounding attempt ${attempt}/${MAX_RETRIES} failed for [${ids}]: ${msg}`)
@@ -789,6 +856,11 @@ function parseWritingMessage(content: ContentBlock[]): WritingData[] {
         typeof (c as Contender).country === 'string' &&
         typeof (c as Contender).note === 'string',
     )
+    const visible = [item.blurb, item.potentialContendersIntro, JSON.stringify(contenders)]
+    if (visible.some(containsBannedTerm)) {
+      console.warn(`    ${item.id}: writing used a trademarked term — dropped, will retry next run`)
+      continue
+    }
     results.push({
       id: item.id,
       blurb: item.blurb,
@@ -811,6 +883,7 @@ export async function generateWriting(
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
       const response = await client.messages.create(params)
+      recordUsage(response.model, response.usage, false)
       return parseWritingMessage(response.content)
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
@@ -1001,6 +1074,9 @@ async function runMessageBatchesBySport<TJob extends { sport: string }, TResult>
       for await (const item of results) {
         const outcome = byId.get(item.custom_id)
         if (!outcome) continue
+        if (item.result.type === 'succeeded') {
+          recordUsage(item.result.message.model, item.result.message.usage, true)
+        }
         if (item.result.type !== 'succeeded') {
           outcome.error = item.result.type
           continue
@@ -1055,6 +1131,7 @@ export interface GroundingJob {
   sport: string
   batch: SessionSource[]
   extraInstructions?: string
+  previous?: Map<string, PreviousBrief>
 }
 
 export type GroundingBatchOutcome = BatchOutcome<GroundingJob, GroundingData>
@@ -1077,8 +1154,14 @@ export async function fetchGroundingViaBatches(
   return runMessageBatchesBySport(
     client,
     jobs,
-    (job) => buildGroundingRequest(job.batch, job.sport, model, job.extraInstructions),
-    (content, job) => parseGroundingMessage(content, new Set(job.batch.map((s) => s.id))),
+    (job) =>
+      buildGroundingRequest(job.batch, job.sport, model, job.extraInstructions, job.previous),
+    (content, job) =>
+      parseGroundingMessage(
+        content,
+        new Set(job.batch.map((s) => s.id)),
+        previousIdsFor(job.batch, job.previous),
+      ),
     'grounding',
     options,
   )
@@ -1279,6 +1362,13 @@ function parseScoringMessage(content: ContentBlock[]): ScoringData[] {
     if (!significance || !experience || !starPower || !uniqueness || !demand || !overall) {
       continue
     }
+    const explanations = [significance, experience, starPower, uniqueness, demand]
+      .map((d) => d.explanation)
+      .concat(overall)
+    if (explanations.some(containsBannedTerm)) {
+      console.warn(`    ${item.id}: scoring used a trademarked term — dropped, will retry next run`)
+      continue
+    }
     const aggregate = computeAggregate(
       significance.score,
       experience.score,
@@ -1315,6 +1405,7 @@ export async function generateScoring(
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
       const response = await client.messages.create(params)
+      recordUsage(response.model, response.usage, false)
       return parseScoringMessage(response.content)
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
@@ -1365,4 +1456,62 @@ export async function generateScoringViaBatches(
     'scoring',
     { onSportComplete: options.onSportComplete, pollIntervalMs: options.pollIntervalMs },
   )
+}
+
+// Fingerprint of everything that shapes a session's writing or scoring output:
+// model, prompt version, system prompt, sport and venue context, grounding
+// facts, Paris medals, and corrections. When it matches the hash stored with
+// the session's last output, regenerating would only reword the same inputs,
+// so the stage skips the session.
+function hashInput(parts: string[]): string {
+  return createHash('sha256').update(parts.join('\u0000')).digest('hex').slice(0, 16)
+}
+
+// Fingerprint of the corrections grounding sees for a session (session and
+// sport scope), or undefined when there are none. A brief whose stored hash
+// differs was written before the current corrections, so it gets rewritten
+// from scratch rather than re-checked: a re-check could judge "no material
+// change" and keep facts the correction contradicts.
+export function groundingCorrectionsHash(session: SessionSource): string | undefined {
+  const extra = buildCorrectionContext({ sessionIds: [session.id], sport: session.sport })
+  return extra ? hashInput([extra]) : undefined
+}
+
+export function writingInputHash(
+  session: SessionSource,
+  grounding: GroundingData | undefined,
+  model: string,
+): string {
+  const g = new Map<string, GroundingData>()
+  if (grounding) g.set(session.id, grounding)
+  const extra = buildCorrectionContext({ sessionIds: [session.id], sport: session.sport })
+  return hashInput([
+    model,
+    String(WRITING_VERSION),
+    WRITING_SYSTEM_PROMPT,
+    buildSportContext(session.sport),
+    buildVenueContext([session]),
+    buildWritingSessionsBody([session], g, extra),
+  ])
+}
+
+export function scoringInputHash(
+  session: SessionSource,
+  grounding: GroundingData | undefined,
+  writing: WritingData | undefined,
+  model: string,
+): string {
+  const g = new Map<string, GroundingData>()
+  if (grounding) g.set(session.id, grounding)
+  const w = new Map<string, WritingData>()
+  if (writing) w.set(session.id, writing)
+  const extra = buildCorrectionContext({ sessionIds: [session.id], sport: session.sport })
+  return hashInput([
+    model,
+    String(SCORING_VERSION),
+    SCORING_SYSTEM_PROMPT,
+    buildSportContext(session.sport),
+    buildVenueContext([session]),
+    buildScoringSessionsBody([session], g, w, extra),
+  ])
 }

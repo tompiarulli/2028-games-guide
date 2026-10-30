@@ -3,16 +3,16 @@ import Anthropic from '@anthropic-ai/sdk'
 import pLimit from 'p-limit'
 
 import {
+  backfillInputHashes,
   chunk as chunkList,
   readAllSessions,
   readGroundingForSession,
   readStageStatus,
   upsertWriting,
-  type StageStatus,
 } from './lib/content-store.js'
+import { planWriting } from './lib/freshness.js'
 import {
   ANTHROPIC_WRITING_DEFAULT_MODEL,
-  GROUNDING_VERSION,
   type GroundingData,
   WRITING_BATCH_SIZE,
   WRITING_VERSION,
@@ -21,6 +21,7 @@ import {
   generateWriting,
   generateWritingViaBatches,
 } from './lib/session-content.js'
+import { printUsageSummary } from './lib/usage.js'
 
 // Sync (--no-batch) mode only: output TPM is the binding constraint on low
 // tiers, and adaptive thinking adds output on top of the ~2.5k-token answer.
@@ -49,12 +50,6 @@ function groupBySport<T extends { sport: string }>(items: T[]): Map<string, T[]>
   return groups
 }
 
-function needsWriting(status: StageStatus | undefined, forceAll: boolean): boolean {
-  if (forceAll) return true
-  if (!status) return true
-  return (status.writingPromptVersion ?? -1) < WRITING_VERSION
-}
-
 async function main() {
   const writingModel = getArgValue('--anthropic-model') ?? ANTHROPIC_WRITING_DEFAULT_MODEL
   const forceAll = process.argv.includes('--force')
@@ -74,25 +69,18 @@ async function main() {
 
   const sessions = readAllSessions()
   const sessionMap = new Map(sessions.map((s) => [s.id, s]))
-  const stageStatus = readStageStatus()
   console.log(`Loaded ${sessions.length} sessions from src/data/sessions.json`)
 
-  const targets = sessions.filter((s) => {
-    if (sportFilter && s.sport !== sportFilter) return false
-    const st = stageStatus.get(s.id)
-    if (!needsWriting(st, forceAll)) return false
-    // Require grounding at current version — writing depends on session-facts.
-    return (st?.groundingPromptVersion ?? -1) >= GROUNDING_VERSION
-  })
-  const blocked = sessions.filter((s) => {
-    if (sportFilter && s.sport !== sportFilter) return false
-    const st = stageStatus.get(s.id)
-    return needsWriting(st, forceAll) && (st?.groundingPromptVersion ?? -1) < GROUNDING_VERSION
-  })
-  console.log(`${targets.length} session(s) ready for writing`)
-  if (blocked.length > 0) {
-    console.log(`${blocked.length} session(s) blocked — run pnpm generate:session-facts first`)
+  const scoped = sportFilter ? sessions.filter((s) => s.sport === sportFilter) : sessions
+  const plan = planWriting(scoped, writingModel, forceAll)
+  const targets = plan.targets
+  console.log(
+    `${targets.length} session(s) to write, ${plan.unchanged} unchanged since their last run`,
+  )
+  if (plan.blocked.length > 0) {
+    console.log(`${plan.blocked.length} session(s) blocked — run pnpm generate:session-facts first`)
   }
+  if (!dryRun) await backfillInputHashes('writing', plan.backfill)
 
   if (dryRun) {
     for (const s of targets) console.log(`  [dry-run] ${s.id} (${s.sport})`)
@@ -158,6 +146,7 @@ async function main() {
               blurb: r.blurb,
               potentialContendersIntro: r.potentialContendersIntro || undefined,
               potentialContenders: r.potentialContenders,
+              inputHash: plan.hashes.get(r.id),
             }))
           await upsertWriting(toUpsert, {
             model: writingModel,
@@ -194,6 +183,7 @@ async function main() {
               blurb: r.blurb,
               potentialContendersIntro: r.potentialContendersIntro || undefined,
               potentialContenders: r.potentialContenders,
+              inputHash: plan.hashes.get(r.id),
             })
             got.add(r.id)
             wrote += 1
@@ -218,6 +208,7 @@ async function main() {
   const written = [...finalStatus.values()].filter(
     (s) => (s.writingPromptVersion ?? -1) >= WRITING_VERSION,
   ).length
+  printUsageSummary()
   console.log(`\nDone: ${written} written (v${WRITING_VERSION})`)
 }
 

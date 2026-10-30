@@ -40,7 +40,10 @@ Runtime reads happen in `src/data/sessions.data.server.ts`, which merges session
 
 ### Regenerating session content and ratings
 
-Three independent scripts, one per stage. Run them in order the first time; after that each can run on its own. Each is gated by `promptVersion`, so unchanged sessions are skipped; use `--force` to regenerate everything.
+Three independent scripts, one per stage. Run them in order the first time; after that each can run on its own.
+
+- **Grounding** runs for sessions that are missing or on an old `promptVersion`. `--stale-days=<n>` also re-checks sessions not grounded or re-checked in the last n days, and `--force` re-checks every session. A re-check sends the stored brief along and asks whether anything material changed. If nothing did, the stored facts are kept as-is (only `checkedAt` moves). `--no-previous` skips that and writes every brief from scratch.
+- **Writing and scoring** store a hash of each session's inputs (grounding facts, sport and venue context, Paris medals, corrections, model, prompt version) and skip sessions whose inputs haven't changed. `--force` regenerates regardless.
 
 ```bash
 # Stage 1: per-session Claude + web search grounding → session-facts.json
@@ -52,7 +55,13 @@ pnpm generate:session-content --sport=Archery
 # Stage 3: Anthropic scoring → session-scores.json (requires session-content)
 pnpm generate:session-scores --sport=Archery
 
-# Force regen (ignores promptVersion gates)
+# Scheduled refresh: re-check briefs older than 25 days, then rewrite and
+# rescore only the sessions whose facts changed
+pnpm generate:session-facts --stale-days=25
+pnpm generate:session-content
+pnpm generate:session-scores
+
+# Force regen (ignores version and input-hash gates)
 pnpm generate:session-content --sport=Archery --force
 
 # Use sync messages.create instead of Message Batches (faster per-request,
@@ -65,9 +74,13 @@ pnpm generate:session-scores --sport=Archery --no-batch
 pnpm refresh ATH04 --skip-grounding --prompt "Tighten the blurb"
 ```
 
-All three stages use Anthropic prompt caching and Messages Batches by default. Stage 1 runs Claude with the web search tool, 10 sessions of one sport per request and at most 10 searches each. A batched request whose search turn pauses can't be resumed, so those sessions stay due — rerun the command, or use `--no-batch` for the stragglers. Per-sport log lines report completion so you can watch the run.
+All three stages use Anthropic prompt caching and Messages Batches by default. Stage 1 runs Claude with the web search tool, 20 sessions of one sport per request and at most 15 searches each. A batched request whose search turn pauses can't be resumed, so those sessions stay due — rerun the command, or use `--no-batch` for the stragglers. Per-sport log lines report completion so you can watch the run.
 
-Regenerated files are committed like any other source — there's no separate deploy step for data. A full `--force` run makes paid API calls for every one of ~850 sessions and costs real money — scope with `--sport=...` while developing.
+Every generate script and `pnpm refresh` ends with a usage summary: requests, tokens, cache hits, web searches, and an estimated cost from list prices. Output that uses a trademarked term (see `containsBannedTerm` in `scripts/lib/session-content.ts`) is rejected: the session or fact entry stays due and is retried on the next run.
+
+Sport and venue facts change rarely. Keep them out of scheduled runs, and rerun them with `--force` only when something changes, like a venue or format update.
+
+Regenerated files are committed like any other source — there's no separate deploy step for data. Run `pnpm format` after a generation run: the store writes plain `JSON.stringify` output, which oxfmt reformats. A full `--force` run makes paid API calls for every one of ~850 sessions and costs real money — scope with `--sport=...` while developing.
 
 ### Regenerating sport facts
 
@@ -124,11 +137,11 @@ Shape (all three):
 }
 ```
 
-Each value is an array — multiple corrections stack. To apply: edit the file, then re-run the relevant generate command (or `pnpm refresh <id>`). Corrections are injected as the "User correction / additional context (authoritative — supersedes conflicting information)" block in every relevant prompt. No `promptVersion` bump — corrections take effect on the next generation pass.
+Each value is an array — multiple corrections stack. To apply: edit the file, then rerun the relevant generate command (or `pnpm refresh <id>`). Each stage fingerprints the corrections it used, so session and sport corrections are picked up on the next run with no flags: `generate:session-facts` writes those sessions' briefs from scratch instead of re-checking them, and writing and scoring follow because their inputs changed. Corrections are injected as the "User correction / additional context (authoritative — supersedes conflicting information)" block in every relevant prompt. No `promptVersion` bump — corrections take effect on the next generation pass.
 
 **Fix-at-source for global facts.** Some facts apply to many sessions and have an authoritative source file:
 
-- Wrong Paris 2024 medalist → edit `src/data/paris-2024-medals.json`, then rerun `pnpm generate:session-facts --sport="<sport>" --force` for affected sessions. The medal block is already labeled "authoritative — do not contradict" in every prompt that uses it.
+- Wrong Paris 2024 medalist → edit `src/data/paris-2024-medals.json`, then rerun `pnpm generate:session-facts --sport="<sport>" --force --no-previous` for affected sessions. The medal block is already labeled "authoritative — do not contradict" in every prompt that uses it.
 - Sport gamesContext / parisRecap consistently wrong across many sessions → consider editing `src/data/sport-facts.json` directly, or use `sport-corrections.json` plus regen.
 - Venue capacity / location wrong → edit `src/data/venue-facts.json` directly or use `venue-corrections.json` plus regen.
 
