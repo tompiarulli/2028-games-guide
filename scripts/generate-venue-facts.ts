@@ -2,10 +2,11 @@ import 'dotenv/config'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
-import Anthropic from '@anthropic-ai/sdk'
+import type Anthropic from '@anthropic-ai/sdk'
 import pLimit from 'p-limit'
 
 import type { SessionSource } from '../src/types/session.js'
+import { createAnthropicClient } from './lib/anthropic-client.js'
 import {
   RESEARCH_DEFAULT_MODEL,
   buildResearchParams,
@@ -171,12 +172,6 @@ async function main() {
   const venueFilter = getArgValue('--venue')
   const concurrency = parsePositiveInt(getArgValue('--concurrency'), DEFAULT_CONCURRENCY)
 
-  const apiKey = process.env.ANTHROPIC_API_KEY
-  if (!dryRun && !apiKey) {
-    console.error('Error: ANTHROPIC_API_KEY is required (or use --dry-run)')
-    process.exit(1)
-  }
-
   const sessions = JSON.parse(readFileSync(SESSIONS_PATH, 'utf8')) as SessionSource[]
   const existing = JSON.parse(readFileSync(VENUE_FACTS_PATH, 'utf8')) as VenueFactsFile
 
@@ -218,7 +213,7 @@ async function main() {
   }
   if (targets.length === 0) return
 
-  const client = new Anthropic({ apiKey })
+  const client = createAnthropicClient()
   const limit = pLimit(concurrency)
   let done = 0
   const updated: Record<string, VenueFacts> = {}

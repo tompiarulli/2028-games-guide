@@ -1,7 +1,7 @@
 import 'dotenv/config'
-import Anthropic from '@anthropic-ai/sdk'
 import pLimit from 'p-limit'
 
+import { createAnthropicClient } from './lib/anthropic-client.js'
 import {
   type GroundingEntry,
   chunk as chunkList,
@@ -90,12 +90,6 @@ async function main() {
   const staleDays = staleDaysArg ? parsePositiveInt(staleDaysArg, 0) : 0
   const staleBefore = staleDays ? new Date(Date.now() - staleDays * 86_400_000).toISOString() : null
 
-  const anthropicKey = process.env.ANTHROPIC_API_KEY
-  if (!dryRun && !anthropicKey) {
-    console.error('Error: ANTHROPIC_API_KEY is required (or use --dry-run)')
-    process.exit(1)
-  }
-
   const mode = noBatch ? `sync concurrency=${concurrency}` : 'batches-api'
   console.log(`Grounding: anthropic ${model} + web search  ${mode}`)
 
@@ -145,7 +139,7 @@ async function main() {
   }
   console.log(`${jobs.length} batch(es) across ${sports.length} sport(s)`)
 
-  const client = new Anthropic({ apiKey: anthropicKey! })
+  const client = createAnthropicClient()
 
   let changedTotal = 0
   let unchangedTotal = 0

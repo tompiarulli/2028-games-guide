@@ -1,6 +1,5 @@
 import 'dotenv/config'
-import Anthropic from '@anthropic-ai/sdk'
-
+import { createAnthropicClient } from './lib/anthropic-client.js'
 import {
   readGroundingForSession,
   readSessionById,
@@ -125,12 +124,7 @@ async function main() {
   const args = parseArgs(process.argv)
   if (!args.sessionId) usage()
 
-  const anthropicKey = process.env.ANTHROPIC_API_KEY
   const needsApi = !args.skipGrounding || !args.skipWriting || !args.skipScoring
-  if (!args.dryRun && needsApi && !anthropicKey) {
-    console.error('Error: ANTHROPIC_API_KEY is required')
-    process.exit(1)
-  }
 
   const session = readSessionById(args.sessionId)
   if (!session) {
@@ -173,7 +167,7 @@ async function main() {
     return
   }
 
-  const anthropicClient = needsApi ? new Anthropic({ apiKey: anthropicKey! }) : null
+  const anthropicClient = needsApi ? createAnthropicClient() : null
 
   // Stage 1: Grounding
   let grounding: GroundingData | null = null
