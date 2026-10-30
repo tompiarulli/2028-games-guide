@@ -1467,6 +1467,16 @@ function hashInput(parts: string[]): string {
   return createHash('sha256').update(parts.join('\u0000')).digest('hex').slice(0, 16)
 }
 
+// Fingerprint of the corrections grounding sees for a session (session and
+// sport scope), or undefined when there are none. A brief whose stored hash
+// differs was written before the current corrections, so it gets rewritten
+// from scratch rather than re-checked: a re-check could judge "no material
+// change" and keep facts the correction contradicts.
+export function groundingCorrectionsHash(session: SessionSource): string | undefined {
+  const extra = buildCorrectionContext({ sessionIds: [session.id], sport: session.sport })
+  return extra ? hashInput([extra]) : undefined
+}
+
 export function writingInputHash(
   session: SessionSource,
   grounding: GroundingData | undefined,

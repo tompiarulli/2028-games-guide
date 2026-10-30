@@ -20,6 +20,7 @@ import {
   type PreviousBrief,
   buildCorrectionContext,
   fetchGroundingBatch,
+  groundingCorrectionsHash,
   fetchGroundingViaBatches,
 } from './lib/session-content.js'
 import { printUsageSummary } from './lib/usage.js'
@@ -51,15 +52,18 @@ function groupBySport<T extends { sport: string }>(items: T[]): Map<string, T[]>
   return groups
 }
 
-// Due when forced, missing, on an old prompt version, or (with --stale-days)
-// not grounded or re-checked within that many days.
+// Due when forced, missing, on an old prompt version, written before the
+// session's current corrections, or (with --stale-days) not grounded or
+// re-checked within that many days.
 function needsGrounding(
   entry: GroundingEntry | null,
+  correctionsHash: string | undefined,
   forceAll: boolean,
   staleBefore: string | null,
 ): boolean {
   if (forceAll || !entry) return true
   if (entry.promptVersion < GROUNDING_VERSION) return true
+  if (entry.correctionsHash !== correctionsHash) return true
   if (!staleBefore) return false
   return (entry.checkedAt ?? entry.generatedAt) < staleBefore
 }
@@ -98,19 +102,26 @@ async function main() {
   const sessions = readAllSessions()
   console.log(`Loaded ${sessions.length} sessions from src/data/sessions.json`)
 
+  const correctionsHashes = new Map(sessions.map((s) => [s.id, groundingCorrectionsHash(s)]))
   const targets = sessions.filter((s) => {
     if (sportFilter && s.sport !== sportFilter) return false
-    return needsGrounding(readGroundingForSession(s.id), forceAll, staleBefore)
+    const entry = readGroundingForSession(s.id)
+    return needsGrounding(entry, correctionsHashes.get(s.id), forceAll, staleBefore)
   })
+  // Briefs written before the current corrections are rewritten from scratch.
   const previous = new Map<string, PreviousBrief>()
-  if (usePrevious) {
-    for (const s of targets) {
-      const brief = previousBrief(readGroundingForSession(s.id))
-      if (brief) previous.set(s.id, brief)
+  let correctionChanges = 0
+  for (const s of targets) {
+    const entry = readGroundingForSession(s.id)
+    if (entry && entry.correctionsHash !== correctionsHashes.get(s.id)) {
+      correctionChanges += 1
+      continue
     }
+    const brief = usePrevious ? previousBrief(entry) : undefined
+    if (brief) previous.set(s.id, brief)
   }
   console.log(
-    `${targets.length} session(s) need grounding (${previous.size} re-checked against their previous brief)`,
+    `${targets.length} session(s) need grounding (${previous.size} re-checked against their previous brief, ${correctionChanges} rewritten for changed corrections)`,
   )
 
   if (dryRun) {
@@ -156,6 +167,7 @@ async function main() {
         facts: g.groundingFacts,
         relatedNews: g.relatedNews,
         sources: g.sources,
+        correctionsHash: correctionsHashes.get(g.id),
       })),
       meta,
     )

@@ -2,7 +2,12 @@ import type { Usage } from '@anthropic-ai/sdk/resources/messages'
 import { describe, expect, it } from 'vitest'
 
 import type { SessionSource } from '../../src/types/session.js'
-import { containsBannedTerm, type GroundingData, writingInputHash } from './session-content.js'
+import {
+  containsBannedTerm,
+  type GroundingData,
+  groundingCorrectionsHash,
+  writingInputHash,
+} from './session-content.js'
 import { estimateCost } from './usage.js'
 
 function usage(partial: Partial<Usage>): Usage {
@@ -52,6 +57,18 @@ describe('estimateCost', () => {
 
   it('returns null for models without a rate', () => {
     expect(estimateCost('some-other-model', usage({ input_tokens: 1 }), false)).toBeNull()
+  })
+})
+
+describe('groundingCorrectionsHash', () => {
+  it('is undefined for a session with no session or sport corrections', () => {
+    const s = { id: 'ARC01', sport: 'Archery' } as SessionSource
+    expect(groundingCorrectionsHash(s)).toBeUndefined()
+  })
+
+  it('reflects sport-wide corrections', () => {
+    const s = { id: 'BDM01', sport: 'Badminton' } as SessionSource
+    expect(groundingCorrectionsHash(s)).toMatch(/^[0-9a-f]{16}$/)
   })
 })
 

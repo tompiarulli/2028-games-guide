@@ -25,6 +25,7 @@ import {
   fetchGrounding,
   generateScoring,
   generateWriting,
+  groundingCorrectionsHash,
   scoringInputHash,
   writingInputHash,
 } from './lib/session-content.js'
@@ -199,6 +200,7 @@ async function main() {
           facts: grounding.groundingFacts,
           relatedNews: grounding.relatedNews,
           sources: grounding.sources,
+          correctionsHash: groundingCorrectionsHash(session),
         },
       ],
       {

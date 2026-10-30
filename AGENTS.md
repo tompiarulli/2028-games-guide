@@ -32,7 +32,7 @@ All paid API calls require `ANTHROPIC_API_KEY` in `.env`. Research stages (sport
 
 Cost controls (see `scripts/lib/freshness.ts` and `scripts/lib/usage.ts`):
 
-- Grounding re-checks send each session's stored brief; when Claude reports no material change, the stored facts and `generatedAt` stay put and only `checkedAt` moves.
+- Grounding re-checks send each session's stored brief; when Claude reports no material change, the stored facts and `generatedAt` stay put and only `checkedAt` moves. Briefs written before a session's current session/sport corrections (tracked by `correctionsHash`) are rewritten from scratch instead.
 - Writing and scoring store an input hash per session and skip sessions whose inputs are unchanged; `--force` overrides.
 - Every script prints a usage summary with an estimated cost.
 - Reader-facing output containing a trademarked term is rejected in code and retried on the next run.

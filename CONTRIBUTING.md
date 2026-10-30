@@ -137,7 +137,7 @@ Shape (all three):
 }
 ```
 
-Each value is an array — multiple corrections stack. To apply: edit the file, then run `pnpm refresh <id>`, or rerun the relevant generate command (`generate:session-facts` needs `--force --no-previous` for the affected sport, since a re-check can keep the old brief). Writing and scoring pick up correction changes on their own, because corrections are part of their input hash. Corrections are injected as the "User correction / additional context (authoritative — supersedes conflicting information)" block in every relevant prompt. No `promptVersion` bump — corrections take effect on the next generation pass.
+Each value is an array — multiple corrections stack. To apply: edit the file, then rerun the relevant generate command (or `pnpm refresh <id>`). Each stage fingerprints the corrections it used, so session and sport corrections are picked up on the next run with no flags: `generate:session-facts` writes those sessions' briefs from scratch instead of re-checking them, and writing and scoring follow because their inputs changed. Corrections are injected as the "User correction / additional context (authoritative — supersedes conflicting information)" block in every relevant prompt. No `promptVersion` bump — corrections take effect on the next generation pass.
 
 **Fix-at-source for global facts.** Some facts apply to many sessions and have an authoritative source file:
 

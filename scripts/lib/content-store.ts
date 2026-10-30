@@ -40,6 +40,8 @@ export interface GroundingEntry {
   // Last time grounding re-checked this session and found no material change.
   // generatedAt only moves when the facts themselves change.
   checkedAt?: string
+  // groundingCorrectionsHash() of the corrections this brief was written with.
+  correctionsHash?: string
 }
 
 export interface WritingEntry {
@@ -77,6 +79,7 @@ export interface GroundingUpsert {
   facts: string[] | null
   relatedNews: RelatedNews[]
   sources: ContentSource[] | undefined
+  correctionsHash?: string
 }
 
 export interface WritingUpsert {
@@ -240,6 +243,7 @@ export function upsertGrounding(rows: GroundingUpsert[], meta: StageMetadata): P
         model: meta.model,
         promptVersion: meta.promptVersion,
         generatedAt: meta.generatedAt,
+        correctionsHash: r.correctionsHash,
       }
     }
     groundingCache = sortedKeys(cache)
