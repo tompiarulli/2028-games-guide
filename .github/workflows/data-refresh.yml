@@ -58,6 +58,11 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
 
+      # Free model lookup that runs the full federation exchange, so auth
+      # problems fail here, even on runs where no session is due.
+      - name: Check Claude API access
+        run: pnpm check:anthropic-auth
+
       # Sport and venue facts are stable and stay out of scheduled runs.
       - name: Ground sessions
         run: pnpm generate:session-facts --stale-days="$STALE_DAYS" 2>&1 | tee "$RUNNER_TEMP/Grounding.log"

@@ -93,7 +93,7 @@ The workflow authenticates with [Workload Identity Federation](https://platform.
 3. Let the workflow open PRs:
    - **Recommended:** add a `DATA_REFRESH_PR_TOKEN` secret, a fine-grained personal access token for this repository with read/write access to contents and pull requests. CI then runs on the PR automatically.
    - **Without the token:** enable **Settings → Actions → General → Allow GitHub Actions to create and approve pull requests**. The PR is opened with the default token, which GitHub doesn't let trigger CI, so close and reopen the PR to run checks.
-4. Trigger it once from **Actions → Data refresh → Run workflow** to confirm the token exchange succeeds. A failed exchange shows up as `Authentication failed`; the reason is on the Console's workload identity **History** tab.
+4. Trigger it once from **Actions → Data refresh → Run workflow**. Its first step, `pnpm check:anthropic-auth`, does a free model lookup that runs the full token exchange, so it confirms federation works even when no session is due. A failed exchange shows up as `Authentication failed`; the reason is on the Console's workload identity **History** tab.
 
 Locally, nothing changes: the scripts keep using `ANTHROPIC_API_KEY` from `.env`, or an `ant auth login` profile if there's no key.
 
