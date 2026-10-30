@@ -1319,72 +1319,180 @@
   },
   "ATH04": {
     "facts": [
-      "Ryan Crouser of USA won gold in the men's shot put at Paris 2024.",
-      "Noah Lyles of USA won gold in the men's 100m at Paris 2024.",
-      "Camryn Rogers of CAN won gold in the women's hammer throw at Paris 2024.",
-      "The men's shot put final is scheduled for the afternoon session on July 16 at LA Memorial Coliseum.",
-      "The men's 100m semi and final are part of the afternoon session on July 16 at LA Memorial Coliseum.",
-      "The mixed 4x400m relay final is included in the afternoon session on July 16 at LA Memorial Coliseum."
+      "Ryan Crouser (USA) won the men's shot put gold at Paris 2024, with Joe Kovacs (USA) taking silver and Rajindra Campbell (JAM) taking bronze.",
+      "Noah Lyles (USA) won the men's 100m gold at Paris 2024, ahead of Kishane Thompson (JAM) with silver and Fred Kerley (USA) with bronze.",
+      "Oblique Seville (JAM) won the men's 100m at the 2025 World Athletics Championships in Tokyo, with Kishane Thompson (JAM) second and Noah Lyles (USA) third.",
+      "Kishane Thompson led the world going into the 2025 World Championships after running 9.75 at the Jamaican Championships, which put him sixth on the all-time list.",
+      "Thompson beat defending world champion Noah Lyles in the Diamond League during the 2025 season, before the World Championships.",
+      "Camryn Rogers (CAN) is the reigning Paris 2024 women's hammer champion and won world titles in 2023 (Budapest) and 2025 (Tokyo).",
+      "Rogers won the 2025 world hammer final with 80.51m, a North American record and personal best that made her the second-farthest women's hammer thrower in history.",
+      "At the 2025 World Championships, Zhao Jie (CHN) took silver in the women's hammer with 76.54m and Zhang Jiale (CHN) took bronze with 76.22m.",
+      "Brooke Andersen (USA), the 2022 world champion, led the world in 2025 with 79.29m but did not get through qualifying at the 2025 World Championships.",
+      "Rogers's 80.51m was the longest women's hammer throw anywhere since July 2017; Poland's Anita Wlodarczyk holds the only longer marks.",
+      "Camryn Rogers is listed as the women's hammer gold medalist at the 2026 Commonwealth Games in Glasgow.",
+      "The 2028 Games athletics program has 48 medal events, and track and field sessions at the LA Memorial Coliseum run in the first week, from July 15 to 24.",
+      "This session includes the mixed 4x400m relay final; the 2028 program also adds a new mixed 4x100m relay."
     ],
-    "relatedNews": [],
-    "sources": [
+    "relatedNews": [
       {
-        "title": "2028 Olympic Track and Field Schedule: Full Dates And Events for ...",
-        "url": "https://citiusmag.com/articles/2028-olympics-track-and-field-schedule",
-        "date": "2025-11-12",
-        "lastUpdated": "2026-03-28",
-        "snippet": "Track and field at the 2028 Los Angeles Olympics will span 13 days for the first time in history– from July 15–30. Here's the full LA28 ...",
-        "source": "web"
+        "id": "ATH04-n0",
+        "title": "Camryn Rogers makes history with successful defence of hammer throw world title and record-setting mark",
+        "summary": "Reports that the reigning Paris 2024 hammer champion defended her world title in Tokyo with 80.51m, the longest women's throw since 2017, which makes her the clear favorite going into the 2028 women's hammer final.",
+        "sourceName": "Team Canada",
+        "sourceUrl": "https://olympic.ca/2025/09/15/camryn-rogers-makes-history-with-successful-defence-of-hammer-throw-world-title-and-record-setting-mark/",
+        "publishedDate": "2025-09-15",
+        "tags": ["womens-hammer", "camryn-rogers", "world-championships"]
       },
       {
-        "title": "[PDF] LA28 OLYMPIC GAMES Daily Competition Schedule",
-        "url": "https://la28.org/content/dam/latwentyeight/competition-schedule-imagery/LA28OlympicGamesCompetitionByDaySchedule.pdf",
-        "lastUpdated": "2026-03-31",
-        "snippet": "Page 1. LA28 OLYMPIC GAMES Daily Competition Schedule. EVENT DAY. MEDAL EVENT DAY. SPORT/. DISCIPLINE. VENUE. -2. -1.",
-        "source": "web"
-      },
-      {
-        "title": "Full List of Olympic Sports for the LA28 Summer Olympics",
-        "url": "https://la28.org/en/games-plan/olympics.html",
-        "lastUpdated": "2026-04-05",
-        "snippet": "2028 Olympic Games. Competition Schedule · 3x3 Basketball · Archery · Artistic Gymnastics · Artistic Swimming · Athletics · Badminton · Baseball · Basketball ...",
-        "source": "web"
-      },
-      {
-        "title": "[PDF] Olympic Competition Schedule by Event Version 2.0 - LA 2028",
-        "url": "https://la28.org/content/dam/latwentyeight/competition-schedule-imagery/uploaded-nov-12-2025/LA28OlympicGamesCompetitionScheduleByEventV2.pdf",
-        "date": "2025-11-12",
-        "lastUpdated": "2026-04-15",
-        "snippet": "All dates listed are in the year 2028. Athletics (Track & Field). LA Memorial Coliseum. Exposition Park. ATH15. Saturday, July 22.",
-        "source": "web"
-      },
-      {
-        "title": "Official Games Plan for the LA28 Olympics and Paralympics",
-        "url": "https://la28.org/en/games-plan.html",
-        "lastUpdated": "2026-04-15",
-        "snippet": "The LA28 Games Plan lists all Olympic and Paralympic sports and the most recent Olympic and Paralympic venues and locations for the 2028 Summer Games.",
-        "source": "web"
-      },
-      {
-        "title": "LA28 Olympics schedule: daily competition times for all events",
-        "url": "https://www.nbcsports.com/olympics/news/2028-olympic-schedule-la28-los-angeles",
-        "date": "2026-04-01",
-        "lastUpdated": "2026-04-13",
-        "snippet": "Flag Football: Women's, men's preliminary games (5 p.m., 10 p.m.) Gymnastics (Artistic): Men's qualifying (2:30 p.m., 6:30 p.m., 10:30 p.m.)",
-        "source": "web"
-      },
-      {
-        "title": "LA28 Olympic Games athletics session timetable published",
-        "url": "https://worldathletics.org/competitions/olympic-games/la28/news/article/la28-olympic-games-athletics-session-timetable-published",
-        "date": "2026-02-07",
-        "lastUpdated": "2026-03-28",
-        "snippet": "World Athletics and the LA28 Organising Committee have published the updated athletics competition timetable by session and event.",
-        "source": "web"
+        "id": "ATH04-n1",
+        "title": "Canada's Camryn Rogers wins her 2nd world champion title in hammer throw",
+        "summary": "Video report on Rogers winning the 2025 world hammer title with an 80.51m throw on her second attempt.",
+        "sourceName": "CBC",
+        "sourceUrl": "https://www.cbc.ca/player/play/video/9.6904387",
+        "publishedDate": "2025-09-15",
+        "tags": ["womens-hammer", "camryn-rogers", "canada"]
       }
     ],
-    "model": "sonar-pro",
-    "promptVersion": 2,
-    "generatedAt": "2026-04-17T05:36:50.552Z"
+    "sources": [
+      {
+        "title": "2025 World Athletics Championships",
+        "url": "https://en.wikipedia.org/wiki/2025_World_Athletics_Championships_%E2%80%93_Men's_100_metres",
+        "lastUpdated": "99 days ago"
+      },
+      {
+        "title": "World Athletics Championships Tokyo 25: Oblique Seville shocks Kishane Thompson and Noah Lyles to win 100m gold",
+        "url": "https://www.olympics.com/en/news/world-athletics-championships-2025-mens-100m-oblique-seville-shock-victory",
+        "lastUpdated": "411 days ago"
+      },
+      {
+        "title": "Oblique Seville",
+        "url": "https://en.wikipedia.org/wiki/Oblique_Seville"
+      },
+      {
+        "title": "2025 World Athletics Championships %E2%80%93 Men%27s 100 metres",
+        "url": "https://en.wikipedia.org/wiki/2025_World_Athletics_Championships_%E2%80%93_Men%27s_100_metres"
+      },
+      {
+        "title": "Oblique Seville wins 100m world title, puts Jamaica back on top of men's sprinting - NBC Sports",
+        "url": "https://www.nbcsports.com/olympics/news/oblique-seville-noah-lyles-100-meters-world-championships-track-and-field-2025",
+        "lastUpdated": "410 days ago"
+      },
+      {
+        "title": "Seville storms to world 100m title in Tokyo",
+        "url": "https://worldathletics.org/competitions/world-athletics-championships/tokyo25/news/report/world-championships-tokyo-25-report-mens-100m",
+        "lastUpdated": "411 days ago"
+      },
+      {
+        "title": "Athletics at the 2024 Summer Olympics %E2%80%93 Men%27s 100 metres",
+        "url": "https://en.wikipedia.org/wiki/Athletics_at_the_2024_Summer_Olympics_%E2%80%93_Men%27s_100_metres"
+      },
+      {
+        "title": "Kishane Thompson",
+        "url": "https://en.wikipedia.org/wiki/Kishane_Thompson"
+      },
+      {
+        "title": "World Athletics Championships 2025: Seville stuns Thompson and Lyles to win 100m Gold",
+        "url": "https://www.pulse.com.gh/story/world-athletics-championships-2025-seville-stuns-thompson-and-lyles-to-win-100m-gold-2025091414595208952",
+        "lastUpdated": "324 days ago"
+      },
+      {
+        "title": "Ryan Crouser Claims Third World Shot Put Title as Tokyo 2025 World Championships Open in Style",
+        "url": "https://www.watchathletics.com/article/13468/ryan-crouser-claims-third-world-shot-put-title-as-tokyo-2025-world-championships-open-in-style",
+        "lastUpdated": "291 days ago"
+      },
+      {
+        "title": "2025 World Athletics Championships",
+        "url": "https://en.wikipedia.org/wiki/2025_World_Athletics_Championships_%E2%80%93_Men's_shot_put",
+        "lastUpdated": "99 days ago"
+      },
+      {
+        "title": "Ryan Crouser wins third outdoor world shot put title - University of Texas Athletics",
+        "url": "https://texaslonghorns.com/news/2025/9/13/track-field-cross-country-ryan-crouser-wins-third-outdoor-world-shot-put-title",
+        "lastUpdated": "412 days ago"
+      },
+      {
+        "title": "Crouser beats injury, wins world shot put title",
+        "url": "https://www.nwaonline.com/news/2025/sep/14/crouser-beats-injury-wins-world-shot-put-title/",
+        "lastUpdated": "411 days ago"
+      },
+      {
+        "title": "Ryan Crouser beats injury and wins his third world shot put title to go with three Olympics golds - The Washington Post",
+        "url": "https://www.washingtonpost.com/sports/2025/09/13/ryan-crouser-worlds-gold-shot-put/ee7f18a2-90b3-11f0-8260-0712daa5c125_story.html",
+        "lastUpdated": "412 days ago"
+      },
+      {
+        "title": "Ryan Crouser",
+        "url": "https://en.wikipedia.org/wiki/Ryan_Crouser"
+      },
+      {
+        "title": "2025 World Athletics Championships %E2%80%93 Men%27s shot put",
+        "url": "https://en.wikipedia.org/wiki/2025_World_Athletics_Championships_%E2%80%93_Men%27s_shot_put"
+      },
+      {
+        "title": "Crouser returns to take third world shot put title in Tokyo",
+        "url": "https://worldathletics.org/en/competitions/world-athletics-championships/world-athletics-championships-tokyo-2025-7190593/news/report/world-championships-tokyo-25-report-mens-shot-put",
+        "lastUpdated": "412 days ago"
+      },
+      {
+        "title": "Ryan Crouser Beats Injury and Wins His Third World Shot Put Title to Go with Three Olympics Golds",
+        "url": "https://ground.news/article/injury-ravaged-crouser-wins-astounding-third-shot-gold",
+        "lastUpdated": "411 days ago"
+      },
+      {
+        "title": "Shot put at the World Athletics Championships",
+        "url": "https://en.wikipedia.org/wiki/Shot_put_at_the_World_Athletics_Championships"
+      },
+      {
+        "title": "Canada's Camryn Rogers wins her 2nd world champion title in hammer throw",
+        "url": "https://www.cbc.ca/player/play/video/9.6904387",
+        "lastUpdated": "409 days ago"
+      },
+      {
+        "title": "2025 World Athletics Championships",
+        "url": "https://en.wikipedia.org/wiki/2025_World_Athletics_Championships_%E2%80%93_Women's_hammer_throw",
+        "lastUpdated": "291 days ago"
+      },
+      {
+        "title": "Camryn Rogers makes history with successful defence of hammer throw world title and record-setting mark - Team Canada",
+        "url": "https://olympic.ca/2025/09/15/camryn-rogers-makes-history-with-successful-defence-of-hammer-throw-world-title-and-record-setting-mark/",
+        "lastUpdated": "410 days ago"
+      },
+      {
+        "title": "Camryn Rogers",
+        "url": "https://en.wikipedia.org/wiki/Camryn_Rogers"
+      },
+      {
+        "title": "2025 World Athletics Championships %E2%80%93 Women%27s hammer throw",
+        "url": "https://en.wikipedia.org/wiki/2025_World_Athletics_Championships_%E2%80%93_Women%27s_hammer_throw"
+      },
+      {
+        "title": "Camryn Rogers defends hammer throw world title with Canadian record - Canadian Running Magazine",
+        "url": "https://runningmagazine.ca/sections/runs-races/camryn-rogers-defends-hammer-throw-world-title-with-canadian-record/",
+        "lastUpdated": "410 days ago"
+      },
+      {
+        "title": "'I don't know how I just did that': Richmond's Camryn Rogers reflects on hammer throw win at Worlds",
+        "url": "https://www.richmond-news.com/local-sports/i-dont-know-how-i-just-did-that-richmonds-camryn-rogers-wins-hammer-throw-gold-at-worlds-11269376",
+        "lastUpdated": "398 days ago"
+      },
+      {
+        "title": "Canada's Camryn Rogers wins her 2nd world champion title in hammer throw - YouTube",
+        "url": "https://www.youtube.com/watch?v=pzT6Il0gWb8",
+        "lastUpdated": "409 days ago"
+      },
+      {
+        "title": "Canada's Rogers defends women's hammer throw title at World Athletics Championships-Xinhua",
+        "url": "https://english.news.cn/20250915/4d472c31433d4649902290921e0e6764/c.html",
+        "lastUpdated": "410 days ago"
+      },
+      {
+        "title": "Camryn Rogers captures historic hammer throw silver for Canada's 1st medal at 2022 world championships",
+        "url": "https://www.cbc.ca/1.6523340"
+      }
+    ],
+    "model": "claude-opus-5-5",
+    "promptVersion": 3,
+    "generatedAt": "2026-10-30T20:30:40.271Z"
   },
   "ATH05": {
     "facts": [

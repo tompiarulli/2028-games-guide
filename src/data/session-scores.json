@@ -720,40 +720,40 @@
     "generatedAt": "2026-04-17T10:44:51.696Z"
   },
   "ATH04": {
-    "agg": 9.9,
+    "agg": 9.6,
     "rSig": 10,
-    "rExp": 10,
+    "rExp": 9,
     "rStar": 10,
-    "rUniq": 9,
-    "rDem": 10,
+    "rUniq": 10,
+    "rDem": 9,
     "scorecard": {
       "significance": {
         "score": 10,
-        "explanation": "Three gold medals in the marquee men's 100m—the fastest human alive—plus men's shot put and mixed relay final. The 100m final is track's marquee event; all three medals carry peak significance."
+        "explanation": "Men's 100m final headlines a card that also stacks the shot put final, women's hammer final and mixed 4x400m relay final, with the decathlon running alongside."
       },
       "experience": {
-        "score": 10,
-        "explanation": "Sunday afternoon (3:15–6:55 PM) finals at the Coliseum with medal ceremonies and roaring crowds. The men's 100m is the Games' most electrifying race; prime-time slot and iconic venue at peak energy."
+        "score": 9,
+        "explanation": "Marquee 100m final at the Coliseum, though the 3:15 PM start keeps it in afternoon light rather than prime-time darkness."
       },
       "starPower": {
         "score": 10,
-        "explanation": "Noah Lyles (defending 100m champion) vs. Kishane Thompson and Fred Kerley—the closest 100m final in Games history retold. Ryan Crouser chasing a historic fourth shot put title. International superstars in every event."
+        "explanation": "Noah Lyles, Kishane Thompson and 2025 world champion Oblique Seville all race the 100m, with Camryn Rogers in the hammer."
       },
       "uniqueness": {
-        "score": 9,
-        "explanation": "The men's 100m final at the Coliseum is among track's most iconic pairings; throw in shot put gold and decathlon day-two climax, and this session contains truly once-in-a-lifetime combinations for a mid-Games session."
+        "score": 10,
+        "explanation": "Athletics gold-medal final at the Coliseum, the venue where Carl Lewis won four golds in 1984, is a once-in-a-lifetime pairing of stakes and stage."
       },
       "demand": {
-        "score": 10,
-        "explanation": "Gold-medal finals with the men's 100m as the anchor command maximum ticket demand and premium pricing ($104–$2,461). The fastest-human-on-earth race is the most sought ticket in athletics across any Games."
+        "score": 9,
+        "explanation": "Sunday afternoon finals night with the 100m and multiple medal finals on one card should be among the hardest tickets in the first week."
       },
-      "aggregate": 9.9,
-      "overall": "Sunday's crown jewel: the men's 100m final defending champion showdown (Lyles, Thompson, Kerley) paired with shot put gold and decathlon climax. Peak significance, star power, and prime-time venue—this is the signature sprint session of opening weekend."
+      "aggregate": 9.6,
+      "overall": "A stacked Sunday afternoon of finals headlined by the men's 100m, with Lyles and Thompson in a rematch of the sprint rivalry. The Coliseum setting and multiple medal decisions make it a must-see day of athletics."
     },
-    "model": "claude-haiku-4-5-20251001",
-    "promptVersion": 5,
+    "model": "claude-haiku-5-5",
+    "promptVersion": 6,
     "batchId": null,
-    "generatedAt": "2026-04-17T10:44:51.696Z"
+    "generatedAt": "2026-10-30T20:32:21.614Z"
   },
   "ATH05": {
     "agg": 5.8,
