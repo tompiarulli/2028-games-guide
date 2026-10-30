@@ -26,9 +26,10 @@ Six independent scripts; each reads JSON output of upstream stages and writes on
 - `pnpm generate:session-facts` — Per-session Claude + web search grounding → `src/data/session-facts.json` (facts, related news, sources). Flags: `--stale-days=<n>` (re-check briefs older than n days), `--no-previous` (write briefs from scratch instead of re-checking the stored one), `--no-batch`, `--concurrency=<n>` (with `--no-batch`), `--anthropic-model=<m>`.
 - `pnpm generate:session-content` — Per-session Anthropic writing → `src/data/session-content.json` (blurb, contenders). Requires `session-facts.json` populated. Flags: `--no-batch`, `--anthropic-model=<m>`.
 - `pnpm generate:session-scores` — Per-session Anthropic scoring → `src/data/session-scores.json` (ratings + scorecard). Requires `session-content.json` populated. Flags: `--no-batch`, `--anthropic-model=<m>`.
+- `pnpm check:anthropic-auth` — Free model lookup that confirms the scripts can authenticate (local key/profile, or federation in GitHub Actions).
 - `pnpm refresh <sessionId>` — Refresh grounding+writing+scoring for a single session with an optional `--prompt "..."` correction. Flags: `--skip-grounding|writing|scoring`.
 
-All paid API calls require `ANTHROPIC_API_KEY` in `.env`. Research stages (sport, venue, and session facts) use Claude's server-side web search tool ($10 per 1,000 searches plus tokens) and return results through a strict record tool — see `scripts/lib/claude-research.ts`. Session grounding, writing, and scoring use prompt caching and Messages Batches (50% token discount) by default — see `scripts/lib/session-content.ts` for the batching helpers. A batched grounding request whose search turn pauses can't be resumed, so it fails and stays due for the next run; rerun, or use `--no-batch` for stragglers.
+Paid API calls authenticate through `scripts/lib/anthropic-client.ts`: locally the SDK finds `ANTHROPIC_API_KEY` in `.env` (or an `ant auth login` profile); in GitHub Actions it uses Workload Identity Federation with no stored key. Research stages (sport, venue, and session facts) use Claude's server-side web search tool ($10 per 1,000 searches plus tokens) and return results through a strict record tool — see `scripts/lib/claude-research.ts`. Session grounding, writing, and scoring use prompt caching and Messages Batches (50% token discount) by default — see `scripts/lib/session-content.ts` for the batching helpers. A batched grounding request whose search turn pauses can't be resumed, so it fails and stays due for the next run; rerun, or use `--no-batch` for stragglers.
 
 Cost controls (see `scripts/lib/freshness.ts` and `scripts/lib/usage.ts`):
 
@@ -37,6 +38,8 @@ Cost controls (see `scripts/lib/freshness.ts` and `scripts/lib/usage.ts`):
 - Every script prints a usage summary with an estimated cost.
 - Reader-facing output containing a trademarked term is rejected in code and retried on the next run.
 - Sport and venue facts are stable — don't put them in scheduled runs. A scheduled refresh is `generate:session-facts --stale-days=<n>`, then `generate:session-content`, `generate:session-scores`, and `pnpm format`.
+
+`.github/workflows/data-refresh.yml` runs that refresh monthly (and on demand via workflow_dispatch) and opens a `chore(data)` PR with the results and a usage summary. Setup is in CONTRIBUTING.md under "Scheduled data refresh".
 
 #### Persistent corrections
 

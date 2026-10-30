@@ -1,0 +1,116 @@
+name: Data refresh
+
+# Re-checks session briefs that are older than STALE_DAYS, rewrites and rescores
+# only the sessions whose facts changed, and opens a PR with the result.
+# Authenticates to the Claude API with Workload Identity Federation (no API key);
+# see "Scheduled data refresh" in CONTRIBUTING.md for the one-time setup.
+
+on:
+  schedule:
+    # 14:00 UTC on the 1st of every month
+    - cron: '0 14 1 * *'
+  workflow_dispatch:
+    inputs:
+      stale_days:
+        description: Re-check briefs not grounded or re-checked in this many days
+        default: '25'
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write # GitHub identity token for Workload Identity Federation
+
+concurrency:
+  group: data-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    # The federation rule only trusts runs on main.
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    defaults:
+      run:
+        # Explicit bash adds -o pipefail, so `| tee` doesn't mask a failing script.
+        shell: bash
+    env:
+      STALE_DAYS: ${{ inputs.stale_days || '25' }}
+      ANTHROPIC_FEDERATION_RULE_ID: ${{ vars.ANTHROPIC_FEDERATION_RULE_ID }}
+      ANTHROPIC_ORGANIZATION_ID: ${{ vars.ANTHROPIC_ORGANIZATION_ID }}
+      ANTHROPIC_SERVICE_ACCOUNT_ID: ${{ vars.ANTHROPIC_SERVICE_ACCOUNT_ID }}
+      ANTHROPIC_WORKSPACE_ID: ${{ vars.ANTHROPIC_WORKSPACE_ID }}
+    steps:
+      - name: Check federation settings
+        run: |
+          for name in ANTHROPIC_FEDERATION_RULE_ID ANTHROPIC_ORGANIZATION_ID ANTHROPIC_SERVICE_ACCOUNT_ID; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Repository variable $name is not set (Settings > Secrets and variables > Actions > Variables)"
+              exit 1
+            fi
+          done
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      # Free model lookup that runs the full federation exchange, so auth
+      # problems fail here, even on runs where no session is due.
+      - name: Check Claude API access
+        run: pnpm check:anthropic-auth
+
+      # Sport and venue facts are stable and stay out of scheduled runs.
+      - name: Ground sessions
+        run: pnpm generate:session-facts --stale-days="$STALE_DAYS" 2>&1 | tee "$RUNNER_TEMP/Grounding.log"
+      - name: Write blurbs and contenders
+        run: pnpm generate:session-content 2>&1 | tee "$RUNNER_TEMP/Writing.log"
+      - name: Score sessions
+        run: pnpm generate:session-scores 2>&1 | tee "$RUNNER_TEMP/Scoring.log"
+      - run: pnpm format
+
+      - name: Open pull request
+        env:
+          # A PR opened with the default GITHUB_TOKEN doesn't trigger CI. Set a
+          # DATA_REFRESH_PR_TOKEN secret (fine-grained PAT: contents and pull
+          # requests read/write) so the PR gets its checks automatically.
+          GH_TOKEN: ${{ secrets.DATA_REFRESH_PR_TOKEN || github.token }}
+        run: |
+          if git diff --quiet -- src/data; then
+            echo "No data changes; nothing to open."
+            exit 0
+          fi
+
+          branch="chore/data-refresh-$(date -u +%Y-%m-%d)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add src/data
+          git commit -m "chore(data): scheduled content refresh"
+          git push --force -u origin "$branch"
+
+          {
+            echo "Scheduled refresh: briefs older than ${STALE_DAYS} days re-checked; writing and scoring reran only where inputs changed."
+            echo
+            echo "Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+            for stage in Grounding Writing Scoring; do
+              echo
+              echo "### $stage"
+              echo
+              echo '```'
+              grep -E "need grounding|Updated .* brief|to write,|to score,|still due|blocked|Usage|claude-|total ≈|Done:" "$RUNNER_TEMP/$stage.log" || true
+              echo '```'
+            done
+          } > "$RUNNER_TEMP/pr-body.md"
+
+          # A same-day rerun updates the existing PR instead of opening another.
+          if gh pr view "$branch" --json state -q .state 2>/dev/null | grep -q OPEN; then
+            gh pr edit "$branch" --body-file "$RUNNER_TEMP/pr-body.md"
+          else
+            gh pr create --base main --head "$branch" \
+              --title "chore(data): scheduled content refresh $(date -u +%Y-%m-%d)" \
+              --body-file "$RUNNER_TEMP/pr-body.md"
+          fi

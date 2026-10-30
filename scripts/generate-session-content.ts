@@ -1,7 +1,7 @@
 import 'dotenv/config'
-import Anthropic from '@anthropic-ai/sdk'
 import pLimit from 'p-limit'
 
+import { createAnthropicClient } from './lib/anthropic-client.js'
 import {
   backfillInputHashes,
   chunk as chunkList,
@@ -58,12 +58,6 @@ async function main() {
   const sportFilter = getArgValue('--sport')
   const concurrency = parsePositiveInt(getArgValue('--concurrency'), DEFAULT_CONCURRENCY)
 
-  const anthropicKey = process.env.ANTHROPIC_API_KEY
-  if (!dryRun && !anthropicKey) {
-    console.error('Error: ANTHROPIC_API_KEY is required (or use --dry-run)')
-    process.exit(1)
-  }
-
   const mode = noBatch ? `sync concurrency=${concurrency}` : 'batches-api'
   console.log(`Writing: anthropic ${writingModel}  ${mode}`)
 
@@ -88,7 +82,7 @@ async function main() {
   }
   if (targets.length === 0) return
 
-  const anthropicClient = new Anthropic({ apiKey: anthropicKey! })
+  const anthropicClient = createAnthropicClient()
 
   const groundingByid = new Map<string, GroundingData>()
   for (const s of targets) {

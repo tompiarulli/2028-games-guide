@@ -14,6 +14,7 @@
     "lighthouse": "pnpm dlx @lhci/cli@0.15.1 autorun",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
+    "check:anthropic-auth": "tsx scripts/check-anthropic-auth.ts",
     "generate:paris-medals": "tsx scripts/generate-paris-medals.ts",
     "generate:sport-facts": "tsx scripts/generate-sport-facts.ts",
     "generate:venue-facts": "tsx scripts/generate-venue-facts.ts",
