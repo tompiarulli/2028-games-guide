@@ -2,12 +2,18 @@ import 'dotenv/config'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
+import Anthropic from '@anthropic-ai/sdk'
 import pLimit from 'p-limit'
 
 import type { SessionSource } from '../src/types/session.js'
+import {
+  RESEARCH_DEFAULT_MODEL,
+  buildResearchParams,
+  extractRecord,
+  runResearch,
+} from './lib/claude-research.js'
 import { getSportMedals, type ParisMedalsData } from './lib/paris-medals.js'
 import {
-  PERPLEXITY_DEFAULT_MODEL,
   ROOT,
   augmentationBlock,
   buildCorrectionContext,
@@ -32,6 +38,7 @@ const MEDALS_PATH = resolve(ROOT, 'src/data/paris-2024-medals.json')
 const MAX_RETRIES = 3
 const RETRY_DELAY_MS = 5000
 const DEFAULT_CONCURRENCY = 3
+const MAX_SEARCHES = 5
 
 function getArgValue(name: string): string | undefined {
   const prefix = `${name}=`
@@ -55,6 +62,13 @@ const SPORT_FACTS_SCHEMA = {
   },
 }
 
+const RECORD_TOOL = {
+  name: 'record_sport_facts',
+  description:
+    'Record the gamesContext and parisRecap for this sport. Call once, after research is complete.',
+  schema: SPORT_FACTS_SCHEMA,
+}
+
 const SYSTEM_PROMPT = `You gather per-sport reference facts for a 2028 Los Angeles Summer Games ticket-buying guide. Your output is used as background context by another stage that writes session-level prose — you do NOT write marketing copy. Keep everything factual, specific, and sourced from your web searches.
 
 IMPORTANT SCOPE — venue metadata lives in a separate venue-facts.json file. Do NOT duplicate venue capacity, year built, location, or general history here. Anything you write should be sport-scoped.
@@ -69,8 +83,8 @@ Rules:
 - Do not state 2028 participation as confirmed. Names mentioned should be historical (Paris medalists) or clearly flagged as projected contenders.
 - Do not name athletes who aren't in the Paris medal block unless you have a current source.
 - If the user provides a Paris medal block, those gold/silver/bronze assignments are authoritative. Never substitute different athletes.
-- No markdown, no code fences. Return valid JSON matching the schema.
-- Do NOT include inline citation markers like "[1]", "[2, 3]", or "[1][5]" in any output field. Your search sources are returned separately by the API; your text must be citation-free prose.
+- Submit your results through the record_sport_facts tool, not as text. Plain strings only — no markdown.
+- Do NOT include inline citation markers like "[1]", "[2, 3]", or "[1][5]" in any output field. Your text must be citation-free prose.
 - Do not use trademarked terms "Olympic", "Olympics", "Olympian", "LA28", "Paralympic", "Paralympics" in any form. Use "the 2028 Games", "the 2028 Summer Games", "Paris 2024" (event name is acceptable as historical reference), "medalist", etc. This applies even when source material uses them — rephrase.`
 
 function formatMedalist(m: { name: string; country: string } | null): string {
@@ -104,51 +118,29 @@ function buildPrompt(
   for (const e of events) prompt += `- ${e}\n`
   prompt += `\n${buildParisBlock(sport, medals)}\n`
   prompt += augmentationBlock(extraInstructions)
-  prompt += `Use current web search (sport governing body, team/federation sources, reputable outlets) to produce gamesContext and parisRecap. Treat the Paris medal block as authoritative for historical results. Return a single JSON object matching the schema — no markdown fences.`
+  prompt += `Use current web search (sport governing body, team/federation sources, reputable outlets) to produce gamesContext and parisRecap. Treat the Paris medal block as authoritative for historical results.`
   return prompt
 }
 
-interface PerplexityResponse {
-  choices?: { message?: { content?: string } }[]
-}
-
 async function fetchSportFacts(
-  apiKey: string,
+  client: Anthropic,
   sport: string,
   events: string[],
   medals: ParisMedalsData,
   model: string,
   extraInstructions?: string,
 ): Promise<SportFacts | null> {
-  const prompt = buildPrompt(sport, events, medals, extraInstructions)
+  const params = buildResearchParams({
+    model,
+    system: SYSTEM_PROMPT,
+    prompt: buildPrompt(sport, events, medals, extraInstructions),
+    recordTool: RECORD_TOOL,
+    maxSearches: MAX_SEARCHES,
+  })
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      const response = await fetch('https://api.perplexity.ai/v1/sonar', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model,
-          messages: [
-            { role: 'system', content: SYSTEM_PROMPT },
-            { role: 'user', content: prompt },
-          ],
-          max_tokens: 4000,
-          temperature: 0.1,
-          response_format: {
-            type: 'json_schema',
-            json_schema: { schema: SPORT_FACTS_SCHEMA },
-          },
-          web_search_options: { search_mode: 'web' },
-        }),
-      })
-      if (!response.ok) {
-        const text = await response.text()
-        throw new Error(`Perplexity API ${response.status}: ${text.slice(0, 500)}`)
-      }
-      const body = (await response.json()) as PerplexityResponse
-      const text = body.choices?.[0]?.message?.content
-      if (!text) throw new Error('No Perplexity message content')
-      const parsed = JSON.parse(text) as Partial<SportFacts>
+      const content = await runResearch(client, params)
+      const parsed = extractRecord(content, RECORD_TOOL.name) as Partial<SportFacts>
       if (typeof parsed.gamesContext !== 'string' || typeof parsed.parisRecap !== 'string') {
         throw new Error('Response missing required fields')
       }
@@ -168,15 +160,15 @@ async function fetchSportFacts(
 }
 
 async function main() {
-  const model = getArgValue('--perplexity-model') ?? PERPLEXITY_DEFAULT_MODEL
+  const model = getArgValue('--anthropic-model') ?? RESEARCH_DEFAULT_MODEL
   const forceAll = process.argv.includes('--force')
   const dryRun = process.argv.includes('--dry-run')
   const sportFilter = getArgValue('--sport')
   const concurrency = parsePositiveInt(getArgValue('--concurrency'), DEFAULT_CONCURRENCY)
 
-  const apiKey = process.env.PERPLEXITY_API_KEY
+  const apiKey = process.env.ANTHROPIC_API_KEY
   if (!dryRun && !apiKey) {
-    console.error('Error: PERPLEXITY_API_KEY is required (or use --dry-run)')
+    console.error('Error: ANTHROPIC_API_KEY is required (or use --dry-run)')
     process.exit(1)
   }
 
@@ -217,7 +209,7 @@ async function main() {
         return !current || !current.parisRecap
       })
 
-  console.log(`Sport facts: perplexity ${model}  concurrency=${concurrency}`)
+  console.log(`Sport facts: anthropic ${model} + web search  concurrency=${concurrency}`)
   console.log(`${targets.length}/${sports.length} sport(s) need regeneration`)
   if (dryRun) {
     for (const sport of targets) {
@@ -228,6 +220,7 @@ async function main() {
   }
   if (targets.length === 0) return
 
+  const client = new Anthropic({ apiKey })
   const limit = pLimit(concurrency)
   let done = 0
   const updated: Record<string, SportFacts> = {}
@@ -238,14 +231,7 @@ async function main() {
         const entry = bySport.get(sport)!
         const events = [...entry.events].sort()
         const extraInstructions = buildCorrectionContext({ sport })
-        const facts = await fetchSportFacts(
-          apiKey!,
-          sport,
-          events,
-          medals,
-          model,
-          extraInstructions,
-        )
+        const facts = await fetchSportFacts(client, sport, events, medals, model, extraInstructions)
         done += 1
         if (!facts) {
           console.log(`  [${done}/${targets.length}] ${sport} ✗ failed`)
@@ -262,7 +248,7 @@ async function main() {
   merged._meta = {
     lastVerified: new Date().toISOString().slice(0, 10),
     notes:
-      'Per-sport facts generated by scripts/generate-sport-facts.ts using Perplexity sonar-pro grounded on Paris 2024 medal results.',
+      'Per-sport facts generated by scripts/generate-sport-facts.ts using Claude with web search, grounded on Paris 2024 medal results.',
   }
   for (const [sport, facts] of Object.entries(updated)) {
     merged[sport] = facts

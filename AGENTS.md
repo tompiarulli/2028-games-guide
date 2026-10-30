@@ -21,14 +21,14 @@ This file provides guidance to AI coding agents working with code in this reposi
 Six independent scripts; each reads JSON output of upstream stages and writes one file. Run in order, or any subset with `--sport=<name>` / `--force` / `--dry-run`.
 
 - `pnpm generate:paris-medals` — Rescrape Olympedia into `src/data/paris-2024-medals.json`. One-off; run only when medal data needs refreshing.
-- `pnpm generate:sport-facts` — Regenerate `src/data/sport-facts.json` per sport via Perplexity, anchored on `paris-2024-medals.json`. Extra flag: `--force` regenerates even when `parisRecap` already populated.
-- `pnpm generate:venue-facts` — Regenerate `src/data/venue-facts.json` per venue via Perplexity (capacity, history, spectator experience, 2028 changes). Filter: `--venue=<name>`.
-- `pnpm generate:session-facts` — Per-session Perplexity grounding → `src/data/session-facts.json` (facts, related news, sources). Flag: `--concurrency=<n>`.
+- `pnpm generate:sport-facts` — Regenerate `src/data/sport-facts.json` per sport via Claude with web search, anchored on `paris-2024-medals.json`. Extra flag: `--force` regenerates even when `parisRecap` already populated.
+- `pnpm generate:venue-facts` — Regenerate `src/data/venue-facts.json` per venue via Claude with web search (capacity, history, spectator experience, 2028 changes). Filter: `--venue=<name>`.
+- `pnpm generate:session-facts` — Per-session Claude + web search grounding → `src/data/session-facts.json` (facts, related news, sources). Flags: `--no-batch`, `--concurrency=<n>` (with `--no-batch`), `--anthropic-model=<m>`.
 - `pnpm generate:session-content` — Per-session Anthropic writing → `src/data/session-content.json` (blurb, contenders). Requires `session-facts.json` populated. Flags: `--no-batch`, `--anthropic-model=<m>`.
 - `pnpm generate:session-scores` — Per-session Anthropic scoring → `src/data/session-scores.json` (ratings + scorecard). Requires `session-content.json` populated. Flags: `--no-batch`, `--anthropic-model=<m>`.
 - `pnpm refresh <sessionId>` — Refresh grounding+writing+scoring for a single session with an optional `--prompt "..."` correction. Flags: `--skip-grounding|writing|scoring`.
 
-All paid API calls require `PERPLEXITY_API_KEY` and/or `ANTHROPIC_API_KEY` in `.env`. Writing and scoring stages use Anthropic prompt caching and Messages Batches (50% discount) by default — see `scripts/lib/session-content.ts` for the batching helpers.
+All paid API calls require `ANTHROPIC_API_KEY` in `.env`. Research stages (sport, venue, and session facts) use Claude's server-side web search tool ($10 per 1,000 searches plus tokens) and return results through a strict record tool — see `scripts/lib/claude-research.ts`. Session grounding, writing, and scoring use prompt caching and Messages Batches (50% token discount) by default — see `scripts/lib/session-content.ts` for the batching helpers. A batched grounding request whose search turn pauses can't be resumed, so it fails and stays due for the next run; rerun, or use `--no-batch` for stragglers.
 
 #### Persistent corrections
 
@@ -64,9 +64,9 @@ Session data lives in JSON files under `src/data/`, committed to the repo and bu
 
 - `sessions.json` — hand-validated source data (id, sport, venue, date, etc.); no generated content
 - `paris-2024-medals.json` — Olympedia-scraped medal results; authoritative history, used as grounding anchor
-- `sport-facts.json` — per-sport Perplexity output (gamesContext, parisRecap), keyed by sport
-- `venue-facts.json` — per-venue Perplexity output (capacity, yearBuilt, location, iconicMoments, spectatorExperience, changes2028), keyed by venue name
-- `session-facts.json` — per-session Perplexity output (facts, related news, sources), keyed by session id
+- `sport-facts.json` — per-sport Claude web-search output (gamesContext, parisRecap), keyed by sport
+- `venue-facts.json` — per-venue Claude web-search output (capacity, yearBuilt, location, iconicMoments, spectatorExperience, changes2028), keyed by venue name
+- `session-facts.json` — per-session Claude web-search output (facts, related news, sources), keyed by session id
 - `session-content.json` — Anthropic prose (blurb, contenders), keyed by session id
 - `session-scores.json` — ratings + optional Scorecard (dimension scores with explanations), keyed by session id
 - `session-corrections.json` / `sport-corrections.json` / `venue-corrections.json` — hand-edited authoritative overrides injected into prompts at generation time (see Persistent corrections above)

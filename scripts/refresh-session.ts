@@ -10,11 +10,11 @@ import {
   upsertWriting,
 } from './lib/content-store.js'
 import {
+  ANTHROPIC_GROUNDING_DEFAULT_MODEL,
   ANTHROPIC_SCORING_DEFAULT_MODEL,
   ANTHROPIC_WRITING_DEFAULT_MODEL,
   GROUNDING_VERSION,
   type GroundingData,
-  PERPLEXITY_DEFAULT_MODEL,
   SCORING_VERSION,
   WRITING_VERSION,
   type WritingData,
@@ -34,7 +34,7 @@ interface ParsedArgs {
   skipWriting: boolean
   skipScoring: boolean
   dryRun: boolean
-  perplexityModel: string
+  groundingModel: string
   writingModel: string
   scoringModel: string
 }
@@ -45,7 +45,7 @@ function parseArgs(argv: string[]): ParsedArgs {
     skipWriting: false,
     skipScoring: false,
     dryRun: false,
-    perplexityModel: PERPLEXITY_DEFAULT_MODEL,
+    groundingModel: ANTHROPIC_GROUNDING_DEFAULT_MODEL,
     writingModel: ANTHROPIC_WRITING_DEFAULT_MODEL,
     scoringModel: ANTHROPIC_SCORING_DEFAULT_MODEL,
   }
@@ -64,10 +64,10 @@ function parseArgs(argv: string[]): ParsedArgs {
       parsed.skipScoring = true
     } else if (arg === '--dry-run') {
       parsed.dryRun = true
-    } else if (arg === '--perplexity-model') {
-      parsed.perplexityModel = args[++i]
-    } else if (arg.startsWith('--perplexity-model=')) {
-      parsed.perplexityModel = arg.slice('--perplexity-model='.length)
+    } else if (arg === '--anthropic-grounding-model') {
+      parsed.groundingModel = args[++i]
+    } else if (arg.startsWith('--anthropic-grounding-model=')) {
+      parsed.groundingModel = arg.slice('--anthropic-grounding-model='.length)
     } else if (arg === '--anthropic-model') {
       parsed.writingModel = args[++i]
       parsed.scoringModel = parsed.writingModel
@@ -100,14 +100,14 @@ and writes the updates back into the JSON content store under src/data/.
 
 Options:
   --prompt <text>          Extra instructions appended to both grounding and writing prompts.
-  --skip-grounding         Skip Perplexity; reuse the grounding entry already in the store.
+  --skip-grounding         Skip web-search grounding; reuse the grounding entry already in the store.
   --skip-writing           Skip Anthropic writing; only refresh grounding.
   --skip-scoring           Skip Anthropic scoring; leave the existing scorecard in place.
   --dry-run                Print resolved session and prompts, make no API calls.
-  --perplexity-model <m>         Override grounding model (default: ${PERPLEXITY_DEFAULT_MODEL}).
+  --anthropic-grounding-model <m> Grounding model (default: ${ANTHROPIC_GROUNDING_DEFAULT_MODEL}).
   --anthropic-writing-model <m>  Writing model (default: ${ANTHROPIC_WRITING_DEFAULT_MODEL}).
   --anthropic-scoring-model <m>  Scoring model (default: ${ANTHROPIC_SCORING_DEFAULT_MODEL}).
-  --anthropic-model <m>          Legacy: apply one model to both writing and scoring.
+  --anthropic-model <m>          Apply one model to both writing and scoring.
 
 Example:
   pnpm refresh ATH04
@@ -121,18 +121,11 @@ async function main() {
   const args = parseArgs(process.argv)
   if (!args.sessionId) usage()
 
-  const perplexityKey = process.env.PERPLEXITY_API_KEY
   const anthropicKey = process.env.ANTHROPIC_API_KEY
-
-  if (!args.dryRun) {
-    if (!args.skipGrounding && !perplexityKey) {
-      console.error('Error: PERPLEXITY_API_KEY is required (or use --skip-grounding)')
-      process.exit(1)
-    }
-    if ((!args.skipWriting || !args.skipScoring) && !anthropicKey) {
-      console.error('Error: ANTHROPIC_API_KEY is required (or use --skip-writing/--skip-scoring)')
-      process.exit(1)
-    }
+  const needsApi = !args.skipGrounding || !args.skipWriting || !args.skipScoring
+  if (!args.dryRun && needsApi && !anthropicKey) {
+    console.error('Error: ANTHROPIC_API_KEY is required')
+    process.exit(1)
   }
 
   const session = readSessionById(args.sessionId)
@@ -176,15 +169,17 @@ async function main() {
     return
   }
 
+  const anthropicClient = needsApi ? new Anthropic({ apiKey: anthropicKey! }) : null
+
   // Stage 1: Grounding
   let grounding: GroundingData | null = null
-  if (!args.skipGrounding) {
-    console.log(`\n=== Stage 1: Grounding (${args.perplexityModel}) ===`)
+  if (!args.skipGrounding && anthropicClient) {
+    console.log(`\n=== Stage 1: Grounding (${args.groundingModel} + web search) ===`)
     grounding = await fetchGrounding(
-      perplexityKey!,
+      anthropicClient,
       session,
       session.sport,
-      args.perplexityModel,
+      args.groundingModel,
       extraInstructions,
     )
     if (!grounding) {
@@ -204,7 +199,7 @@ async function main() {
         },
       ],
       {
-        model: args.perplexityModel,
+        model: args.groundingModel,
         promptVersion: GROUNDING_VERSION,
         generatedAt: new Date().toISOString(),
       },
@@ -220,9 +215,6 @@ async function main() {
       }
     }
   }
-
-  const anthropicClient =
-    !args.skipWriting || !args.skipScoring ? new Anthropic({ apiKey: anthropicKey! }) : null
 
   // Stage 2: Writing
   let writing: WritingData | null = null

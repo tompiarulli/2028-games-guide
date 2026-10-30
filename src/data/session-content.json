@@ -509,34 +509,39 @@
     "generatedAt": "2026-04-17T05:50:19.322Z"
   },
   "ATH04": {
-    "blurb": "Sunday afternoon delivers three gold medal races: men's shot put, men's 100m, and the mixed 4x400m relay final. The shot put crowns the world's most powerful thrower; the 100m determines the fastest human alive.\n\nNoah Lyles won the Paris 2024 men's 100m by five-thousandths of a second, the closest finish in Games history. If he returns in 2028, expect another duel with Jamaica's Kishane Thompson and the USA's Fred Kerley. Ryan Crouser has dominated shot put for a decade—three consecutive golds through Paris 2024—and could be chasing a historic fourth title.\n\nThe Coliseum roars for sprint finals. Decathletes continue their campaign with high jump and 400m, adding a grinding undercurrent to the evening's fireworks.",
-    "potentialContendersIntro": "Paris 2024 medalists are projected to headline if they qualify, with the men's 100m and shot put featuring reigning champions.",
+    "blurb": "Sunday afternoon at the Coliseum packs a men's 100m final, a hammer final, a shot put final and the mixed 4x400m relay final into under four hours. Decathletes also work through the high jump and 400m.\n\nThe 100m is the main draw, with semifinals and the final in one session. Noah Lyles won Paris 2024 gold ahead of Kishane Thompson, but Oblique Seville won the 2025 world title with Thompson second and Lyles third.\n\nIn the hammer, Camryn Rogers of Canada is the Paris 2024 champion and threw 80.51m to win the 2025 world title. If she competes, she could be chasing records.\n\nThe Coliseum hosted the 1932 and 1984 Games, including Carl Lewis's four golds. Its peristyle arch and 77,500-seat bowl should give this card a big-night feel.",
+    "potentialContendersIntro": "These contenders are for the men's 100m and women's hammer finals. Lyles and Rogers are confirmed Paris 2024 or world-level winners, but 2028 rosters are not set, so every name below is a projection.",
     "potentialContenders": [
       {
-        "name": "Noah Lyles",
-        "country": "USA",
-        "note": "Paris 2024 men's 100m gold medalist, won by 0.005 seconds"
-      },
-      {
-        "name": "Ryan Crouser",
-        "country": "USA",
-        "note": "Paris 2024 men's shot put gold medalist, seeking fourth consecutive title"
+        "name": "Oblique Seville",
+        "country": "JAM",
+        "note": "Won the 2025 World Championships 100m in Tokyo. Projected to be a leading threat if he qualifies and stays healthy."
       },
       {
         "name": "Kishane Thompson",
         "country": "JAM",
-        "note": "Paris 2024 men's 100m silver medalist"
+        "note": "Silver medalist at Paris 2024 and 2025 Worlds. Ran 9.75 in 2025. A likely contender for the 100m final if he makes the team."
+      },
+      {
+        "name": "Noah Lyles",
+        "country": "USA",
+        "note": "Paris 2024 100m gold medalist and 2025 world bronze medalist. Could return as a home-crowd favorite if he qualifies."
       },
       {
         "name": "Camryn Rogers",
         "country": "CAN",
-        "note": "Paris 2024 women's hammer throw gold medalist"
+        "note": "Paris 2024 champion and 2023 and 2025 world champion. Her 80.51m in 2025 is a North American record. Projected favorite if she competes."
+      },
+      {
+        "name": "Brooke Andersen",
+        "country": "USA",
+        "note": "2022 world champion who led the world in 2025 with 79.29m. She missed the 2025 world final, so her 2028 form is a storyline to watch."
       }
     ],
-    "model": "claude-sonnet-4-5-20250929",
-    "promptVersion": 3,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 4,
     "batchId": null,
-    "generatedAt": "2026-04-17T05:50:19.322Z"
+    "generatedAt": "2026-10-30T20:32:13.691Z"
   },
   "ATH05": {
     "blurb": "Decathletes return Monday morning to tackle three grueling disciplines: the 110m hurdles, discus throw, and pole vault. Day two separates contenders from pretenders as fatigue accumulates and technical precision becomes critical.\n\nThe session also awards the women's triple jump gold medal. Thea LaFond of Dominica won Paris 2024, becoming her nation's first-ever gold medalist in any sport—a historic breakthrough that could inspire a title defense in 2028 if she qualifies.\n\nMonday mornings at the Coliseum mean thinner crowds and intimate views of decathletes grinding through their middle events. Triple jump finals bring explosive takeoffs and dramatic landings in the long jump pit.",

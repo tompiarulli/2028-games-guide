@@ -21,6 +21,13 @@ import type {
   SessionSource,
 } from '../../src/types/session.js'
 import {
+  RESEARCH_DEFAULT_MODEL,
+  buildResearchParams,
+  extractRecord,
+  extractSearchSources,
+  runResearch,
+} from './claude-research.js'
+import {
   readSessionCorrections,
   readSportCorrections,
   readVenueCorrections,
@@ -47,17 +54,27 @@ const PARIS_MEDALS = JSON.parse(
   readFileSync(resolve(ROOT, 'src/data/paris-2024-medals.json'), 'utf8'),
 ) as ParisMedalsData
 
-export const PERPLEXITY_DEFAULT_MODEL = 'sonar-pro'
-export const ANTHROPIC_DEFAULT_MODEL = 'claude-sonnet-4-5-20250929'
-export const ANTHROPIC_WRITING_DEFAULT_MODEL = 'claude-sonnet-4-5-20250929'
-export const ANTHROPIC_SCORING_DEFAULT_MODEL = 'claude-haiku-4-5-20251001'
-export const GROUNDING_VERSION = 2
-export const WRITING_VERSION = 3
-export const SCORING_VERSION = 5
+export const ANTHROPIC_GROUNDING_DEFAULT_MODEL = RESEARCH_DEFAULT_MODEL
+export const ANTHROPIC_WRITING_DEFAULT_MODEL = 'claude-sonnet-5-5'
+export const ANTHROPIC_SCORING_DEFAULT_MODEL = 'claude-haiku-5-5'
+// Both models think adaptively by default; thinking counts toward max_tokens.
+// Effort is set explicitly (these match each model's default) so a model swap
+// doesn't silently change how much the stage thinks.
+const WRITING_EFFORT = 'high'
+const SCORING_EFFORT = 'medium'
+const WRITING_MAX_TOKENS = 16000
+const SCORING_MAX_TOKENS = 16000
+export const GROUNDING_VERSION = 3
+export const WRITING_VERSION = 4
+export const SCORING_VERSION = 6
 export const MAX_RETRIES = 3
 export const RETRY_DELAY_MS = 5000
 export const MAX_NEWS_ITEMS = 10
 export const GROUNDING_BATCH_SIZE = 10
+// Web search cap per grounding request ($10 per 1,000 searches). A batch request
+// covers up to GROUNDING_BATCH_SIZE sessions of one sport.
+export const GROUNDING_BATCH_MAX_SEARCHES = 10
+export const GROUNDING_SINGLE_MAX_SEARCHES = 5
 export const WRITING_BATCH_SIZE = 15
 export const SCORING_BATCH_SIZE = 15
 
@@ -104,20 +121,8 @@ export interface ScoringData {
   scorecard: Scorecard
 }
 
-interface PerplexitySearchResult {
-  title?: string
-  url?: string
-  date?: string
-  last_updated?: string
-  snippet?: string
-  source?: string
-}
-
-interface PerplexityResponse {
-  choices?: { message?: { content?: string } }[]
-  search_results?: PerplexitySearchResult[] | null
-}
-
+// Strict tool schemas don't support maxItems; normalizeRelatedNews caps the
+// list at MAX_NEWS_ITEMS instead.
 const GROUNDING_SESSION_SCHEMA = {
   type: 'object',
   additionalProperties: false,
@@ -130,7 +135,6 @@ const GROUNDING_SESSION_SCHEMA = {
     },
     relatedNews: {
       type: 'array',
-      maxItems: MAX_NEWS_ITEMS,
       items: {
         type: 'object',
         additionalProperties: false,
@@ -148,16 +152,19 @@ const GROUNDING_SESSION_SCHEMA = {
   },
 }
 
-const PERPLEXITY_GROUNDING_SCHEMA = GROUNDING_SESSION_SCHEMA
-
-const PERPLEXITY_BATCH_GROUNDING_SCHEMA = {
-  type: 'object',
-  additionalProperties: false,
-  required: ['sessions'],
-  properties: {
-    sessions: {
-      type: 'array',
-      items: GROUNDING_SESSION_SCHEMA,
+const RECORD_GROUNDING_TOOL = {
+  name: 'record_grounding',
+  description:
+    'Record the grounding brief for every session in the request. Call once, after research is complete.',
+  schema: {
+    type: 'object',
+    additionalProperties: false,
+    required: ['sessions'],
+    properties: {
+      sessions: {
+        type: 'array',
+        items: GROUNDING_SESSION_SCHEMA,
+      },
     },
   },
 }
@@ -219,7 +226,7 @@ Rules:
 - Do not speculate as fact. Speculation must be labeled ("projected to contend," "expected based on 2025 form").
 - If a "Paris 2024 Medal Results" block is present in the user prompt, treat those medalists as authoritative historical facts. Never contradict them, never substitute other athletes in place of the listed gold/silver/bronze. You may still cite other sources for surrounding context.
 - If a "User correction / additional context" block is present in the user prompt, treat it as authoritative — it represents a human-provided fact or correction that supersedes conflicting search results. Still cite sources for other facts.
-- Return valid JSON matching the schema. No markdown, no code fences.
+- Submit your results through the record_grounding tool, not as text. Plain strings only — no markdown and no inline citation markers like "[1]".
 ${BANNED_TERMS_BLOCK}`
 
 export const WRITING_SYSTEM_PROMPT = `You are writing session blurbs for a 2028 Los Angeles Summer Games ticket-buying guide. Readers are deciding whether to attend; give them a flavorful picture of what the session actually is and why it could be worth watching.
@@ -244,7 +251,7 @@ Produce three fields per session:
 
 2. potentialContendersIntro — 1-2 sentences introducing the projected field. Mix confirmed facts (who won Paris, who's the reigning world champion) with speculation about 2028 (clearly flagged). Empty string if the session has no meaningful contender context.
 
-3. potentialContenders — 2-5 athletes or teams likely to appear in THIS session. The "note" for each can be factual (a Paris 2024 result, a world ranking, a career achievement) or speculative (a projection, a storyline worth watching) — make it obvious which it is.
+3. potentialContenders — 2-5 athletes or teams likely to appear in THIS session, each as { name, country, note }. For a team, name is the team (e.g. "USA") and country is its country code. The "note" for each can be factual (a Paris 2024 result, a world ranking, a career achievement) or speculative (a projection, a storyline worth watching) — make it obvious which it is.
    - Speculation is welcome — just label it. If you don't know for certain who will be in a session, make informed guesses based on recent form and world rankings, phrased with hedging words like "could appear," "projected to compete," "likely contender," "if they qualify." What you must NOT do is state speculation as fact.
    - Only return an empty array for ceremonies or sessions so generic (mass prelim of 80+ unknown qualifiers) that names would be meaningless. For any session with a final, semifinal, or marquee event, list contenders.
    - For multi-event sessions, focus contenders on the 1-2 highest-profile events. Note in the intro which event they're for.
@@ -263,7 +270,7 @@ Rules:
 - Don't refuse out of caution. Speculation is allowed as long as clearly flagged.
 - Vary sentence structure and angles across the batch — don't start every blurb the same way.
 
-Return a JSON array of objects, one per session id, each with "id", "blurb", "potentialContendersIntro", and "potentialContenders". No markdown fences around the JSON.
+Return a JSON object whose "sessions" array has one object per session id, each with "id", "blurb", "potentialContendersIntro", and "potentialContenders".
 ${BANNED_TERMS_BLOCK}`
 
 export function augmentationBlock(extraInstructions?: string): string {
@@ -408,7 +415,7 @@ export function buildGroundingPrompt(
   prompt += `- Date/Time: ${session.date}, ${session.time}\n\n`
   prompt += `Use current web search to find facts relevant to THIS session's event, round, venue, and likely contenders. Prioritize 2028 Games-specific news, then 2024-2026 performance and status updates for probable contenders. Prefer official games organizing body, international federation, team, and reputable sports-news sources.\n\n`
   prompt += augmentationBlock(extraInstructions)
-  prompt += `Return a single JSON object matching the required schema. Do not include markdown fences.`
+  prompt += `Record one entry in sessions, with id ${session.id}.`
   return prompt
 }
 
@@ -432,7 +439,7 @@ export function buildBatchGroundingPrompt(
   prompt += `Use current web search to find facts relevant to EACH session's event, round, venue, and likely contenders. Prioritize 2028 Games-specific news, then 2024-2026 performance and status updates for probable contenders. Prefer official games organizing body, international federation, team, and reputable sports-news sources.\n\n`
   prompt += `Return per-session groundingFacts and relatedNews — each session should have its own facts and news specific to its event and round type. Finals need different facts than prelims.\n\n`
   prompt += augmentationBlock(extraInstructions)
-  prompt += `Return a JSON object with a "sessions" array containing ${sessions.length} objects (one per session id above), each with id, groundingFacts, relatedNews. No markdown fences.`
+  prompt += `Record ${sessions.length} entries in sessions (one per session id above), each with id, groundingFacts, relatedNews.`
   return prompt
 }
 
@@ -465,7 +472,7 @@ function buildWritingSessionsBody(
     prompt += '\n'
   }
   prompt += augmentationBlock(extraInstructions)
-  prompt += `Return a JSON array with ${sessions.length} objects, one for each session id above, with fields id, blurb, potentialContendersIntro, potentialContenders. No markdown fences.`
+  prompt += `Return a JSON object whose sessions array has ${sessions.length} objects, one for each session id above, with fields id, blurb, potentialContendersIntro, potentialContenders.`
   return prompt
 }
 
@@ -478,7 +485,7 @@ export function buildWritingPrompt(
   return buildSportContext(sport) + buildWritingSessionsBody(sessions, grounding, extraInstructions)
 }
 
-// Perplexity sonar-pro occasionally leaks inline citation markers like "[1]"
+// Search-grounded models occasionally leak inline citation markers like "[1]"
 // or "[1][5]" or "[1, 3]" into prose even when the system prompt forbids them.
 // Belt-and-suspenders strip, shared across the sport-facts and venue-facts
 // generators. Matches adjacent bracketed-digit groups with optional commas or
@@ -543,161 +550,184 @@ export function normalizeRelatedNews(items: unknown, sessionId: string): Related
   return out
 }
 
-export function normalizePerplexitySources(
-  results: PerplexitySearchResult[] | null | undefined,
-): ContentSource[] {
-  if (!results) return []
-  const seen = new Set<string>()
-  const sources: ContentSource[] = []
-  for (const result of results) {
-    if (!result.url || seen.has(result.url)) continue
-    seen.add(result.url)
-    sources.push({
-      title: result.title?.trim() || result.url,
-      url: result.url,
-      date: result.date,
-      lastUpdated: result.last_updated,
-      snippet: result.snippet,
-      source: result.source,
+// Pulls per-session entries out of a record_grounding call. Entries for ids
+// outside the request are dropped; every entry shares the turn's search sources.
+function parseGroundingMessage(content: ContentBlock[], sessionIds: Set<string>): GroundingData[] {
+  const record = extractRecord(content, RECORD_GROUNDING_TOOL.name) as { sessions?: unknown }
+  const items = Array.isArray(record.sessions) ? record.sessions : []
+  const sources = extractSearchSources(content)
+  const results: GroundingData[] = []
+  for (const raw of items) {
+    if (!raw || typeof raw !== 'object') continue
+    const item = raw as { id?: unknown; groundingFacts?: unknown; relatedNews?: unknown }
+    if (typeof item.id !== 'string' || !sessionIds.has(item.id)) continue
+    const facts = Array.isArray(item.groundingFacts)
+      ? item.groundingFacts
+          .filter((f): f is string => typeof f === 'string' && f.trim().length > 0)
+          .map(stripCitationMarkers)
+      : []
+    results.push({
+      id: item.id,
+      groundingFacts: facts,
+      relatedNews: normalizeRelatedNews(item.relatedNews, item.id),
+      sources,
     })
   }
-  return sources
+  return results
+}
+
+function buildGroundingRequest(
+  sessions: SessionSource[],
+  sport: string,
+  model: string,
+  extraInstructions?: string,
+): MessageCreateParamsNonStreaming {
+  const single = sessions.length === 1
+  return buildResearchParams({
+    model,
+    system: GROUNDING_SYSTEM_PROMPT,
+    prompt: single
+      ? buildGroundingPrompt(sessions[0], sport, extraInstructions)
+      : buildBatchGroundingPrompt(sessions, sport, extraInstructions),
+    recordTool: RECORD_GROUNDING_TOOL,
+    maxSearches: single ? GROUNDING_SINGLE_MAX_SEARCHES : GROUNDING_BATCH_MAX_SEARCHES,
+  })
 }
 
 export async function fetchGrounding(
-  apiKey: string,
+  client: Anthropic,
   session: SessionSource,
   sport: string,
   model: string,
   extraInstructions?: string,
 ): Promise<GroundingData | null> {
-  const prompt = buildGroundingPrompt(session, sport, extraInstructions)
-  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-    try {
-      const response = await fetch('https://api.perplexity.ai/v1/sonar', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model,
-          messages: [
-            { role: 'system', content: GROUNDING_SYSTEM_PROMPT },
-            { role: 'user', content: prompt },
-          ],
-          max_tokens: 3000,
-          temperature: 0.1,
-          response_format: {
-            type: 'json_schema',
-            json_schema: { schema: PERPLEXITY_GROUNDING_SCHEMA },
-          },
-          web_search_options: { search_mode: 'web' },
-        }),
-      })
-      if (!response.ok) {
-        const text = await response.text()
-        throw new Error(`Perplexity API ${response.status}: ${text.slice(0, 500)}`)
-      }
-      const body = (await response.json()) as PerplexityResponse
-      const text = body.choices?.[0]?.message?.content
-      if (!text) throw new Error('No Perplexity message content')
-      const parsed = JSON.parse(text) as {
-        id: string
-        groundingFacts?: unknown
-        relatedNews?: unknown
-      }
-      const facts = Array.isArray(parsed.groundingFacts)
-        ? parsed.groundingFacts.filter(
-            (f): f is string => typeof f === 'string' && f.trim().length > 0,
-          )
-        : []
-      return {
-        id: session.id,
-        groundingFacts: facts,
-        relatedNews: normalizeRelatedNews(parsed.relatedNews, session.id),
-        sources: normalizePerplexitySources(body.search_results),
-      }
-    } catch (err) {
-      const cause = err instanceof Error && err.cause ? ` [cause: ${err.cause}]` : ''
-      const msg = err instanceof Error ? err.message : String(err)
-      console.error(
-        `    Grounding attempt ${attempt}/${MAX_RETRIES} failed for ${session.id}: ${msg}${cause}`,
-      )
-      if (attempt < MAX_RETRIES) await new Promise((r) => setTimeout(r, RETRY_DELAY_MS * attempt))
-    }
-  }
-  console.error(`    Grounding FAILED after ${MAX_RETRIES} attempts for ${session.id}`)
-  return null
+  const results = await fetchGroundingBatch(client, [session], sport, model, extraInstructions)
+  return results.find((r) => r.id === session.id) ?? null
 }
 
 export async function fetchGroundingBatch(
-  apiKey: string,
+  client: Anthropic,
   sessions: SessionSource[],
   sport: string,
   model: string,
   extraInstructions?: string,
 ): Promise<GroundingData[]> {
   if (sessions.length === 0) return []
-  const prompt = buildBatchGroundingPrompt(sessions, sport, extraInstructions)
+  const params = buildGroundingRequest(sessions, sport, model, extraInstructions)
   const sessionIds = new Set(sessions.map((s) => s.id))
+  const ids = sessions.map((s) => s.id).join(',')
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      const response = await fetch('https://api.perplexity.ai/v1/sonar', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model,
-          messages: [
-            { role: 'system', content: GROUNDING_SYSTEM_PROMPT },
-            { role: 'user', content: prompt },
-          ],
-          max_tokens: 8192,
-          temperature: 0.1,
-          response_format: {
-            type: 'json_schema',
-            json_schema: { schema: PERPLEXITY_BATCH_GROUNDING_SCHEMA },
-          },
-          web_search_options: { search_mode: 'web' },
-        }),
-      })
-      if (!response.ok) {
-        const text = await response.text()
-        throw new Error(`Perplexity API ${response.status}: ${text.slice(0, 500)}`)
-      }
-      const body = (await response.json()) as PerplexityResponse
-      const text = body.choices?.[0]?.message?.content
-      if (!text) throw new Error('No Perplexity message content')
-      const parsed = JSON.parse(text) as { sessions?: unknown[] }
-      const items = Array.isArray(parsed.sessions) ? parsed.sessions : []
-      const sources = normalizePerplexitySources(body.search_results)
-      const results: GroundingData[] = []
-      for (const raw of items) {
-        const item = raw as { id?: string; groundingFacts?: unknown; relatedNews?: unknown }
-        if (!item.id || !sessionIds.has(item.id)) continue
-        const facts = Array.isArray(item.groundingFacts)
-          ? item.groundingFacts.filter(
-              (f): f is string => typeof f === 'string' && f.trim().length > 0,
-            )
-          : []
-        results.push({
-          id: item.id,
-          groundingFacts: facts,
-          relatedNews: normalizeRelatedNews(item.relatedNews, item.id),
-          sources,
-        })
-      }
-      return results
+      const content = await runResearch(client, params)
+      return parseGroundingMessage(content, sessionIds)
     } catch (err) {
-      const cause = err instanceof Error && err.cause ? ` [cause: ${err.cause}]` : ''
       const msg = err instanceof Error ? err.message : String(err)
-      const ids = sessions.map((s) => s.id).join(',')
-      console.error(
-        `    Grounding batch attempt ${attempt}/${MAX_RETRIES} failed for [${ids}]: ${msg}${cause}`,
-      )
+      console.error(`    Grounding attempt ${attempt}/${MAX_RETRIES} failed for [${ids}]: ${msg}`)
       if (attempt < MAX_RETRIES) await new Promise((r) => setTimeout(r, RETRY_DELAY_MS * attempt))
     }
   }
-  const ids = sessions.map((s) => s.id).join(',')
-  console.error(`    Grounding batch FAILED after ${MAX_RETRIES} attempts for [${ids}]`)
+  console.error(`    Grounding FAILED after ${MAX_RETRIES} attempts for [${ids}]`)
   return []
+}
+
+// Writing and scoring use structured outputs so the API enforces the response
+// shape (field names included) instead of trusting the prompt alone. Neither
+// stage uses web search, so the citations conflict that rules this out for
+// grounding doesn't apply.
+const WRITING_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['sessions'],
+  properties: {
+    sessions: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['id', 'blurb', 'potentialContendersIntro', 'potentialContenders'],
+        properties: {
+          id: { type: 'string' },
+          blurb: { type: 'string' },
+          potentialContendersIntro: { type: 'string' },
+          potentialContenders: {
+            type: 'array',
+            items: {
+              type: 'object',
+              additionalProperties: false,
+              required: ['name', 'country', 'note'],
+              properties: {
+                name: { type: 'string' },
+                country: { type: 'string' },
+                note: { type: 'string' },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+}
+
+const SCORE_DIMENSION_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['score', 'explanation'],
+  properties: {
+    score: { type: 'integer' },
+    explanation: { type: 'string' },
+  },
+}
+
+const SCORING_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['sessions'],
+  properties: {
+    sessions: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['id', 'scorecard'],
+        properties: {
+          id: { type: 'string' },
+          scorecard: {
+            type: 'object',
+            additionalProperties: false,
+            required: [
+              'significance',
+              'experience',
+              'starPower',
+              'uniqueness',
+              'demand',
+              'overall',
+            ],
+            properties: {
+              significance: SCORE_DIMENSION_SCHEMA,
+              experience: SCORE_DIMENSION_SCHEMA,
+              starPower: SCORE_DIMENSION_SCHEMA,
+              uniqueness: SCORE_DIMENSION_SCHEMA,
+              demand: SCORE_DIMENSION_SCHEMA,
+              overall: { type: 'string' },
+            },
+          },
+        },
+      },
+    },
+  },
+}
+
+// Decodes a structured-output response: the text blocks (after any thinking
+// blocks) form one JSON object whose "sessions" array holds the results.
+function parseSessionsJson(content: ContentBlock[]): unknown[] {
+  const text = content
+    .map((c) => (c.type === 'text' ? c.text : ''))
+    .join('')
+    .trim()
+  if (!text) throw new Error('No text in Anthropic response')
+  const parsed = JSON.parse(text) as { sessions?: unknown }
+  if (!Array.isArray(parsed.sessions)) throw new Error('Expected a sessions array')
+  return parsed.sessions
 }
 
 // Ephemeral cache marker. Applied to the system prompt (stable across the run)
@@ -730,21 +760,20 @@ function buildWritingRequest(
 
   return {
     model,
-    max_tokens: 8192,
+    max_tokens: WRITING_MAX_TOKENS,
+    output_config: {
+      effort: WRITING_EFFORT,
+      format: { type: 'json_schema', schema: WRITING_SCHEMA },
+    },
     system: [{ type: 'text', text: WRITING_SYSTEM_PROMPT, cache_control: EPHEMERAL_CACHE }],
     messages: [{ role: 'user', content }],
   }
 }
 
-// Shared response decoder. Both sync and batch paths receive an array of
-// ContentBlocks; we extract the first text block and validate the JSON shape.
+// Shared response decoder for the sync and batch paths. The schema guarantees
+// the shape; this still drops entries for unknown ids or empty fields.
 function parseWritingMessage(content: ContentBlock[]): WritingData[] {
-  const textBlock = content.find((c) => c.type === 'text')
-  const text = textBlock && textBlock.type === 'text' ? textBlock.text : ''
-  const jsonMatch = text.match(/\[[\s\S]*\]/)
-  if (!jsonMatch) throw new Error('No JSON array in Anthropic response')
-  const parsed = JSON.parse(jsonMatch[0]) as unknown
-  if (!Array.isArray(parsed)) throw new Error('Expected array')
+  const parsed = parseSessionsJson(content)
   const results: WritingData[] = []
   for (const raw of parsed) {
     if (!raw || typeof raw !== 'object') continue
@@ -886,7 +915,7 @@ async function runMessageBatchesBySport<TJob extends { sport: string }, TResult>
   client: Anthropic,
   jobs: TJob[],
   buildParams: (job: TJob) => MessageCreateParamsNonStreaming,
-  parseMessage: (content: ContentBlock[]) => TResult[],
+  parseMessage: (content: ContentBlock[], job: TJob) => TResult[],
   label: string,
   options: BatchesOptions<TJob, TResult>,
 ): Promise<BatchOutcome<TJob, TResult>[]> {
@@ -977,7 +1006,7 @@ async function runMessageBatchesBySport<TJob extends { sport: string }, TResult>
           continue
         }
         try {
-          outcome.results = parseMessage(item.result.message.content)
+          outcome.results = parseMessage(item.result.message.content, outcome.job)
         } catch (err) {
           outcome.error = err instanceof Error ? err.message : String(err)
         }
@@ -1019,6 +1048,39 @@ export async function generateWritingViaBatches(
     parseWritingMessage,
     'writing',
     { onSportComplete: options.onSportComplete, pollIntervalMs: options.pollIntervalMs },
+  )
+}
+
+export interface GroundingJob {
+  sport: string
+  batch: SessionSource[]
+  extraInstructions?: string
+}
+
+export type GroundingBatchOutcome = BatchOutcome<GroundingJob, GroundingData>
+export type GroundingBatchProgress = BatchProgress<GroundingJob, GroundingData>
+
+export interface GroundingBatchesOptions {
+  onSportComplete?: (progress: GroundingBatchProgress) => void | Promise<void>
+  pollIntervalMs?: number
+}
+
+// A batch item whose search turn pauses (stop_reason "pause_turn") can't be
+// resumed inside the Batches API, so it comes back as an error and its
+// sessions stay due for the next run (or a --no-batch run).
+export async function fetchGroundingViaBatches(
+  client: Anthropic,
+  jobs: GroundingJob[],
+  model: string,
+  options: GroundingBatchesOptions = {},
+): Promise<GroundingBatchOutcome[]> {
+  return runMessageBatchesBySport(
+    client,
+    jobs,
+    (job) => buildGroundingRequest(job.batch, job.sport, model, job.extraInstructions),
+    (content, job) => parseGroundingMessage(content, new Set(job.batch.map((s) => s.id))),
+    'grounding',
+    options,
   )
 }
 
@@ -1091,7 +1153,7 @@ Rules:
 - Use the full 4-10 range honestly. A marquee final in prime time at the Coliseum earns its 9s and 10s; an early prelim earns 4-5s. Don't compress everything to the middle.
 - If a "Paris 2024 Medal Results" block is provided for a session, treat those medalists as authoritative. Never name a different athlete as the Paris gold/silver/bronze medalist in any explanation.
 - If a "User correction / additional context" block is present in the user prompt, treat it as authoritative — it supersedes conflicting facts.
-- Return a JSON array of objects, one per session id, each with "id" and "scorecard" containing the five dimensions plus "overall". No markdown fences.
+- Return a JSON object whose "sessions" array has one object per session id, each with "id" and "scorecard" containing the five dimensions plus "overall".
 
 Example object shape (do not copy values):
 {
@@ -1139,7 +1201,7 @@ function buildScoringSessionsBody(
     prompt += '\n'
   }
   prompt += augmentationBlock(extraInstructions)
-  prompt += `Return a JSON array with ${sessions.length} objects, one per session id above, each shaped { id, scorecard: { significance, experience, starPower, uniqueness, demand, overall } } where each dimension is { score, explanation }. No markdown fences.`
+  prompt += `Return a JSON object whose sessions array has ${sessions.length} objects, one per session id above, each shaped { id, scorecard: { significance, experience, starPower, uniqueness, demand, overall } } where each dimension is { score, explanation }.`
   return prompt
 }
 
@@ -1178,7 +1240,11 @@ function buildScoringRequest(
 
   return {
     model,
-    max_tokens: 8192,
+    max_tokens: SCORING_MAX_TOKENS,
+    output_config: {
+      effort: SCORING_EFFORT,
+      format: { type: 'json_schema', schema: SCORING_SCHEMA },
+    },
     system: [{ type: 'text', text: SCORING_SYSTEM_PROMPT, cache_control: EPHEMERAL_CACHE }],
     messages: [{ role: 'user', content }],
   }
@@ -1194,15 +1260,9 @@ function parseDimension(raw: unknown): ScorecardDimension | null {
   return { score, explanation }
 }
 
-// Shared response decoder for scoring. Both sync and batch paths receive an
-// array of ContentBlocks; extract the first text block and validate the JSON.
+// Shared response decoder for scoring; see parseWritingMessage.
 function parseScoringMessage(content: ContentBlock[]): ScoringData[] {
-  const textBlock = content.find((c) => c.type === 'text')
-  const text = textBlock && textBlock.type === 'text' ? textBlock.text : ''
-  const jsonMatch = text.match(/\[[\s\S]*\]/)
-  if (!jsonMatch) throw new Error('No JSON array in Anthropic response')
-  const parsed = JSON.parse(jsonMatch[0]) as unknown
-  if (!Array.isArray(parsed)) throw new Error('Expected array')
+  const parsed = parseSessionsJson(content)
   const results: ScoringData[] = []
   for (const raw of parsed) {
     if (!raw || typeof raw !== 'object') continue

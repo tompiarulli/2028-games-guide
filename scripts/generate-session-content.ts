@@ -22,8 +22,8 @@ import {
   generateWritingViaBatches,
 } from './lib/session-content.js'
 
-// Anthropic tier-1 output TPM (8k/min on sonnet-4.5) is the binding constraint;
-// 2 concurrent writing batches (~2.5k output each) stays safely under.
+// Sync (--no-batch) mode only: output TPM is the binding constraint on low
+// tiers, and adaptive thinking adds output on top of the ~2.5k-token answer.
 const DEFAULT_CONCURRENCY = 2
 
 function getArgValue(name: string): string | undefined {
