@@ -1,6 +1,3 @@
-# pnpm settings (pnpm 11+ no longer reads the `pnpm` field in package.json).
-
-# Packages allowed to run install scripts; anything else is blocked.
 allowBuilds:
   esbuild: true
   lightningcss: true
@@ -9,4 +6,4 @@ allowBuilds:
 overrides:
   # TanStack Start's server core depends on h3 v2 through the `h3-v2` alias. Pinned to a
   # stable release for its security fixes; Renovate keeps it current.
-  h3-v2: npm:h3@2.0.2
+  h3-v2: npm:h3@2.0.8

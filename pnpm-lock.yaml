@@ -163,7 +163,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  h3-v2: npm:h3@2.0.2
+  h3-v2: npm:h3@2.0.8
 
 importers:
 
