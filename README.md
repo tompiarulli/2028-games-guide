@@ -51,7 +51,7 @@ Every dimension is scored on a 1–10 scale. The **aggregate** is a weighted ave
 
 - **App:** [TanStack Start](https://tanstack.com/start) (React 19, server-side rendering, file-based routing) with TanStack Router and Query. Built with Vite and [Nitro](https://nitro.build).
 - **UI:** Tailwind CSS v4, [Base UI](https://base-ui.com), and Lucide icons.
-- **Content pipeline:** TypeScript scripts that use the [Perplexity](https://www.perplexity.ai) API for grounded research and the [Anthropic](https://www.anthropic.com) API for writing and scoring. They use prompt caching and batch requests to keep costs down.
+- **Content pipeline:** TypeScript scripts that use the [Anthropic](https://www.anthropic.com) API for everything: Claude with web search for grounded research, then Claude for writing and scoring. They use prompt caching and batch requests to keep costs down.
 - **Quality:** strict TypeScript, Vitest and Testing Library, oxlint and oxfmt, and Lighthouse CI budgets on every pull request.
 - **Delivery:** GitHub Actions, Release Please (versioning and changelog driven by conventional commits), Renovate, and Vercel (hosting, Web Analytics, Speed Insights).
 - **Development:** [Claude Code](https://claude.com/claude-code) for AI-assisted development. Its project instructions are committed in [`AGENTS.md`](AGENTS.md).

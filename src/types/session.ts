@@ -13,7 +13,7 @@ export interface ContentSource {
   source?: string
 }
 
-export type ContentProvider = 'perplexity' | 'anthropic' | 'hybrid'
+export type ContentProvider = 'anthropic' | 'hybrid'
 
 export interface ContentMeta {
   provider: ContentProvider

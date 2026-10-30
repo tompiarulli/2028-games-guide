@@ -2,11 +2,17 @@ import 'dotenv/config'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
+import Anthropic from '@anthropic-ai/sdk'
 import pLimit from 'p-limit'
 
 import type { SessionSource } from '../src/types/session.js'
 import {
-  PERPLEXITY_DEFAULT_MODEL,
+  RESEARCH_DEFAULT_MODEL,
+  buildResearchParams,
+  extractRecord,
+  runResearch,
+} from './lib/claude-research.js'
+import {
   ROOT,
   augmentationBlock,
   buildCorrectionContext,
@@ -34,6 +40,7 @@ const SESSIONS_PATH = resolve(ROOT, 'src/data/sessions.json')
 const MAX_RETRIES = 3
 const RETRY_DELAY_MS = 5000
 const DEFAULT_CONCURRENCY = 3
+const MAX_SEARCHES = 5
 const EXCLUDED_VENUES = new Set(['N/A', 'TBD'])
 
 function getArgValue(name: string): string | undefined {
@@ -62,6 +69,12 @@ const VENUE_FACTS_SCHEMA = {
   },
 }
 
+const RECORD_TOOL = {
+  name: 'record_venue_facts',
+  description: 'Record the facts for this venue. Call once, after research is complete.',
+  schema: VENUE_FACTS_SCHEMA,
+}
+
 const SYSTEM_PROMPT = `You gather per-venue reference facts for the 2028 Los Angeles Summer Games ticket-buying guide. Your output is used as stable background context (capacity, history, what the venue is like) by another stage that writes session prose — you do NOT write marketing copy. Facts first, sourced from your web searches.
 
 Return six fields:
@@ -82,59 +95,37 @@ Rules:
 - Facts only; no superlative prose ("legendary," "iconic," "world-class" without substance).
 - If the venue is a temporary Games-only structure, say so explicitly.
 - If you can't find a fact, omit the field rather than guess.
-- Do NOT include inline citation markers like "[1]", "[2, 3]", or "[1][5]" in any output field. Your search sources are returned separately by the API; your text must be citation-free prose.
+- Do NOT include inline citation markers like "[1]", "[2, 3]", or "[1][5]" in any output field. Your text must be citation-free prose.
 - Do not use trademarked terms "Olympic", "Olympics", "Olympian", "LA28", "Paralympic", "Paralympics". Use "the 2028 Games", "the 2028 Summer Games", "Paris 2024", "medalist", "Games history". This applies even when source material uses them — rephrase.
-- No markdown, no code fences. Return valid JSON matching the schema.`
+- Submit your results through the record_venue_facts tool, not as text. Plain strings only — no markdown.`
 
 function buildPrompt(venue: string, sports: string[], extraInstructions?: string): string {
   let prompt = `## Venue: ${venue}\n\n`
   prompt += `### Sports held here at 2028\n`
   for (const s of sports) prompt += `- ${s}\n`
   prompt += augmentationBlock(extraInstructions)
-  prompt += `\nResearch this venue's capacity, year built, location, iconic historical moments, spectator experience, and any 2028-specific changes. Treat the sport list as context for which configuration of the venue is relevant. Return a single JSON object matching the schema — no markdown fences.`
+  prompt += `\nResearch this venue's capacity, year built, location, iconic historical moments, spectator experience, and any 2028-specific changes. Treat the sport list as context for which configuration of the venue is relevant.`
   return prompt
 }
 
-interface PerplexityResponse {
-  choices?: { message?: { content?: string } }[]
-}
-
 async function fetchVenueFacts(
-  apiKey: string,
+  client: Anthropic,
   venue: string,
   sports: string[],
   model: string,
   extraInstructions?: string,
 ): Promise<VenueFacts | null> {
-  const prompt = buildPrompt(venue, sports, extraInstructions)
+  const params = buildResearchParams({
+    model,
+    system: SYSTEM_PROMPT,
+    prompt: buildPrompt(venue, sports, extraInstructions),
+    recordTool: RECORD_TOOL,
+    maxSearches: MAX_SEARCHES,
+  })
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      const response = await fetch('https://api.perplexity.ai/v1/sonar', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model,
-          messages: [
-            { role: 'system', content: SYSTEM_PROMPT },
-            { role: 'user', content: prompt },
-          ],
-          max_tokens: 2500,
-          temperature: 0.1,
-          response_format: {
-            type: 'json_schema',
-            json_schema: { schema: VENUE_FACTS_SCHEMA },
-          },
-          web_search_options: { search_mode: 'web' },
-        }),
-      })
-      if (!response.ok) {
-        const text = await response.text()
-        throw new Error(`Perplexity API ${response.status}: ${text.slice(0, 500)}`)
-      }
-      const body = (await response.json()) as PerplexityResponse
-      const text = body.choices?.[0]?.message?.content
-      if (!text) throw new Error('No Perplexity message content')
-      const parsed = JSON.parse(text) as Partial<VenueFacts>
+      const content = await runResearch(client, params)
+      const parsed = extractRecord(content, RECORD_TOOL.name) as Partial<VenueFacts>
       if (
         typeof parsed.location !== 'string' ||
         typeof parsed.iconicMoments !== 'string' ||
@@ -169,15 +160,15 @@ async function fetchVenueFacts(
 }
 
 async function main() {
-  const model = getArgValue('--perplexity-model') ?? PERPLEXITY_DEFAULT_MODEL
+  const model = getArgValue('--anthropic-model') ?? RESEARCH_DEFAULT_MODEL
   const forceAll = process.argv.includes('--force')
   const dryRun = process.argv.includes('--dry-run')
   const venueFilter = getArgValue('--venue')
   const concurrency = parsePositiveInt(getArgValue('--concurrency'), DEFAULT_CONCURRENCY)
 
-  const apiKey = process.env.PERPLEXITY_API_KEY
+  const apiKey = process.env.ANTHROPIC_API_KEY
   if (!dryRun && !apiKey) {
-    console.error('Error: PERPLEXITY_API_KEY is required (or use --dry-run)')
+    console.error('Error: ANTHROPIC_API_KEY is required (or use --dry-run)')
     process.exit(1)
   }
 
@@ -211,7 +202,7 @@ async function main() {
         return !current || !current.iconicMoments
       })
 
-  console.log(`Venue facts: perplexity ${model}  concurrency=${concurrency}`)
+  console.log(`Venue facts: anthropic ${model} + web search  concurrency=${concurrency}`)
   console.log(`${targets.length}/${venues.length} venue(s) need regeneration`)
   if (dryRun) {
     for (const venue of targets) {
@@ -222,6 +213,7 @@ async function main() {
   }
   if (targets.length === 0) return
 
+  const client = new Anthropic({ apiKey })
   const limit = pLimit(concurrency)
   let done = 0
   const updated: Record<string, VenueFacts> = {}
@@ -231,7 +223,7 @@ async function main() {
       limit(async () => {
         const sports = [...byVenue.get(venue)!].sort()
         const extraInstructions = buildCorrectionContext({ venue })
-        const facts = await fetchVenueFacts(apiKey!, venue, sports, model, extraInstructions)
+        const facts = await fetchVenueFacts(client, venue, sports, model, extraInstructions)
         done += 1
         if (!facts) {
           console.log(`  [${done}/${targets.length}] ${venue} ✗ failed`)
@@ -248,7 +240,7 @@ async function main() {
   merged._meta = {
     lastVerified: new Date().toISOString().slice(0, 10),
     notes:
-      'Per-venue facts generated by scripts/generate-venue-facts.ts using Perplexity sonar-pro web search.',
+      'Per-venue facts generated by scripts/generate-venue-facts.ts using Claude with web search.',
   }
   for (const [venue, facts] of Object.entries(updated)) {
     merged[venue] = facts
