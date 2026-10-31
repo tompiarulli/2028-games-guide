@@ -1,4 +1,4 @@
-import { Bookmark } from 'lucide-react'
+import { Bookmark, ChevronDown, ChevronUp } from 'lucide-react'
 import { memo, type KeyboardEvent } from 'react'
 
 import { useMediaQuery } from '@/hooks/useMediaQuery'
@@ -38,12 +38,15 @@ const SortHeader = memo(function SortHeader({
   const active = sort.col === col
   return (
     <th data-col={col} onClick={() => onSort(col)} title={title} className={thBase}>
-      {label}
-      {active && (
-        <span className="text-gold ml-0.5 text-[0.55rem]">
-          {sort.dir === 'asc' ? '\u25B2' : '\u25BC'}
-        </span>
-      )}
+      <span className="inline-flex items-center gap-0.5 align-middle leading-none">
+        {label}
+        {active &&
+          (sort.dir === 'asc' ? (
+            <ChevronUp size={11} strokeWidth={3} aria-hidden className="text-gold shrink-0" />
+          ) : (
+            <ChevronDown size={11} strokeWidth={3} aria-hidden className="text-gold shrink-0" />
+          ))}
+      </span>
     </th>
   )
 })
