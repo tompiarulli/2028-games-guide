@@ -1,5 +1,43 @@
 # Changelog
 
+## [1.12.0](https://github.com/tompiarulli/2028-games-guide/compare/v1.11.0...v1.12.0) (2026-10-31)
+
+
+### Features
+
+* **content:** replace Perplexity with Claude web search and upgrade models ([#202](https://github.com/tompiarulli/2028-games-guide/issues/202)) ([701c8db](https://github.com/tompiarulli/2028-games-guide/commit/701c8db3405b4aad26a4a7735a989de7f30a25ed))
+* **content:** skip unchanged sessions and log pipeline costs ([#204](https://github.com/tompiarulli/2028-games-guide/issues/204)) ([dd0c826](https://github.com/tompiarulli/2028-games-guide/commit/dd0c826be5e6fb8cfa10cad59a1df6dde0a34ffa))
+* **content:** store only the sources each session cites ([#209](https://github.com/tompiarulli/2028-games-guide/issues/209)) ([d770ded](https://github.com/tompiarulli/2028-games-guide/commit/d770deda640f52ab5a81dcb480b8b47f2b90dbdc))
+* rename to 2028 Games Session Guide and add per-page meta tags ([#195](https://github.com/tompiarulli/2028-games-guide/issues/195)) ([42a406d](https://github.com/tompiarulli/2028-games-guide/commit/42a406d474b41c75798c5916110cbf8b928f49a7))
+
+
+### Bug Fixes
+
+* **table:** vertically center the sort chevron ([#212](https://github.com/tompiarulli/2028-games-guide/issues/212)) ([5e3702b](https://github.com/tompiarulli/2028-games-guide/commit/5e3702b857e100d08c65833b7fc1f053cab70918))
+
+
+### Documentation
+
+* **contributing:** require the CEL condition on the federation rule ([#210](https://github.com/tompiarulli/2028-games-guide/issues/210)) ([370c5d3](https://github.com/tompiarulli/2028-games-guide/commit/370c5d36408862c15d90773149e5bed739caa586))
+* **readme:** clean up the session table link ([#208](https://github.com/tompiarulli/2028-games-guide/issues/208)) ([87f75d0](https://github.com/tompiarulli/2028-games-guide/commit/87f75d064f3ddc64c67d5d43a44fce3d56c02dd1))
+* use GitHub's ID-based OIDC subject in the federation setup ([#207](https://github.com/tompiarulli/2028-games-guide/issues/207)) ([fa16faf](https://github.com/tompiarulli/2028-games-guide/commit/fa16faf6cf25f09fc87a587beedefd2f5bf30cc0))
+
+
+### CI
+
+* add monthly data refresh with workload identity federation ([#205](https://github.com/tompiarulli/2028-games-guide/issues/205)) ([86b583f](https://github.com/tompiarulli/2028-games-guide/commit/86b583fbb57b804e8896251000ddc3e798c852db))
+
+
+### Miscellaneous
+
+* **data:** full content refresh with the Claude pipeline ([#203](https://github.com/tompiarulli/2028-games-guide/issues/203)) ([caccdfe](https://github.com/tompiarulli/2028-games-guide/commit/caccdfeca9131805e7aa46659a3d834a8aeb86f2))
+* **data:** scheduled content refresh 2026-10-30 ([#206](https://github.com/tompiarulli/2028-games-guide/issues/206)) ([3227cf2](https://github.com/tompiarulli/2028-games-guide/commit/3227cf2b546cb8c633b043c87383f809e8307188))
+* **data:** trim session sources to their news links ([#211](https://github.com/tompiarulli/2028-games-guide/issues/211)) ([a28b8b3](https://github.com/tompiarulli/2028-games-guide/commit/a28b8b33f61d0d03caf8cec129ec2d45c03f510b))
+* **deps:** update dependency dotenv to v18.0.9 ([#198](https://github.com/tompiarulli/2028-games-guide/issues/198)) ([efbe5be](https://github.com/tompiarulli/2028-games-guide/commit/efbe5beafc685941a1193ed56bc5ffcc636d697a))
+* **deps:** update dependency h3-v2 to v2.0.8 ([#199](https://github.com/tompiarulli/2028-games-guide/issues/199)) ([af4d29d](https://github.com/tompiarulli/2028-games-guide/commit/af4d29dd54976ed193155e1afd33ad0379c05d62))
+* **deps:** update dependency vite to v8.3.5 ([#200](https://github.com/tompiarulli/2028-games-guide/issues/200)) ([471db55](https://github.com/tompiarulli/2028-games-guide/commit/471db554325c364ac25e5b218e182d2dc9ab382e))
+* **deps:** update pnpm/action-setup digest to 0977fd9 ([#197](https://github.com/tompiarulli/2028-games-guide/issues/197)) ([ba00f3e](https://github.com/tompiarulli/2028-games-guide/commit/ba00f3ec2badf1a9ac1541a7bf0c575f42e313ce))
+
 ## [1.11.0](https://github.com/tompiarulli/2028-games-guide/compare/v1.10.2...v1.11.0) (2026-10-22)
 
 
