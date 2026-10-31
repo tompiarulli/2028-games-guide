@@ -6,6 +6,8 @@ import {
   containsBannedTerm,
   type GroundingData,
   groundingCorrectionsHash,
+  MAX_SOURCES_PER_SESSION,
+  selectSessionSources,
   writingInputHash,
 } from './session-content.js'
 import { estimateCost } from './usage.js'
@@ -57,6 +59,29 @@ describe('estimateCost', () => {
 
   it('returns null for models without a rate', () => {
     expect(estimateCost('some-other-model', usage({ input_tokens: 1 }), false)).toBeNull()
+  })
+})
+
+describe('selectSessionSources', () => {
+  const results = [
+    { title: 'A', url: 'https://a.com/story/' },
+    { title: 'B', url: 'https://b.com/x' },
+    { title: 'C', url: 'https://c.com/y' },
+  ]
+
+  it('keeps only cited search results, in citation order', () => {
+    expect(selectSessionSources(results, ['https://c.com/y', 'https://a.com/story'])).toEqual([results[2], results[0]])
+  })
+
+  it('ignores URLs that never came back from a search, and duplicates', () => {
+    const cited = ['https://made-up.com', 'https://b.com/x#top', 'HTTPS://B.COM/X']
+    expect(selectSessionSources(results, cited)).toEqual([results[1]])
+  })
+
+  it('caps the number of sources per session', () => {
+    const many = Array.from({ length: 30 }, (_, i) => ({ title: `${i}`, url: `https://x.com/${i}` }))
+    const cited = many.map((s) => s.url)
+    expect(selectSessionSources(many, cited)).toHaveLength(MAX_SOURCES_PER_SESSION)
   })
 })
 

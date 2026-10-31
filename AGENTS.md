@@ -35,6 +35,7 @@ Cost controls (see `scripts/lib/freshness.ts` and `scripts/lib/usage.ts`):
 
 - Grounding re-checks send each session's stored brief; when Claude reports no material change, the stored facts and `generatedAt` stay put and only `checkedAt` moves. Briefs written before a session's current session/sport corrections (tracked by `correctionsHash`) are rewritten from scratch instead.
 - Writing and scoring store an input hash per session and skip sessions whose inputs are unchanged; `--force` overrides.
+- Each session stores only the search results its facts and news cite (at most 12, checked against what the searches actually returned), not the whole batch's results.
 - Every script prints a usage summary with an estimated cost.
 - Reader-facing output containing a trademarked term is rejected in code and retried on the next run.
 - Sport and venue facts are stable — don't put them in scheduled runs. A scheduled refresh is `generate:session-facts --stale-days=<n>`, then `generate:session-content`, `generate:session-scores`, and `pnpm format`.

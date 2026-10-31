@@ -72,6 +72,8 @@ export const SCORING_VERSION = 6
 export const MAX_RETRIES = 3
 export const RETRY_DELAY_MS = 5000
 export const MAX_NEWS_ITEMS = 10
+// Cap on the search results kept as a session's sources.
+export const MAX_SOURCES_PER_SESSION = 12
 // Sessions of one sport share most of their searches (same athletes, same
 // rankings), so larger batches cut duplicate searches and repeated context.
 export const GROUNDING_BATCH_SIZE = 20
@@ -143,10 +145,11 @@ export interface ScoringData {
 const GROUNDING_SESSION_SCHEMA = {
   type: 'object',
   additionalProperties: false,
-  required: ['id', 'materialChange', 'groundingFacts', 'relatedNews'],
+  required: ['id', 'materialChange', 'groundingFacts', 'relatedNews', 'sourceUrls'],
   properties: {
     id: { type: 'string' },
     materialChange: { type: 'boolean' },
+    sourceUrls: { type: 'array', items: { type: 'string' } },
     groundingFacts: {
       type: 'array',
       items: { type: 'string' },
@@ -246,7 +249,9 @@ For each session you will return:
 
 2. relatedNews — 0 to ${MAX_NEWS_ITEMS} recent news articles directly relevant to this session. Pull only from your search results. Include title, one-sentence summary of why it matters, sourceName, canonical sourceUrl, ISO publishedDate (YYYY-MM-DD), and 1-4 kebab-case tags. Prioritize 2028 Games-specific news, then recent form of probable contenders. Skip generic sport news. Empty array is fine if nothing fits.
 
-3. materialChange — Some sessions include a "Previous brief" gathered earlier. For those, research whether anything material has changed since then: new results or rankings, roster, injury, or retirement news, schedule or venue changes, or new relevant articles. If nothing material has changed, set materialChange to false and return empty groundingFacts and relatedNews; the previous brief is kept as-is. If something has changed, set materialChange to true and return a complete, updated brief, carrying forward previous facts that are still accurate. A session without a previous brief always gets materialChange true and a full brief.
+3. sourceUrls — the URLs of the search results this session's groundingFacts and relatedNews rely on, at most ${MAX_SOURCES_PER_SESSION}. Only URLs that came back from your searches. A batch shares one set of searches, so list just the pages that support THIS session, not everything you found.
+
+4. materialChange — Some sessions include a "Previous brief" gathered earlier. For those, research whether anything material has changed since then: new results or rankings, roster, injury, or retirement news, schedule or venue changes, or new relevant articles. If nothing material has changed, set materialChange to false and return empty groundingFacts, relatedNews, and sourceUrls; the previous brief is kept as-is. If something has changed, set materialChange to true and return a complete, updated brief, carrying forward previous facts that are still accurate. A session without a previous brief always gets materialChange true and a full brief.
 
 Rules:
 - Do not fabricate URLs, titles, dates, or outlets. If you don't have a source, don't include the fact.
@@ -482,7 +487,7 @@ export function buildBatchGroundingPrompt(
   prompt += `Use current web search to find facts relevant to EACH session's event, round, venue, and likely contenders. Prioritize 2028 Games-specific news, then 2024-2026 performance and status updates for probable contenders. Prefer official games organizing body, international federation, team, and reputable sports-news sources.\n\n`
   prompt += `Return per-session groundingFacts and relatedNews — each session should have its own facts and news specific to its event and round type. Finals need different facts than prelims.\n\n`
   prompt += augmentationBlock(extraInstructions)
-  prompt += `Record ${sessions.length} entries in sessions (one per session id above), each with id, materialChange, groundingFacts, relatedNews.`
+  prompt += `Record ${sessions.length} entries in sessions (one per session id above), each with id, materialChange, groundingFacts, relatedNews, sourceUrls.`
   return prompt
 }
 
@@ -597,6 +602,30 @@ export function normalizeRelatedNews(items: unknown, sessionId: string): Related
 
 // Pulls per-session entries out of a record_grounding call. Entries for ids
 // outside the request are dropped; every entry shares the turn's search sources.
+// One request's search results cover a whole batch of sessions. Keeps only
+// the results a session cites (its sourceUrls plus its news links), so each
+// session stores its own provenance instead of the batch's full result list.
+// URLs that never came back from a search are dropped, so a session can't
+// cite a page that wasn't actually retrieved.
+export function selectSessionSources(
+  searchResults: ContentSource[],
+  citedUrls: string[],
+): ContentSource[] {
+  const key = (url: string) => url.trim().replace(/#.*$/, '').replace(/\/+$/, '').toLowerCase()
+  const byUrl = new Map(searchResults.map((s) => [key(s.url), s]))
+  const out: ContentSource[] = []
+  const seen = new Set<string>()
+  for (const url of citedUrls) {
+    const k = key(url)
+    const source = byUrl.get(k)
+    if (!source || seen.has(k)) continue
+    seen.add(k)
+    out.push(source)
+    if (out.length >= MAX_SOURCES_PER_SESSION) break
+  }
+  return out
+}
+
 function parseGroundingMessage(
   content: ContentBlock[],
   sessionIds: Set<string>,
@@ -604,7 +633,7 @@ function parseGroundingMessage(
 ): GroundingData[] {
   const record = extractRecord(content, RECORD_GROUNDING_TOOL.name) as { sessions?: unknown }
   const items = Array.isArray(record.sessions) ? record.sessions : []
-  const sources = extractSearchSources(content)
+  const searchResults = extractSearchSources(content)
   const results: GroundingData[] = []
   for (const raw of items) {
     if (!raw || typeof raw !== 'object') continue
@@ -613,6 +642,7 @@ function parseGroundingMessage(
       materialChange?: unknown
       groundingFacts?: unknown
       relatedNews?: unknown
+      sourceUrls?: unknown
     }
     if (typeof item.id !== 'string' || !sessionIds.has(item.id)) continue
     // "No change" only counts when there was a previous brief to keep.
@@ -622,11 +652,18 @@ function parseGroundingMessage(
           .filter((f): f is string => typeof f === 'string' && f.trim().length > 0)
           .map(stripCitationMarkers)
       : []
+    const relatedNews = normalizeRelatedNews(item.relatedNews, item.id)
+    const citedUrls = [
+      ...(Array.isArray(item.sourceUrls)
+        ? item.sourceUrls.filter((u): u is string => typeof u === 'string')
+        : []),
+      ...relatedNews.map((n) => n.sourceUrl),
+    ]
     results.push({
       id: item.id,
       groundingFacts: facts,
-      relatedNews: normalizeRelatedNews(item.relatedNews, item.id),
-      sources,
+      relatedNews,
+      sources: selectSessionSources(searchResults, citedUrls),
       materialChange,
     })
   }
