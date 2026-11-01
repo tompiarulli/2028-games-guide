@@ -6,6 +6,8 @@
 
 **Live site: [28games.tompiarulli.com](https://28games.tompiarulli.com)**
 
+**Use it from Claude or ChatGPT:** [setup takes two minutes](#ask-claude-or-chatgpt-about-sessions).
+
 [![CI](https://github.com/tompiarulli/2028-games-guide/actions/workflows/ci.yml/badge.svg)](https://github.com/tompiarulli/2028-games-guide/actions/workflows/ci.yml)
 [![Lighthouse performance](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Ftompiarulli%2F2028-games-guide%2Fbadges%2Fperformance.json&logo=lighthouse&logoColor=white)][lighthouse-report]
 [![Lighthouse accessibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Ftompiarulli%2F2028-games-guide%2Fbadges%2Faccessibility.json&logo=lighthouse&logoColor=white)][lighthouse-report]
@@ -47,15 +49,71 @@ Every dimension is scored on a 1–10 scale. The **aggregate** is a weighted ave
 | **Uniqueness**   | 15%    | Rarity of the opportunity: new/returning sports, iconic venue pairings, ceremonies.                                       |
 | **Demand**       | 15%    | How hot tickets are likely to be: sport-level demand, round, standout "cultural moment" combinations.                     |
 
-## For AI Agents
+## Ask Claude or ChatGPT About Sessions
 
-The guide is also available to agents. Add `https://28games.tompiarulli.com/mcp` as a remote MCP server (no sign-in) to let Claude, ChatGPT, Cursor and other clients search sessions, read each session's writeup and look up venues. In Claude Code:
+You can connect this guide to Claude or ChatGPT and ask about sessions in your own words. For example:
+
+- "What are the best sessions on July 22?"
+- "I'm in LA July 20–22 and love swimming and gymnastics. Which sessions should I get tickets for?"
+- "Which track and field finals have the biggest stars?"
+- "What's it like to watch at the swimming venue?"
+
+Claude or ChatGPT looks through every session, reads its rating and writeup, and links you back to this site. Setup takes about two minutes. You don't need an account on this site, and there's nothing to install. Open the steps for the app you use:
+
+<details>
+<summary><strong>Set up in Claude</strong></summary>
+
+This works on Claude's free plan. You set it up once on a computer, at [claude.ai](https://claude.ai) in a web browser or in the Claude desktop app. After that, it also works in the Claude app on your phone.
+
+1. Open [claude.ai](https://claude.ai) or the Claude desktop app, and sign in.
+2. Go to **Customize**, then **Connectors**. (In older versions of the app, look under **Settings**, then **Connectors**.)
+3. Click **+ Add**, then **Add custom connector**.
+4. For the name, type `2028 Games Guide`.
+5. For the URL, paste `https://28games.tompiarulli.com/mcp`, then click **Continue**.
+6. When Claude asks about signing in, choose **No sign in**, then click **Add**.
+
+To use it, start a new chat and click the **+** button at the bottom left. Choose **Connectors** and check that **2028 Games Guide** is turned on. Then ask your question.
+
+On the free plan you can add one custom connector. If you already have one, remove it first.
+
+</details>
+
+<details>
+<summary><strong>Set up in ChatGPT</strong></summary>
+
+You have to set this up at [chatgpt.com](https://chatgpt.com) in a web browser; the phone app can't add it. Adding your own connections is a newer ChatGPT feature that isn't on every plan yet. If you don't see the options below, your plan doesn't include it. On a ChatGPT Business or Enterprise account, only your workspace admin can add it, so send them this page.
+
+1. Go to [chatgpt.com](https://chatgpt.com) and sign in.
+2. Open **Plugins**.
+3. Click the **+** button, then **Add custom MCP server**.
+4. For the name, type `2028 Games Guide`.
+5. Under **Connection**, paste `https://28games.tompiarulli.com/mcp`.
+6. For authentication, choose **No authentication**.
+7. ChatGPT shows a warning for any connection you add yourself. This guide can only look up session information. It can't see your other chats or your account, and it can't change anything. Check **I understand and want to continue**, then click **Create as a plugin**.
+8. Install the new plugin when ChatGPT shows it.
+
+To use it, start a new chat, type **@**, pick **2028 Games Guide**, and ask your question. ChatGPT uses it only for that message, so type **@** and pick it again when a later question needs more session information.
+
+</details>
+
+### Good to know
+
+- The ratings and writeups are written by AI from web research. Treat them as opinions, and check times and ticket details on the official site before you buy.
+- If Claude or ChatGPT says it can't find the guide, check that the connector is turned on (Claude) or that you picked it with **@** (ChatGPT).
+- Claude and ChatGPT both change their menus from time to time. If a step above doesn't match what you see, search their help pages for "custom connector" (Claude) or "custom MCP server" (ChatGPT).
+
+<details>
+<summary><strong>For developers</strong></summary>
+
+The guide is a remote MCP server at `https://28games.tompiarulli.com/mcp`. It uses Streamable HTTP, is read-only and needs no auth. Its tools are `search_sessions`, `get_session`, `list_sports`, `list_venues` and `get_venue`. In Claude Code:
 
 ```bash
 claude mcp add --transport http 28games https://28games.tompiarulli.com/mcp
 ```
 
 Agents that only fetch URLs can use [`/api/sessions.json`](https://28games.tompiarulli.com/api/sessions.json) (every session in one document) and [`/llms.txt`](https://28games.tompiarulli.com/llms.txt).
+
+</details>
 
 ## Tech Stack
 
