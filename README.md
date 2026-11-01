@@ -47,6 +47,16 @@ Every dimension is scored on a 1–10 scale. The **aggregate** is a weighted ave
 | **Uniqueness**   | 15%    | Rarity of the opportunity: new/returning sports, iconic venue pairings, ceremonies.                                       |
 | **Demand**       | 15%    | How hot tickets are likely to be: sport-level demand, round, standout "cultural moment" combinations.                     |
 
+## For AI Agents
+
+The guide is also available to agents. Add `https://28games.tompiarulli.com/mcp` as a remote MCP server (no sign-in) to let Claude, ChatGPT, Cursor and other clients search sessions, read each session's writeup and look up venues. In Claude Code:
+
+```bash
+claude mcp add --transport http 28games https://28games.tompiarulli.com/mcp
+```
+
+Agents that only fetch URLs can use [`/api/sessions.json`](https://28games.tompiarulli.com/api/sessions.json) (every session in one document) and [`/llms.txt`](https://28games.tompiarulli.com/llms.txt).
+
 ## Tech Stack
 
 - **App:** [TanStack Start](https://tanstack.com/start) (React 19, server-side rendering, file-based routing) with TanStack Router and Query. Built with Vite and [Nitro](https://nitro.build).

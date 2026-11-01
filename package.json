@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.3.0",
+    "@modelcontextprotocol/sdk": "^1.32.2",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-query": "5.104.3",
     "@tanstack/react-router": "1.170.45",
@@ -44,7 +45,8 @@
     "react-dom": "^19.2.0",
     "resend": "^6.10.0",
     "tailwind-merge": "^3.5.0",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@anthropic-ai/sdk": "^0.135.0",

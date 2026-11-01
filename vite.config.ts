@@ -83,6 +83,7 @@ export default defineConfig(({ command }) => {
                 '/logo512.png': oneDayCache,
                 '/manifest.json': oneDayCache,
                 '/robots.txt': oneDayCache,
+                '/llms.txt': oneDayCache,
               },
               modules: [vercelMissingAssets404],
             }),
