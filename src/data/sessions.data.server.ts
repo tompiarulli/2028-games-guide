@@ -121,11 +121,21 @@ export async function getSessionDetailData(
   const session = sessionsById.get(sessionId)
   if (!session) return null
 
+  const content = getSessionContent(sessionId)
+
+  return {
+    session,
+    insights: getSessionInsights({ ...session, ...content }),
+    contentMeta: content.contentMeta,
+  }
+}
+
+export function getSessionContent(sessionId: string): SessionContent {
   const w = sessionContent[sessionId]
   const g = sessionFacts[sessionId]
   const s = sessionScores[sessionId]
 
-  const content: SessionContent = {
+  return {
     blurb: w?.blurb,
     potentialContendersIntro: w?.potentialContendersIntro ?? undefined,
     potentialContenders: w?.potentialContenders,
@@ -133,12 +143,14 @@ export async function getSessionDetailData(
     scorecard: s?.scorecard ?? undefined,
     contentMeta: buildContentMeta(g, w, s),
   }
+}
 
-  return {
-    session,
-    insights: getSessionInsights({ ...session, ...content }),
-    contentMeta: content.contentMeta,
-  }
+export function getAllSessions(): readonly Session[] {
+  return sessions
+}
+
+export function getSessionById(sessionId: string): Session | undefined {
+  return sessionsById.get(sessionId)
 }
 
 function buildContentMeta(
