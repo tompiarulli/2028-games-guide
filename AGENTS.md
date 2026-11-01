@@ -94,6 +94,14 @@ Routes live in `src/routes/` and are auto-generated into `src/routeTree.gen.ts` 
 - Routes use `createFileRoute()` / `createRootRoute()`
 - Router config in `src/router.tsx`: preloads on intent, scroll restoration enabled
 
+### Agent access
+
+The session guide is also served to AI agents. All three read the same catalog through `src/data/agent.data.server.ts`, which uses readable field names (`score`, `round`, ISO `date`):
+
+- `/mcp` — remote MCP server (`src/routes/mcp.ts` → `src/lib/mcp-server.ts`). Streamable HTTP, stateless (a fresh server and transport per request, JSON responses), read-only, no auth, open CORS. Tools: `search_sessions`, `get_session`, `list_sports`, `list_venues`, `get_venue`.
+- `/api/sessions.json` — every session summary in one document.
+- `/llms.txt` — static file in `public/` pointing agents at the two above.
+
 ### Path Aliases
 
 `@/*` resolves to `./src/*` (configured in tsconfig.json).
