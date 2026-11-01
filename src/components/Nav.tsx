@@ -1,6 +1,18 @@
 import { Link } from '@tanstack/react-router'
+import { Bot } from 'lucide-react'
+import { lazy, Suspense, useState } from 'react'
 
 import { ThemeToggle } from './ThemeToggle'
+
+// Loaded on first use: the dialog only matters to people who open it, and the nav is on
+// every page.
+const loadAgentSetupDialog = () => import('./AgentSetupDialog')
+const AgentSetupDialog = lazy(() =>
+  loadAgentSetupDialog().then((m) => ({ default: m.AgentSetupDialog })),
+)
+
+const headerButtonClass =
+  'border-border bg-surface text-ink2 hover:border-gold hover:bg-surface2 hover:text-gold absolute top-4 z-5 flex size-9 cursor-pointer items-center justify-center rounded-lg border transition-all duration-150 max-md:top-3'
 
 // lucide-react 1.0 dropped brand icons. This is the outline GitHub mark from the last
 // release that shipped it (ISC license), drawn like lucide's other icons.
@@ -25,13 +37,38 @@ function GithubIcon({ size = 24 }: { size?: number }) {
 }
 
 export function Nav() {
+  const [agentDialogOpen, setAgentDialogOpen] = useState(false)
+  const [agentDialogLoaded, setAgentDialogLoaded] = useState(false)
+
+  function openAgentDialog() {
+    setAgentDialogLoaded(true)
+    setAgentDialogOpen(true)
+  }
+
   return (
     <div className="relative overflow-hidden px-6 pt-12 pb-6 text-center max-md:px-4 max-md:pt-14">
+      <button
+        type="button"
+        onClick={openAgentDialog}
+        onPointerEnter={() => void loadAgentSetupDialog()}
+        onFocus={() => void loadAgentSetupDialog()}
+        className={`${headerButtonClass} right-[108px] max-md:right-[100px]`}
+        title="Ask Claude or ChatGPT about sessions"
+        aria-label="Ask Claude or ChatGPT about sessions"
+        aria-haspopup="dialog"
+      >
+        <Bot size={18} aria-hidden="true" />
+      </button>
+      {agentDialogLoaded ? (
+        <Suspense fallback={null}>
+          <AgentSetupDialog open={agentDialogOpen} onOpenChange={setAgentDialogOpen} />
+        </Suspense>
+      ) : null}
       <a
         href="https://github.com/tompiarulli/2028-games-guide"
         target="_blank"
         rel="noopener noreferrer"
-        className="border-border bg-surface text-ink2 hover:border-gold hover:bg-surface2 hover:text-gold absolute top-4 right-16 z-5 flex size-9 items-center justify-center rounded-lg border transition-all duration-150 max-md:top-3 max-md:right-14"
+        className={`${headerButtonClass} right-16 max-md:right-14`}
         title="View on GitHub"
         aria-label="View on GitHub"
       >
