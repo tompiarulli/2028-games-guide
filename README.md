@@ -25,7 +25,7 @@ A searchable guide to all 800+ sessions of the 2028 Summer Games in Los Angeles.
 
 Ticketing pages list little more than a competition name. The summaries and ratings here are researched and written by Claude from current news and Paris 2024 results ([how it works](#ai-ratings-methodology)).
 
-I originally built this to pick tickets during the local presale, then turned it into an open-source project for anyone else planning their Games.
+I originally built this to pick tickets during the local presale, then turned it into an open-source project for anyone to use.
 
 ## Resources Used
 
