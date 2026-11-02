@@ -12,6 +12,7 @@ This file provides guidance to AI coding agents working with code in this reposi
 - `pnpm serve:prod` — Serve the production build the way Vercel does (static files first, Nitro fallback, brotli) on port 4173
 - `pnpm lighthouse` — Run Lighthouse CI (mobile) against `pnpm serve:prod`; budgets in `lighthouserc.json`. Requires a prior `pnpm build`
 - `pnpm test` — Run tests with Vitest (`vitest run`)
+- `pnpm test:e2e` — Playwright smoke tests (`e2e/`) against `pnpm serve:prod`, or against `ENVIRONMENT_URL` when set. Requires a prior `pnpm build`. Tests tagged `@smoke` also run in production as a Checkly check (`checkly.config.ts`, `__checks__/`)
 - `pnpm format:check` — Check formatting with oxfmt
 - `pnpm lint` — Lint with oxlint
 - `pnpm typecheck` — Type-check with `tsc --noEmit`
@@ -56,7 +57,7 @@ For globally-wrong Paris 2024 medal data, fix `src/data/paris-2024-medals.json` 
 
 ### Pre-PR checks
 
-Before opening a pull request, run the CI-equivalent checks locally and fix any failures first: `pnpm format:check`, `pnpm lint`, `pnpm typecheck`, and `pnpm test`. For UI or rendering changes, also run `pnpm build && pnpm lighthouse`: CI fails the PR if a page drops below its Lighthouse budget. Run them in parallel when possible. This avoids pushing commits that fail CI.
+Before opening a pull request, run the CI-equivalent checks locally and fix any failures first: `pnpm format:check`, `pnpm lint`, `pnpm typecheck`, and `pnpm test`. For UI or rendering changes, also run `pnpm build`, then `pnpm test:e2e` and `pnpm lighthouse`: CI fails the PR if a page drops below its Lighthouse budget. Run them in parallel when possible. This avoids pushing commits that fail CI.
 
 ### Deploying
 

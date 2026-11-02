@@ -17,6 +17,8 @@
 [![CLS](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Ftompiarulli%2F2028-games-guide%2Fbadges%2Fcls.json)][lighthouse-report]
 [![TBT](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Ftompiarulli%2F2028-games-guide%2Fbadges%2Ftbt.json)][lighthouse-report]
 
+<!-- TODO(checkly): add the badge for the "2028 Games Session Guide" check group (https://api.checklyhq.com/v1/badges/groups/<groupId>, linking to the status page) and a link to the status page (https://28games.checkly-status-page.com) once the first release deploys the checks. -->
+
 [lighthouse-report]: https://googlechrome.github.io/lighthouse/viewer/?jsonurl=https://raw.githubusercontent.com/tompiarulli/2028-games-guide/badges/report.json
 
 After being selected for the Los Angeles 2028 Summer Games local presale, I found myself overwhelmed when trying to buy tickets. Browsing the 800+ sessions was cumbersome, and most sources didn't have much information beyond competition names.
@@ -120,7 +122,8 @@ Agents that only fetch URLs can use [`/api/sessions.json`](https://28games.tompi
 - **App:** [TanStack Start](https://tanstack.com/start) (React 19, server-side rendering, file-based routing) with TanStack Router and Query. Built with Vite and [Nitro](https://nitro.build).
 - **UI:** Tailwind CSS v4, [Base UI](https://base-ui.com), and Lucide icons.
 - **Content pipeline:** TypeScript scripts that use the [Anthropic](https://www.anthropic.com) API for everything: Claude with web search for grounded research, then Claude for writing and scoring. They use prompt caching and batch requests to keep costs down.
-- **Quality:** strict TypeScript, Vitest and Testing Library, oxlint and oxfmt, and Lighthouse CI budgets on every pull request.
+- **Quality:** strict TypeScript, Vitest and Testing Library, Playwright smoke tests, oxlint and oxfmt, and Lighthouse CI budgets on every pull request.
+- **Monitoring:** [Checkly](https://www.checklyhq.com), configured as code, checks uptime every 5 minutes and runs the Playwright smoke tests against production every 30.
 - **Delivery:** GitHub Actions, Release Please (versioning and changelog driven by conventional commits), Renovate, and Vercel (hosting, Web Analytics, Speed Insights).
 - **Development:** [Claude Code](https://claude.com/claude-code) for AI-assisted development. Its project instructions are committed in [`AGENTS.md`](AGENTS.md).
 

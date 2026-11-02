@@ -54,6 +54,26 @@ jobs:
           curl -s -o /dev/null -w "CDN warm: HTTP %{http_code} in %{time_total}s\n" \
             https://28games.tompiarulli.com/
 
+  monitoring:
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      CHECKLY_API_KEY: ${{ secrets.CHECKLY_API_KEY }}
+      CHECKLY_ACCOUNT_ID: ${{ secrets.CHECKLY_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # Checks the release first, then deploys the monitors so they match it.
+      - run: pnpm exec checkly test --reporter github --record --test-session-name "Release ${{ github.sha }}"
+      - run: pnpm exec checkly deploy --force
+
   badges:
     needs: deploy
     permissions:

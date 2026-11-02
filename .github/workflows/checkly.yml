@@ -1,0 +1,33 @@
+name: Checkly
+
+# Runs the production monitors against each Vercel preview deploy, so a pull request shows
+# whether the checks would still pass once it ships.
+on:
+  deployment_status:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    if: >-
+      github.event.deployment_status.state == 'success' &&
+      github.event.deployment.environment != 'Production'
+    runs-on: ubuntu-latest
+    env:
+      CHECKLY_API_KEY: ${{ secrets.CHECKLY_API_KEY }}
+      CHECKLY_ACCOUNT_ID: ${{ secrets.CHECKLY_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ github.event.deployment.sha }}
+      - uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: >-
+          pnpm exec checkly test --reporter github --record
+          --env ENVIRONMENT_URL="${{ github.event.deployment_status.environment_url }}"
+          --test-session-name "Preview ${{ github.event.deployment.sha }}"
