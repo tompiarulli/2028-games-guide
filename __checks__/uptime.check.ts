@@ -1,8 +1,6 @@
 import { Frequency, UrlAssertionBuilder, UrlMonitor } from 'checkly/constructs'
 
 import { SITE, email, group } from './site'
-// Only *.check.ts files are loaded, so the status page comes in through here.
-import './status-page'
 
 // Cheap and frequent: is the home page up, and quick? URL monitors only assert the
 // status code; the smoke tests check the CSP header.
