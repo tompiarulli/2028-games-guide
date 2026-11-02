@@ -174,9 +174,9 @@ The correction files are best for narrow, session-specific corrections; the sour
 
 - **Home page is up:** a URL monitor every 5 minutes from two regions, failing above 3 s.
 - **Session guide smoke tests:** the Playwright tests tagged `@smoke` in `e2e/smoke.spec.ts`, run every 30 minutes against the live site. `playwright.config.ts` targets `ENVIRONMENT_URL` when it's set, instead of starting the local server. The `/` test also checks the Content Security Policy header, which URL monitors can't assert.
-- **Alerts and status page:** failures and recoveries email Tom, and a failing check opens an incident on the public status page at [28games.checkly-status-page.com](https://28games.checkly-status-page.com).
+- **Alerts:** failures and recoveries email Tom, and a failing check opens an incident on the Checkly status page.
 
-`.github/workflows/checkly.yml` runs the same checks against each Vercel preview. After each release, the release workflow runs them against production and then deploys them with `checkly deploy`. Both need the `CHECKLY_API_KEY` and `CHECKLY_ACCOUNT_ID` repository secrets (an API key and the account ID from Checkly's account settings). To try the checks yourself, run `pnpm checkly login` once, then `pnpm checkly test --env ENVIRONMENT_URL=<url>`. The Hobby plan is shared with the portfolio's checks, so check `pnpm checkly account plan` before raising frequencies.
+`.github/workflows/checkly.yml` runs the same checks against each Vercel preview. After each release, the release workflow runs them against production and then deploys them with `checkly deploy`. Both need the `CHECKLY_API_KEY` and `CHECKLY_ACCOUNT_ID` repository secrets (an API key and the account ID from Checkly's account settings). To try the checks yourself, run `pnpm checkly login` once, then `pnpm checkly test --env ENVIRONMENT_URL=<url>`. The Checkly plan is shared with the portfolio's checks, so check `pnpm checkly account plan` before raising frequencies.
 
 ## Routing
 

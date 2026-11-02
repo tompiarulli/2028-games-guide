@@ -17,7 +17,7 @@
 [![CLS](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Ftompiarulli%2F2028-games-guide%2Fbadges%2Fcls.json)][lighthouse-report]
 [![TBT](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Ftompiarulli%2F2028-games-guide%2Fbadges%2Ftbt.json)][lighthouse-report]
 
-<!-- TODO(checkly): add the badge for the "2028 Games Session Guide" check group (https://api.checklyhq.com/v1/badges/groups/<groupId>, linking to the status page) and a link to the status page (https://28games.checkly-status-page.com) once the first release deploys the checks. -->
+<!-- TODO(checkly): add the badge for the "2028 Games Session Guide" check group (https://api.checklyhq.com/v1/badges/groups/<groupId>, linking to CONTRIBUTING.md#monitoring) once the first release deploys the checks. -->
 
 [lighthouse-report]: https://googlechrome.github.io/lighthouse/viewer/?jsonurl=https://raw.githubusercontent.com/tompiarulli/2028-games-guide/badges/report.json
 
