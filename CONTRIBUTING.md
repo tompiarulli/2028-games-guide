@@ -15,6 +15,8 @@ The dev server runs on port 3000.
 - `pnpm build` — Production build
 - `pnpm preview` — Preview production build
 - `pnpm test` — Run tests with Vitest
+- `pnpm test:e2e` — Run the Playwright smoke tests against the production build (run `pnpm build` first; install the browser once with `pnpm exec playwright install chromium`)
+- `pnpm checkly test` — Run the Checkly monitors once (see [Monitoring](#monitoring))
 - `pnpm generate:paris-medals` — Rescrape Olympedia for Paris 2024 medal data (rarely needed)
 - `pnpm generate:sport-facts` — Regenerate per-sport reference facts in `src/data/sport-facts.json` (see [Regenerating sport facts](#regenerating-sport-facts))
 - `pnpm generate:venue-facts` — Regenerate per-venue reference facts in `src/data/venue-facts.json` (see [Regenerating venue facts](#regenerating-venue-facts))
@@ -165,6 +167,16 @@ Each value is an array — multiple corrections stack. To apply: edit the file, 
 - Venue capacity / location wrong → edit `src/data/venue-facts.json` directly or use `venue-corrections.json` plus regen.
 
 The correction files are best for narrow, session-specific corrections; the source files are best for facts that should propagate everywhere.
+
+## Monitoring
+
+[Checkly](https://www.checklyhq.com) watches production, configured as code in `checkly.config.ts` and `__checks__/`:
+
+- **Home page is up:** a URL monitor every 5 minutes from two regions, failing above 3 s.
+- **Session guide smoke tests:** the Playwright tests tagged `@smoke` in `e2e/smoke.spec.ts`, run every 30 minutes against the live site. `playwright.config.ts` targets `ENVIRONMENT_URL` when it's set, instead of starting the local server. The `/` test also checks the Content Security Policy header, which URL monitors can't assert.
+- **Alerts:** failures, recoveries and SSL expiry email Tom.
+
+`.github/workflows/checkly.yml` runs the same checks against each Vercel preview. After each release, the release workflow runs them against production and then deploys them with `checkly deploy`. Both need the `CHECKLY_API_KEY` and `CHECKLY_ACCOUNT_ID` repository secrets (an API key and the account ID from Checkly's account settings). To try the checks yourself, run `pnpm checkly login` once, then `pnpm checkly test --env ENVIRONMENT_URL=<url>`. The Checkly plan is shared with the portfolio's checks, so check `pnpm checkly account plan` before raising frequencies.
 
 ## Routing
 

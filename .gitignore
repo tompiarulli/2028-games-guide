@@ -15,3 +15,5 @@ dist-ssr
 __unconfig*
 todos.json
 .lighthouseci
+test-results
+playwright-report

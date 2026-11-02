@@ -101,7 +101,8 @@ export default defineConfig(({ command }) => {
       environment: 'jsdom',
       setupFiles: './src/test/setup.ts',
       // Other checkouts of this repo live inside it; their tests would otherwise run too.
-      exclude: [...configDefaults.exclude, '.claude/**', '.worktrees/**'],
+      // e2e/ holds the Playwright smoke tests (`pnpm test:e2e`).
+      exclude: [...configDefaults.exclude, '.claude/**', '.worktrees/**', 'e2e/**'],
     },
   }
 })
