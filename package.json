@@ -12,6 +12,7 @@
     "preview": "vite preview",
     "serve:prod": "node scripts/serve-prod.mjs",
     "lighthouse": "pnpm dlx @lhci/cli@0.15.1 autorun",
+    "screenshot": "node scripts/capture-screenshot.mjs",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "typecheck": "tsc --noEmit",
