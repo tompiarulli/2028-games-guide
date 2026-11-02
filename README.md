@@ -23,9 +23,9 @@
 
 A searchable guide to all 800+ sessions of the 2028 Summer Games in Los Angeles. Filter by sport, round, venue and rating, save the sessions you're considering, and open any one to see who's competing, what's at stake, and how it rates against the rest of the schedule.
 
-Ticketing pages list little more than a competition name. The summaries and ratings here are researched and written by Claude from current news and Paris 2024 results ([how it works](#ai-ratings-methodology)).
+Official ticketing pages list little more than a competition name. The summaries and ratings here are researched and written by Claude from current news and Paris 2024 results ([how it works](#ai-ratings-methodology)).
 
-I originally built this to pick tickets during the local presale, then turned it into an open-source project to share with Olympics planning communities on Reddit and Facebook.
+I originally built this to select tickets during the local presale, then turned it into an open-source project to share with Olympics planning communities on Reddit and Facebook.
 
 ## Resources Used
 
