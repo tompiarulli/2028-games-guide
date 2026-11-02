@@ -11,6 +11,7 @@ This file provides guidance to AI coding agents working with code in this reposi
 - `pnpm preview` — Preview production build
 - `pnpm serve:prod` — Serve the production build the way Vercel does (static files first, Nitro fallback, brotli) on port 4173
 - `pnpm lighthouse` — Run Lighthouse CI (mobile) against `pnpm serve:prod`; budgets in `lighthouserc.json`. Requires a prior `pnpm build`
+- `pnpm screenshot [url] [outFile]` — Capture the README screenshot (defaults: production, `screenshot.png`). Run it manually after visible UI changes and commit the result
 - `pnpm test` — Run tests with Vitest (`vitest run`)
 - `pnpm test:e2e` — Playwright smoke tests (`e2e/`) against `pnpm serve:prod`, or against `ENVIRONMENT_URL` when set. Requires a prior `pnpm build`. Tests tagged `@smoke` also run in production as a Checkly check (`checkly.config.ts`, `__checks__/`)
 - `pnpm format:check` — Check formatting with oxfmt
