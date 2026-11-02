@@ -54,8 +54,9 @@ const svg = fs.readFileSync(svgPath)
 const [png16, png32, png192, png512] = await Promise.all([
   sharp(svg).resize(16, 16).png().toBuffer(),
   sharp(svg).resize(32, 32).png().toBuffer(),
-  sharp(svg).resize(192, 192).png().toBuffer(),
-  sharp(svg).resize(512, 512).png().toBuffer(),
+  // iOS fills a transparent apple-touch-icon with black, so give the large icons the tile color
+  sharp(svg).resize(192, 192).flatten({ background: '#0a0a0a' }).png().toBuffer(),
+  sharp(svg).resize(512, 512).flatten({ background: '#0a0a0a' }).png().toBuffer(),
 ])
 
 const ico = encodeIco([png32, png16])

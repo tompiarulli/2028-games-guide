@@ -49,8 +49,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     styles: [{ children: appCss }],
     links: [
-      { rel: 'icon', href: '/favicon.svg?v=5', type: 'image/svg+xml', sizes: 'any' },
-      { rel: 'icon', href: '/favicon.ico?v=5', type: 'image/x-icon', sizes: '32x32 16x16' },
+      { rel: 'icon', href: '/favicon.svg?v=6', type: 'image/svg+xml', sizes: 'any' },
+      { rel: 'icon', href: '/favicon.ico?v=6', type: 'image/x-icon', sizes: '32x32 16x16' },
       { rel: 'apple-touch-icon', href: '/logo192.png' },
       // Browsers fetch manifests without cookies by default; sending them lets the manifest
       // load on login-protected Vercel previews instead of redirecting to Vercel SSO.
