@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
@@ -10,6 +11,11 @@ import { nitro } from 'nitro/vite'
 import { configDefaults, defineConfig } from 'vitest/config'
 
 import { securityHeaders } from './src/lib/security-headers.ts'
+
+// Nitro picks the Vercel function runtime from the build's Node version but only knows
+// runtimes up to Node 24, so newer versions would fall back to `nodejs24.x`. Set it from
+// .nvmrc so production runs the same major as CI.
+const vercelRuntime = `nodejs${readFileSync(new URL('.nvmrc', import.meta.url), 'utf8').trim()}.x`
 
 const oneDayCache = { headers: { 'cache-control': 'public, max-age=86400' } }
 
@@ -86,6 +92,7 @@ export default defineConfig(({ command }) => {
                 '/llms.txt': oneDayCache,
               },
               modules: [vercelMissingAssets404],
+              vercel: { functions: { runtime: vercelRuntime } },
             }),
           ]
         : []),
