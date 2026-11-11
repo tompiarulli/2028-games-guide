@@ -143,3 +143,29 @@ html[data-theme-switching] *::before,
 html[data-theme-switching] *::after {
   transition: none !important;
 }
+
+/* The theme toggle renders both icons and CSS picks one, using the same selectors as the
+   palettes above, so the icon is right in the server HTML and doesn't swap on hydration. */
+.theme-icon-moon {
+  display: none;
+}
+
+[data-theme='light'] .theme-icon-sun,
+:root.light .theme-icon-sun {
+  display: none;
+}
+
+[data-theme='light'] .theme-icon-moon,
+:root.light .theme-icon-moon {
+  display: block;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']):not(.dark) .theme-icon-sun {
+    display: none;
+  }
+
+  :root:not([data-theme='dark']):not(.dark) .theme-icon-moon {
+    display: block;
+  }
+}
