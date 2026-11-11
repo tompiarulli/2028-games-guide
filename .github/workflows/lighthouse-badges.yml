@@ -24,7 +24,7 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version-file: .nvmrc
-      # Mobile Lighthouse (default throttling) against the live site, median of 3 runs.
+      # Mobile Lighthouse (default throttling) against the live site, median of 5 runs.
       - run: pnpm dlx @lhci/cli@0.15.1 collect --config=lighthouserc.production.json
       - run: node scripts/lighthouse-badges.mjs .lighthouseci badges
       # Single-commit orphan branch, force-pushed, so badge updates never touch `main`

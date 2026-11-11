@@ -2,7 +2,7 @@
   "ci": {
     "collect": {
       "url": ["https://28games.tompiarulli.com/"],
-      "numberOfRuns": 3,
+      "numberOfRuns": 5,
       "settings": {
         "chromeFlags": "--headless=new --no-sandbox"
       }
