@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { Bot } from 'lucide-react'
+import { BotMessageSquare } from 'lucide-react'
 import { lazy, Suspense, useState } from 'react'
 
 import { ThemeToggle } from './ThemeToggle'
@@ -68,7 +68,7 @@ export function Nav() {
           aria-label="Ask Claude or ChatGPT about sessions"
           aria-haspopup="dialog"
         >
-          <Bot size={18} aria-hidden="true" />
+          <BotMessageSquare size={18} aria-hidden="true" />
         </button>
         {agentDialogLoaded ? (
           <Suspense fallback={null}>
