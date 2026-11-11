@@ -592,544 +592,529 @@
     "inputHash": "39f89e903434ad27"
   },
   "ATH01": {
-    "blurb": "Track and field opens at the Coliseum with a morning that carries a lot of events. The women's and men's 100m begin here with preliminary rounds and Round 1, and the women's 100m will finish with its final that same evening.\n\nField athletes qualify for the women's shot put and hammer and the men's pole vault. The women's 5000m and 800m also run their first rounds, so this session helps set the evening's final fields.\n\nThe Coliseum is an open bowl with no roof, so expect Southern California sun and a crowd still filling in. It's a relaxed way to see the stadium and a wide range of events before the medals start.",
-    "potentialContendersIntro": "Focus is on the women's 100m, men's pole vault, women's hammer and women's 800m. None of these athletes is confirmed for 2028, and the qualification system only tightened in November 2026.",
+    "blurb": "Four rounds of one race, all on one day, and this is where the climb begins. The women's 100m opens with a preliminary round for lower-ranked sprinters, then Round 1, before the semifinal and final that evening.\n\nMorning at the Coliseum means sun, space to wander and no pressure yet. Pole vault qualifying puts Mondo Duplantis, whose world record now stands at 6.31m, on the runway early, while Camryn Rogers could be swinging in hammer qualifying if she makes the team.\n\nThis is the session for spotting names before the stakes rise. Pick a sprinter you've never heard of, and see if she's in the final by dark.",
+    "potentialContendersIntro": "Focus here is the women's 100m, which likely sees the top names enter at Round 1, plus the men's pole vault qualifying and women's 800m. All 2028 appearances are projections.",
     "potentialContenders": [
       {
         "name": "Melissa Jefferson-Wooden",
         "country": "USA",
-        "note": "Paris 2024 100m bronze medalist, 2025 world champion in a championship-record 10.61, and a 2026 world lead of 10.62. A projected favorite if she qualifies."
+        "note": "2025 world 100m champion in a championship-record 10.61 and Paris 2024 bronze medalist. Set a 2026 world lead of 10.62 if she makes the team, the woman to beat."
       },
       {
         "name": "Julien Alfred",
         "country": "LCA",
-        "note": "Paris 2024 100m champion and 2025 world bronze medalist in 10.84. Could be a title threat again."
-      },
-      {
-        "name": "Mondo Duplantis",
-        "country": "SWE",
-        "note": "Paris 2024 champion with a world record of 6.31m set in 2026. Likely to appear in qualifying if he competes."
-      },
-      {
-        "name": "Camryn Rogers",
-        "country": "CAN",
-        "note": "Paris 2024 hammer champion and 2025 world champion with a North American record of 80.51m. Projected to compete in qualifying."
-      },
-      {
-        "name": "Audrey Werro",
-        "country": "SUI",
-        "note": "Won the 2026 Ultimate, Diamond League and European 800m titles, with a world lead of 1:53.70. A likely Round 1 name if she qualifies."
-      }
-    ],
-    "model": "claude-sonnet-5-5",
-    "promptVersion": 4,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:14:29.339Z",
-    "inputHash": "8d2d92861ceb5252"
-  },
-  "ATH02": {
-    "blurb": "Day one ends with a sprint final. The women's 100m semifinal and final fall in the same evening session, the first time the event has opened the athletics program at the Games.\n\nTwo more medals are awarded here, in the women's shot put and the men's 10,000m. Men's 400m hurdles and women's triple jump rounds also run in the field and track program.\n\nThe open-air bowl should be at its fullest and loudest for the first night. Sit near the finish line for the 100m, or toward the shot put circle if you want to watch a throwing final up close.",
-    "potentialContendersIntro": "Contenders below are for the women's 100m and shot put finals. Paris 2024 medalists are confirmed history, but 2028 fields are projections.",
-    "potentialContenders": [
-      {
-        "name": "Melissa Jefferson-Wooden",
-        "country": "USA",
-        "note": "Paris 2024 bronze medalist and 2025 world champion. She won the 100m at the 2026 Ultimate Championship in a world-leading 10.62, so she is a projected favorite."
-      },
-      {
-        "name": "Julien Alfred",
-        "country": "LCA",
-        "note": "Paris 2024 champion, and 2025 world bronze medalist in 10.84. She could contend again if she qualifies."
+        "note": "Paris 2024 champion and Saint Lucia's first gold in the event. Took bronze at the 2025 worlds in 10.84."
       },
       {
         "name": "Sha'Carri Richardson",
         "country": "USA",
-        "note": "Paris 2024 silver medalist. She won ATHLOS London in 10.80 to close 2026, so she could be in the mix."
+        "note": "Paris 2024 silver medalist. Closed 2026 with a meeting-record 10.80 at ATHLOS London."
       },
-      {
-        "name": "Jessica Schilder",
-        "country": "NED",
-        "note": "2025 world shot put champion with 20.29m. A likely contender if she qualifies."
-      },
-      {
-        "name": "Chase Jackson",
-        "country": "USA",
-        "note": "2025 world silver medalist at 20.21m and a 2026 World Athlete of the Year nominee. She could be a home-crowd medal threat."
-      }
-    ],
-    "model": "claude-sonnet-5-5",
-    "promptVersion": 4,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:14:29.339Z",
-    "inputHash": "21c99130b95d2841"
-  },
-  "ATH03": {
-    "blurb": "Day two begins with a morning that mixes the first events of the decathlon with multiple qualifying rounds. The men's decathlon starts with the 100m, long jump and shot put.\n\nQualifying also runs for the women's discus, men's shot put and men's long jump. The mixed 4x400m relay has its first round, and the women's 800m repechage is the second chance for runners who missed automatic advancement.\n\nThis is a good value session for fans who like watching field events up close. The men's 100m final comes later in the day, but the early crowd tends to be there for the specialists.",
-    "potentialContendersIntro": "Names below cover the men's shot put, men's long jump and women's 800m. All are projections for 2028.",
-    "potentialContenders": [
-      {
-        "name": "Ryan Crouser",
-        "country": "USA",
-        "note": "Paris 2024 shot put champion. If he competes in 2028, he would be a headline name in qualifying."
-      },
-      {
-        "name": "Joe Kovacs",
-        "country": "USA",
-        "note": "Paris 2024 shot put silver medalist and a possible U.S. contender if he qualifies."
-      },
-      {
-        "name": "Miltiadis Tentoglou",
-        "country": "GRE",
-        "note": "Paris 2024 long jump champion. A likely contender if he qualifies."
-      },
-      {
-        "name": "Femke Bol",
-        "country": "NED",
-        "note": "Moved from the 400m hurdles to the 800m in 2026 and says her goal is to peak at the 2028 Games. Could appear in the repechage if needed."
-      },
-      {
-        "name": "Audrey Werro",
-        "country": "SUI",
-        "note": "Won the 2026 Ultimate, Diamond League and European 800m titles. A projected contender for the semifinals."
-      }
-    ],
-    "model": "claude-sonnet-5-5",
-    "promptVersion": 4,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:14:29.339Z",
-    "inputHash": "c3e331f09161f9cd"
-  },
-  "ATH04": {
-    "blurb": "The men's 100m final is the big event of day two. The semifinals and final run back to back, so the Coliseum will see who becomes the fastest man in the Games.\n\nThree more medals are decided: the men's shot put, the women's hammer and the mixed 4x400m relay. The decathlon continues with the high jump and 400m, and the men's 1500m opens with Round 1.\n\nExpect a full stadium and a packed schedule. Night sessions at the Coliseum should have electricity at the 100m start, so the semis are worth catching as well.",
-    "potentialContendersIntro": "Contenders are for the men's 100m and women's hammer. Paris 2024 results are confirmed, and the 2028 field is projected.",
-    "potentialContenders": [
-      {
-        "name": "Kenny Bednarek",
-        "country": "USA",
-        "note": "Won the 100m (9.85) and 200m (19.52) at the 2026 Ultimate Championship. A likely U.S. contender."
-      },
-      {
-        "name": "Oblique Seville",
-        "country": "JAM",
-        "note": "2025 world 100m champion. A projected medal threat if he qualifies."
-      },
-      {
-        "name": "Kishane Thompson",
-        "country": "JAM",
-        "note": "Paris 2024 100m silver medalist and 2025 world silver medalist. A likely contender."
-      },
-      {
-        "name": "Noah Lyles",
-        "country": "USA",
-        "note": "Paris 2024 100m champion. He ended his 2026 season early with injury, so his 2028 form is uncertain."
-      },
-      {
-        "name": "Camryn Rogers",
-        "country": "CAN",
-        "note": "Paris 2024 hammer champion and 2025 world champion with an 80.51m North American record. A favorite if she qualifies."
-      }
-    ],
-    "model": "claude-sonnet-5-5",
-    "promptVersion": 4,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:14:29.339Z",
-    "inputHash": "d94de7c14f6ce906"
-  },
-  "ATH05": {
-    "blurb": "One medal is on the line this morning, in the women's triple jump. It is a good session for fans who like a single event with a live final.\n\nThe rest is early rounds. The men's 400m and women's 3000m steeplechase have Round 1, the 400m hurdles repechage gives eliminated runners a second chance, and the decathlon continues with the 110m hurdles, discus and pole vault.\n\nThe triple jump runway is a fun place to watch from. Expect the crowd to clap along with the jumpers as the sun climbs over the open bowl.",
-    "potentialContendersIntro": "Contenders are for the women's triple jump final and the men's 400m. 2028 fields are projections.",
-    "potentialContenders": [
-      {
-        "name": "Leyanis Pérez Hernández",
-        "country": "CUB",
-        "note": "2025 world champion at 14.94m. A projected medal favorite."
-      },
-      {
-        "name": "Thea LaFond",
-        "country": "DMA",
-        "note": "Paris 2024 champion and 2025 world silver medalist with 14.89m. A likely contender."
-      },
-      {
-        "name": "Yulimar Rojas",
-        "country": "VEN",
-        "note": "2025 world bronze medalist at 14.76m. Could return to the podium if healthy."
-      },
-      {
-        "name": "Shanieka Ricketts",
-        "country": "JAM",
-        "note": "Paris 2024 silver medalist and fifth at the 2025 worlds. A possible finalist."
-      },
-      {
-        "name": "Busang Collen Kebinatshipi",
-        "country": "BOT",
-        "note": "2025 world 400m champion in a national record 43.53. Could run in Round 1 if he qualifies."
-      }
-    ],
-    "model": "claude-sonnet-5-5",
-    "promptVersion": 4,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:14:29.339Z",
-    "inputHash": "ba00b3ababd1a035"
-  },
-  "ATH06": {
-    "blurb": "Tonight brings the men's pole vault final, usually the night's biggest draw. The bar is expected to go very high, and the crowd often turns the late stages into an event of its own.\n\nThe mixed 4x100m relay makes its debut, with Round 1 and the final in the same session. The women's 800m semifinals, the men's 1500m repechage and the finish of the decathlon round it out.\n\nThe Coliseum should feel very different after dark. The relay debut will be a first for the Games, so even casual fans could enjoy seeing it live.",
-    "potentialContendersIntro": "Contenders are for the men's pole vault final and the women's 800m semifinals. 2028 participation is projected, not confirmed.",
-    "potentialContenders": [
       {
         "name": "Mondo Duplantis",
         "country": "SWE",
-        "note": "Paris 2024 champion, a three-time world outdoor champion and world record holder at 6.31m. He is the projected favorite if he competes."
-      },
-      {
-        "name": "Emmanouil Karalis",
-        "country": "GRE",
-        "note": "2025 world silver medalist after his first clearance over 6.00m. A possible challenger."
+        "note": "Paris 2024 champion and world record holder at 6.31m. Won the 2026 Ultimate, world indoor and European titles."
       },
       {
         "name": "Audrey Werro",
         "country": "SUI",
-        "note": "2026 Ultimate, Diamond League and European 800m champion with a world lead of 1:53.70. A likely semifinalist."
-      },
-      {
-        "name": "Lilian Odira",
-        "country": "KEN",
-        "note": "2025 world champion in a championship-record 1:54.62. A projected contender."
-      },
-      {
-        "name": "Keely Hodgkinson",
-        "country": "GBR",
-        "note": "Paris 2024 gold medalist and 2025 world bronze medalist. Could run in the semifinals if she qualifies."
+        "note": "Won the 2026 Ultimate, Diamond League and European 800m titles with a world lead of 1:53.70, third on the all-time list. Could appear in the 800m Round 1."
       }
     ],
     "model": "claude-sonnet-5-5",
-    "promptVersion": 4,
+    "promptVersion": 5,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:14:29.339Z",
-    "inputHash": "5fa408080687ec43"
+    "generatedAt": "2026-11-11T14:19:40.780Z",
+    "inputHash": "68c4cdab986a2d68"
   },
-  "ATH07": {
-    "blurb": "This is an accessible morning card, with women's pole vault and men's triple jump qualifying plus first rounds in three track events. Nobody gets a medal here, but fans see who survives.\n\nRound 1 runs in the men's 3000m steeplechase, women's 400m and men's 110m hurdles. The hurdlers are fun to watch up close, and the steeplechase has a barrier and a water jump in front of the crowd.\n\nPole vault qualifying should have a good rhythm, with the bar rising and athletes entering gradually. The morning crowd tends to be fans who love details.",
-    "potentialContendersIntro": "Contenders are for the women's pole vault qualification, men's 110m hurdles and women's 400m. 2028 fields are projections.",
-    "potentialContenders": [
-      {
-        "name": "Katie Moon",
-        "country": "USA",
-        "note": "Paris 2024 silver medalist and three-time world outdoor champion, most recently in 2025. A projected medal threat."
-      },
-      {
-        "name": "Nina Kennedy",
-        "country": "AUS",
-        "note": "Paris 2024 pole vault champion. Likely to appear if she qualifies."
-      },
-      {
-        "name": "Ja'Kobe Tharp",
-        "country": "USA",
-        "note": "Set the 110m hurdles world record of 12.75 in 2026 and won the Ultimate and Diamond League titles. A projected favorite."
-      },
-      {
-        "name": "Marileidy Paulino",
-        "country": "DOM",
-        "note": "Paris 2024 400m champion and 2026 Ultimate Championship winner. A likely Round 1 name."
-      },
-      {
-        "name": "Pedro Pichardo",
-        "country": "POR",
-        "note": "Paris 2024 triple jump silver medalist and 2025 world champion. A projected contender in qualifying."
-      }
-    ],
-    "model": "claude-sonnet-5-5",
-    "promptVersion": 4,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:14:29.339Z",
-    "inputHash": "8b5144e1cca39f2a"
-  },
-  "ATH08": {
-    "blurb": "Four medals are decided this evening: the men's high jump, men's discus, women's 5000m and women's 800m. It is a big session with a mix of track and field.\n\nThere are also semifinals in the 400m hurdles and men's 1500m, and Round 1 of the men's 200m. Sprinters and hurdlers get a chance to move toward their finals.\n\nExpect a loud crowd as the 800m runners come around the final bend. The high jump bar and the discus cage give the infield action all night.",
-    "potentialContendersIntro": "Contenders are for the women's 800m final and men's high jump. Some stars, including Beatrice Chebet and Faith Kipyegon, are expected back in 2027 after time away.",
-    "potentialContenders": [
-      {
-        "name": "Audrey Werro",
-        "country": "SUI",
-        "note": "2026 Ultimate, Diamond League and European champion with a world lead of 1:53.70. A projected 800m medal threat."
-      },
-      {
-        "name": "Lilian Odira",
-        "country": "KEN",
-        "note": "2025 world 800m champion in a championship-record 1:54.62. Could contend if she qualifies."
-      },
-      {
-        "name": "Keely Hodgkinson",
-        "country": "GBR",
-        "note": "Paris 2024 gold medalist and 2025 world bronze medalist. A likely medal contender."
-      },
-      {
-        "name": "Femke Bol",
-        "country": "NED",
-        "note": "Moved to the 800m in 2026 and says she wants to peak at the 2028 Games. A storyline to watch."
-      },
-      {
-        "name": "Hamish Kerr",
-        "country": "NZL",
-        "note": "Paris 2024 high jump champion. A projected contender if he competes."
-      }
-    ],
-    "model": "claude-sonnet-5-5",
-    "promptVersion": 4,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:14:29.339Z",
-    "inputHash": "dacc292ea5105289"
-  },
-  "ATH09": {
-    "blurb": "A quiet morning with one medal at stake, the women's 3000m steeplechase final. The barriers and water jump make it a fan favorite for those who like a messier race.\n\nQualifying runs for the men's hammer and women's long jump. The 400m repechage for men and women and the men's 200m repechage are second-chance rounds under the 2028 format.\n\nThe session is worth it for variety and a lighter crowd. Long jump qualifying has a steady rhythm of runners and sand.",
-    "potentialContendersIntro": "Names below cover the women's long jump qualification and the 400m repechage. 2028 fields are projections.",
-    "potentialContenders": [
-      {
-        "name": "Tara Davis-Woodhall",
-        "country": "USA",
-        "note": "Paris 2024 long jump champion and 2025 world champion with a world-leading 7.13m. A projected favorite."
-      },
-      {
-        "name": "Malaika Mihambo",
-        "country": "GER",
-        "note": "Silver medalist at Paris 2024 and at the 2025 worlds with 6.99m. A likely contender."
-      },
-      {
-        "name": "Natalia Linares",
-        "country": "COL",
-        "note": "2025 world bronze medalist. Could reach the final if she qualifies."
-      },
-      {
-        "name": "Busang Collen Kebinatshipi",
-        "country": "BOT",
-        "note": "2025 world 400m champion in 43.53. Could appear in the repechage if needed."
-      },
-      {
-        "name": "Quincy Hall",
-        "country": "USA",
-        "note": "Paris 2024 400m champion. A possible name if he qualifies."
-      }
-    ],
-    "model": "claude-sonnet-5-5",
-    "promptVersion": 4,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:14:29.339Z",
-    "inputHash": "c987aed27eaf6bfa"
-  },
-  "ATH10": {
-    "blurb": "Several finals land in the same evening, including the men's 1500m and 400m hurdles. Those are two of the sport's best races and each has clear storylines.\n\nThe women's discus and men's long jump finals are also on the card. Round 1 of the women's 1500m and 200m and the men's 110m hurdles repechage run too.\n\nExpect a full house for the 1500m, when the bell rings. The hurdles bring a different thrill, with the runners rushing through the final straight.",
-    "potentialContendersIntro": "Contenders are for the men's 400m hurdles and 1500m finals. Paris 2024 results are confirmed, but 2028 fields are projections.",
-    "potentialContenders": [
-      {
-        "name": "Rai Benjamin",
-        "country": "USA",
-        "note": "Paris 2024 400m hurdles champion and 2025 world champion in 46.52. A projected favorite."
-      },
-      {
-        "name": "Karsten Warholm",
-        "country": "NOR",
-        "note": "World record holder at 45.94, but he finished outside the medals at the 2025 worlds. A likely contender."
-      },
-      {
-        "name": "Cole Hocker",
-        "country": "USA",
-        "note": "Paris 2024 1500m champion and 2025 world 5000m champion. A projected threat."
-      },
-      {
-        "name": "Josh Kerr",
-        "country": "GBR",
-        "note": "Paris 2024 silver medalist. Set a world mile record of 3:42.66 in 2026. A contender."
-      },
-      {
-        "name": "Jakob Ingebrigtsen",
-        "country": "NOR",
-        "note": "Paris 2024 bronze medalist in the 1500m. He returned from Achilles surgery in August 2026, so his form is a storyline."
-      }
-    ],
-    "model": "claude-sonnet-5-5",
-    "promptVersion": 4,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:14:29.339Z",
-    "inputHash": "d42c033f597fd7f8"
-  },
-  "ATH11": {
-    "blurb": "The men's 3000m steeplechase final is the only medal event this morning. It is a good test of tactics, with barriers and water jumps adding drama to every lap.\n\nQualifying also runs for the women's javelin and high jump. Men's 800m Round 1 and the women's 200m repechage give a look at fast runners trying to advance.\n\nThis is a laid-back session. Fans who like field events can get close to the javelin and high jump action.",
-    "potentialContendersIntro": "Contenders cover the men's steeplechase and 800m plus women's javelin and high jump qualifying. Participation in 2028 is projected.",
-    "potentialContenders": [
-      {
-        "name": "Soufiane El Bakkali",
-        "country": "MAR",
-        "note": "Paris 2024 steeplechase champion. A projected favorite if he competes."
-      },
-      {
-        "name": "Emmanuel Wanyonyi",
-        "country": "KEN",
-        "note": "Paris 2024 800m champion and 2025 world champion in a championship-record 1:41.86. A likely Round 1 name."
-      },
-      {
-        "name": "Marco Arop",
-        "country": "CAN",
-        "note": "Paris 2024 800m silver medalist. Could be a contender if he qualifies."
-      },
-      {
-        "name": "Yan Ziyi",
-        "country": "CHN",
-        "note": "Threw 71.74m in 2026, second on the all-time javelin list. A projected qualifying name."
-      },
-      {
-        "name": "Yaroslava Mahuchikh",
-        "country": "UKR",
-        "note": "Paris 2024 high jump champion. Could contend if she competes."
-      }
-    ],
-    "model": "claude-sonnet-5-5",
-    "promptVersion": 4,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:14:29.339Z",
-    "inputHash": "22322d204b4984ff"
-  },
-  "ATH12": {
-    "blurb": "Three medals are decided: women's pole vault, men's hammer and women's 400m hurdles. That is a strong evening for fans who like both field and track drama.\n\nSemifinals in the men's and women's 400m, men's 110m hurdles and men's 200m are also on the card. Those rounds show who is peaking early.\n\nThe pole vault crowd is often among the loudest, clapping the athletes into each attempt. The hurdles bring a loud finish, when runners clear the last barrier.",
-    "potentialContendersIntro": "Contenders are for the women's pole vault, men's hammer and women's 400m hurdles. 2028 participation is not confirmed, and Sydney McLaughlin-Levrone's return is expected in 2027.",
-    "potentialContenders": [
-      {
-        "name": "Katie Moon",
-        "country": "USA",
-        "note": "Paris 2024 silver medalist and three-time world champion, most recently in 2025 at 4.90m. A likely pole vault contender."
-      },
-      {
-        "name": "Nina Kennedy",
-        "country": "AUS",
-        "note": "Paris 2024 pole vault champion. A projected medal threat."
-      },
-      {
-        "name": "Ethan Katzberg",
-        "country": "CAN",
-        "note": "Paris 2024 hammer champion and 2025 world champion with a championship record of 84.70m. A favorite if he competes."
-      },
-      {
-        "name": "Anna Cockrell",
-        "country": "USA",
-        "note": "Paris 2024 400m hurdles silver medalist, with a 2026 world lead of 52.13. A likely contender."
-      },
-      {
-        "name": "Sydney McLaughlin-Levrone",
-        "country": "USA",
-        "note": "World record holder at 50.37 and Paris 2024 champion. Her return is expected in 2027 after the birth of her daughter, so 2028 is a projection."
-      }
-    ],
-    "model": "claude-sonnet-5-5",
-    "promptVersion": 4,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:14:29.339Z",
-    "inputHash": "988730806c7d7530"
-  },
-  "ATH13": {
-    "blurb": "The men's triple jump final is the one medal event this morning. The women's heptathlon also starts, with the 100m hurdles and high jump.\n\nRound 1 runs in the men's 5000m and women's 100m hurdles, and the men's 800m repechage gives another chance to advance. It is a day for fans who like to see a bit of everything.\n\nThe triple jump's hop, step and jump make it great for the crowd. The heptathlon is easy to follow, with points building over two days.",
-    "potentialContendersIntro": "Contenders are for the men's triple jump and the heptathlon and 100m hurdles. 2028 participation is projected.",
-    "potentialContenders": [
-      {
-        "name": "Pedro Pichardo",
-        "country": "POR",
-        "note": "Paris 2024 silver medalist and 2025 world champion. A favorite if he qualifies."
-      },
-      {
-        "name": "Jordán Díaz",
-        "country": "ESP",
-        "note": "Paris 2024 champion. A likely contender."
-      },
-      {
-        "name": "Anna Hall",
-        "country": "USA",
-        "note": "2025 world heptathlon champion. Could be a projected medal contender."
-      },
-      {
-        "name": "Masai Russell",
-        "country": "USA",
-        "note": "Women's 100m hurdles world record holder and a 2026 World Athlete of the Year nominee. Likely to run Round 1 if she qualifies."
-      },
-      {
-        "name": "Cole Hocker",
-        "country": "USA",
-        "note": "2025 world 5000m champion and Paris 2024 1500m champion. A possible Round 1 name."
-      }
-    ],
-    "model": "claude-sonnet-5-5",
-    "promptVersion": 4,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:14:29.339Z",
-    "inputHash": "f74e12b929470126"
-  },
-  "ATH14": {
-    "blurb": "This is a big night with three finals: the women's 10,000m, men's 110m hurdles and men's 200m. The men's 200m final is the main draw.\n\nThere are also semifinals in the women's 1500m and 200m, men's javelin qualifying and the second part of the heptathlon. The track stays busy all evening.\n\nThe 200m bend should be loud, and fans on the curve see the sprinters come off it. The 10,000m is a slower build but gives a view of the stadium from all angles.",
-    "potentialContendersIntro": "Contenders are for the men's 200m, men's 110m hurdles and women's 10,000m. 2028 participation is projected.",
-    "potentialContenders": [
-      {
-        "name": "Letsile Tebogo",
-        "country": "BOT",
-        "note": "Paris 2024 200m champion. Traded barbs with Lyles and Bednarek in November 2026."
-      },
-      {
-        "name": "Kenny Bednarek",
-        "country": "USA",
-        "note": "Paris 2024 silver medalist who won the 2026 Ultimate 200m in 19.52. A likely favorite."
-      },
-      {
-        "name": "Noah Lyles",
-        "country": "USA",
-        "note": "Paris 2024 bronze medalist and four-time world champion. He ended 2026 early with injury, so his form is uncertain."
-      },
-      {
-        "name": "Ja'Kobe Tharp",
-        "country": "USA",
-        "note": "110m hurdles world record holder at 12.75. A projected contender."
-      },
-      {
-        "name": "Agnes Ngetich",
-        "country": "KEN",
-        "note": "2026 world half marathon champion in a women-only world record. Could be a 10,000m name if she qualifies."
-      }
-    ],
-    "model": "claude-sonnet-5-5",
-    "promptVersion": 4,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:14:29.339Z",
-    "inputHash": "16509ef8b882998d"
-  },
-  "ATH15": {
-    "blurb": "This is the biggest night of the week for medals. It features four finals: the women's long jump, women's 400m, men's 400m and women's 200m.\n\nThe heptathlon ends with the javelin and 800m. There are also men's 800m semifinals, men's 4x100m Round 1 and the women's 100m hurdles repechage.\n\nExpect a stadium packed and loud for the final stretch of sprints. The heptathlon 800m often gets the biggest roar, as the field tries to hold on.",
-    "potentialContendersIntro": "Contenders are for the women's 200m and 400m, men's 400m and women's long jump. 2028 fields are projections.",
+  "ATH02": {
+    "blurb": "Melissa Jefferson-Wooden ran 10.61 to win the 2025 world title, a championship record, and now the women's 100m final lands on the first night of athletics. That has never happened at a Games before.\n\nThe shot put and the men's 10,000m final share the evening, so the Coliseum gets raw power and long-haul patience in the same sitting. In the circle, Jessica Schilder beat Chase Jackson by eight centimeters at the 2025 worlds, and that rivalry travels well.\n\nWith about 77,500 seats around a bowl that has hosted two Games already, the semifinals are the warm-up. The real noise comes at the final.",
+    "potentialContendersIntro": "Contenders below are for the women's 100m and the women's shot put. Both lists are projections based on recent form, not confirmed rosters.",
     "potentialContenders": [
       {
         "name": "Melissa Jefferson-Wooden",
         "country": "USA",
-        "note": "2025 world 200m champion with a 2026 world lead of 21.47. A projected 200m favorite."
+        "note": "2025 world champion and Paris 2024 bronze medalist. Won the 100m and 200m at the 2026 Ultimate Championship."
       },
       {
-        "name": "Gabby Thomas",
+        "name": "Julien Alfred",
+        "country": "LCA",
+        "note": "Paris 2024 champion and 2025 world bronze medalist. Likely contender if she holds her form."
+      },
+      {
+        "name": "Sha'Carri Richardson",
         "country": "USA",
-        "note": "Paris 2024 200m champion. Could contend if she qualifies."
+        "note": "Paris 2024 silver medalist. Fifth at the 2025 worlds, but won ATHLOS London in 10.80 to end 2026."
+      },
+      {
+        "name": "Jessica Schilder",
+        "country": "NED",
+        "note": "2025 world shot put champion at 20.29m, the 2028 podium favorite if she stays healthy."
+      },
+      {
+        "name": "Chase Jackson",
+        "country": "USA",
+        "note": "Silver at the 2025 worlds with 20.21m, only eight centimeters short. Named a nominee for 2026 Women's World Athlete of the Year."
+      }
+    ],
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 5,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:19:40.780Z",
+    "inputHash": "7172bd41bad9d5d6"
+  },
+  "ATH03": {
+    "blurb": "The women's 800m repechage is the safety net, and it punishes complacency. Runners who miss automatic qualification get one more crack at a semifinal place, so a favorite's stumble in Round 1 can turn into a nervy morning.\n\nThat makes this a good session for watching big names handle pressure at 9 a.m. Femke Bol, who left the 400m hurdles for the 800m in 2026 with these Games as her stated target, is exactly the kind of name that makes any round worth a look.\n\nAround it, the decathlon opens with the 100m, long jump and shot put. The mixed 4x400m relay begins with heats, where the US set a world record in Paris.",
+    "potentialContendersIntro": "These are projections for the women's 800m, the session's marquee track event. Most of these names would hope to be through before the repechage.",
+    "potentialContenders": [
+      {
+        "name": "Audrey Werro",
+        "country": "SUI",
+        "note": "Won the 2026 Ultimate, Diamond League and European titles. Her 1:53.70 world lead is third on the all-time list."
+      },
+      {
+        "name": "Lilian Odira",
+        "country": "KEN",
+        "note": "2025 world champion in a championship-record 1:54.62. A likely contender if she holds form."
+      },
+      {
+        "name": "Keely Hodgkinson",
+        "country": "GBR",
+        "note": "Paris 2024 champion and 2025 world bronze medalist in 1:54.91."
+      },
+      {
+        "name": "Femke Bol",
+        "country": "NED",
+        "note": "Switched from the 400m hurdles in 2026 and made the podium in her debut at the Ostrava Golden Spike. Could be a wild card."
+      }
+    ],
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 5,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:19:40.780Z",
+    "inputHash": "67decbc6d51ab535"
+  },
+  "ATH04": {
+    "blurb": "The men's 100m final is wide open in a way it hasn't been in years. Noah Lyles, the Paris champion, ended 2026 early after a strain at the U.S. Championships, while Kenny Bednarek won the Ultimate Championship in 9.85 and Oblique Seville owns the 2025 world title.\n\nNothing about the rest of this session lets you breathe. The men's shot put and women's hammer finals fill the infield, and the mixed 4x400m final brings a baton chase that the Netherlands won in Paris after the US set a record in the heats.\n\nIt's late Sunday afternoon in the Coliseum, and when the sprinters settle into the blocks, the whole bowl goes still.",
+    "potentialContendersIntro": "Names below are for the men's 100m, with the women's hammer also in the mix. All 2028 appearances are projections, and Lyles's fitness is an open question.",
+    "potentialContenders": [
+      {
+        "name": "Oblique Seville",
+        "country": "JAM",
+        "note": "2025 world 100m champion. A projected favorite if he holds that form."
+      },
+      {
+        "name": "Kishane Thompson",
+        "country": "JAM",
+        "note": "Paris 2024 silver medalist, beaten in a photo finish, and 2025 world silver medalist."
+      },
+      {
+        "name": "Kenny Bednarek",
+        "country": "USA",
+        "note": "Won the 2026 Ultimate Championship 100m in 9.85 and 200m in 19.52, and was nominated for 2026 World Athlete of the Year."
+      },
+      {
+        "name": "Noah Lyles",
+        "country": "USA",
+        "note": "Paris 2024 champion and 2025 world bronze medalist. Ended 2026 early with a strain, so his status is uncertain."
+      },
+      {
+        "name": "Camryn Rogers",
+        "country": "CAN",
+        "note": "Paris 2024 hammer champion and 2025 world champion with a North American record of 80.51m, a likely contender in the hammer final."
+      }
+    ],
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 5,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:19:40.780Z",
+    "inputHash": "54feda922378e798"
+  },
+  "ATH05": {
+    "blurb": "Five centimeters. That was the gap between Leyanis Pérez Hernández and Thea LaFond in the 2025 world triple jump final, 14.94m to 14.89m, with Yulimar Rojas only another 13 back.\n\nA triple jump final in a morning session is a rarity, and the sun already beating down on the Coliseum makes it feel like a different event. Hop, step, jump, and a slow crowd clap that builds with every runway.\n\nThe track side has stakes too. The men's 400m hurdles repechage means a fast man who clips a barrier gets a second try, and that's where reputations get a little sweaty.",
+    "potentialContendersIntro": "Focus is on the women's triple jump final. These are projections, and Paris 2024 bronze medalist Jasmine Moore has stepped away to recover, with a return expected in 2027.",
+    "potentialContenders": [
+      {
+        "name": "Leyanis Pérez Hernández",
+        "country": "CUB",
+        "note": "2025 world champion with a world-leading 14.94m, the early favorite if she keeps that form."
+      },
+      {
+        "name": "Thea LaFond",
+        "country": "DMA",
+        "note": "Paris 2024 champion and 2025 world silver medalist at 14.89m."
+      },
+      {
+        "name": "Yulimar Rojas",
+        "country": "VEN",
+        "note": "Won bronze at the 2025 worlds with 14.76m. A likely contender if she is in top shape."
+      },
+      {
+        "name": "Shanieka Ricketts",
+        "country": "JAM",
+        "note": "Paris 2024 silver medalist who finished fifth at the 2025 worlds. Could be a medal threat."
+      }
+    ],
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 5,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:19:40.780Z",
+    "inputHash": "f1a30c653561654f"
+  },
+  "ATH06": {
+    "blurb": "Mondo Duplantis doesn't just win pole vault, he raises the bar on his own record. After 6.31m in 2026, the question here is how high the bar goes in front of a Coliseum crowd that learns the clap-hush-run rhythm in about two jumps.\n\nThere's history in the infield and a first on the track. The mixed 4x100m relay debuts at the Games with Round 1 and the final in one session, a short sprint of baton exchanges where one bad handoff ends it.\n\nWomen's 800m semifinals bring Audrey Werro's 1:53.70, and the decathlon wraps up with the 1500m, where the points race is decided.",
+    "potentialContendersIntro": "These are projections for the men's pole vault final and the women's 800m semifinals, based on recent form rather than confirmed rosters.",
+    "potentialContenders": [
+      {
+        "name": "Mondo Duplantis",
+        "country": "SWE",
+        "note": "Paris 2024 champion with a world record of 6.31m and three straight world outdoor titles through 2025."
+      },
+      {
+        "name": "Emmanouil Karalis",
+        "country": "GRE",
+        "note": "2025 world silver medalist with his first clearance over 6.00m. A likely challenger."
+      },
+      {
+        "name": "Kurtis Marschall",
+        "country": "AUS",
+        "note": "2025 world bronze medalist with 5.95m. Could be a podium contender."
+      },
+      {
+        "name": "Audrey Werro",
+        "country": "SUI",
+        "note": "2026 Ultimate, Diamond League and European champion in the 800m with a 1:53.70 world lead."
+      },
+      {
+        "name": "Femke Bol",
+        "country": "NED",
+        "note": "Moved to the 800m in 2026 and says she aims to peak at the 2028 Games. A story worth watching in the semifinals."
+      }
+    ],
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 5,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:19:40.780Z",
+    "inputHash": "c18a835386939a43"
+  },
+  "ATH07": {
+    "blurb": "If you want to see the fastest 110m hurdler alive, here's his first round. Ja'Kobe Tharp ran a world-record 12.75 at the 2026 NCAA Championships and broke 13 seconds six times that year.\n\nMorning heats give you a different kind of Games, with no medals to hand out but hurdles flying and a crowd that's mostly there for the sport itself. Pole vault qualifying lets you see Katie Moon, three-time world champion, find her rhythm.\n\nMen's triple jump qualifying and the first rounds of the women's 400m and men's steeplechase fill out a day for people who like to say they saw it early.",
+    "potentialContendersIntro": "Contenders here are projections for the men's 110m hurdles and women's pole vault, the session's marquee events.",
+    "potentialContenders": [
+      {
+        "name": "Ja'Kobe Tharp",
+        "country": "USA",
+        "note": "World record holder at 12.75 and winner of the 2026 Ultimate and Diamond League titles, the hurdler to beat."
+      },
+      {
+        "name": "Cordell Tinch",
+        "country": "USA",
+        "note": "2025 world champion in 12.99, a likely contender for the podium."
+      },
+      {
+        "name": "Katie Moon",
+        "country": "USA",
+        "note": "Paris 2024 silver medalist and winner of a third straight world title in 2025 at 4.90m."
+      },
+      {
+        "name": "Nina Kennedy",
+        "country": "AUS",
+        "note": "Paris 2024 champion, a reigning gold medalist trying to defend."
       },
       {
         "name": "Marileidy Paulino",
         "country": "DOM",
-        "note": "Paris 2024 400m champion and 2026 Ultimate winner. A likely favorite."
+        "note": "Paris 2024 400m champion who also won the 2026 Ultimate Championship, a likely entrant in the women's 400m."
+      }
+    ],
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 5,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:19:40.780Z",
+    "inputHash": "d62bb0ad579cc957"
+  },
+  "ATH08": {
+    "blurb": "The women's 800m has become the most fascinating race in the sport. Lilian Odira won the 2025 world title in a championship-record 1:54.62, Audrey Werro followed with a world-leading 1:53.70 in 2026, and Keely Hodgkinson still owns the Paris gold.\n\nThen Femke Bol turns up, a hurdler on a mission, aiming her peak at these Games. Two laps of tactics, with the Coliseum roaring on the final bend.\n\nBeatrice Chebet's 5000m, if she returns from having a baby as expected in 2027, adds a world-record holder to the card. The men's high jump and discus finals fill the infield.",
+    "potentialContendersIntro": "The headline is the women's 800m final, with the women's 5000m also on the card. All 2028 entries are projections, and Chebet's return is expected but not confirmed.",
+    "potentialContenders": [
+      {
+        "name": "Audrey Werro",
+        "country": "SUI",
+        "note": "2026 Ultimate, Diamond League and European champion with a 1:53.70 world lead."
       },
       {
-        "name": "Busang Collen Kebinatshipi",
-        "country": "BOT",
-        "note": "2025 world 400m champion and 2026 Ultimate winner in 43.39. A projected men's 400m threat."
+        "name": "Lilian Odira",
+        "country": "KEN",
+        "note": "2025 world champion in a championship record of 1:54.62."
+      },
+      {
+        "name": "Keely Hodgkinson",
+        "country": "GBR",
+        "note": "Paris 2024 gold medalist and 2025 world bronze medalist in 1:54.91."
+      },
+      {
+        "name": "Femke Bol",
+        "country": "NED",
+        "note": "Former world 400m hurdles champion, switched to the 800m in 2026 and says she'll peak for 2028."
+      },
+      {
+        "name": "Beatrice Chebet",
+        "country": "KEN",
+        "note": "5000m world record holder at 13:58.06 and Paris 2024 gold medalist. Had a baby in 2026 and is expected back in 2027."
+      }
+    ],
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 5,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:19:40.780Z",
+    "inputHash": "31c2f5fa762ea2d8"
+  },
+  "ATH09": {
+    "blurb": "One medal gets decided at breakfast time, and it's a fun one. The women's 3000m steeplechase mixes tactics, barriers and the water jump, which draws a gasp every time somebody lands a bit short.\n\nIt's a session for the curious fan, with repechages that decide who survives and who goes home. Men's and women's 400m and the men's 200m all hand out a second chance, and Busang Collen Kebinatshipi, the 2025 world champion in 43.53, would prefer not to use his.\n\nWomen's long jump qualifying shows off Tara Davis-Woodhall, world champion at 7.13m, hunting a clean first jump.",
+    "potentialContendersIntro": "These are projections for the women's steeplechase final and long jump qualifying. Participation in 2028 is not confirmed.",
+    "potentialContenders": [
+      {
+        "name": "Winfred Yavi",
+        "country": "BRN",
+        "note": "Paris 2024 steeplechase gold medalist. A projected contender in the final if she stays healthy."
       },
       {
         "name": "Tara Davis-Woodhall",
         "country": "USA",
-        "note": "Paris 2024 long jump champion and 2025 world champion with 7.13m. A likely contender."
+        "note": "Paris 2024 long jump champion and 2025 world champion with a world-leading 7.13m."
+      },
+      {
+        "name": "Malaika Mihambo",
+        "country": "GER",
+        "note": "Silver in both Paris 2024 and the 2025 worlds (6.99m). A likely finalist."
+      },
+      {
+        "name": "Natalia Linares",
+        "country": "COL",
+        "note": "2025 world bronze medalist in the long jump, a threat to reach the final."
       }
     ],
     "model": "claude-sonnet-5-5",
-    "promptVersion": 4,
+    "promptVersion": 5,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:14:29.339Z",
-    "inputHash": "7a21281094538c6e"
+    "generatedAt": "2026-11-11T14:19:40.780Z",
+    "inputHash": "a8b61fe967314e11"
+  },
+  "ATH10": {
+    "blurb": "Two of the best races on the program share one evening. In the men's 400m hurdles, Rai Benjamin beat Karsten Warholm in Paris, took the 2025 world title in 46.52 after an overturned disqualification, and still has Warholm's 45.94 world record to chase.\n\nThe men's 1500m is the other one, with Cole Hocker, Josh Kerr and Jakob Ingebrigtsen reuniting. Hocker won in Paris, Kerr set a world mile record of 3:42.66 in 2026, and Ingebrigtsen is back from Achilles surgery.\n\nThe women's discus and men's long jump finals fill the stadium's infield, and in a hurdles final you can hear every barrier hit.",
+    "potentialContendersIntro": "Names below are for the men's 400m hurdles and men's 1500m finals. They are projections based on recent form, not confirmed rosters.",
+    "potentialContenders": [
+      {
+        "name": "Rai Benjamin",
+        "country": "USA",
+        "note": "Paris 2024 champion and 2025 world champion in 46.52."
+      },
+      {
+        "name": "Karsten Warholm",
+        "country": "NOR",
+        "note": "World record holder at 45.94, set in Tokyo in 2021. Went into the 2025 worlds with the world lead but finished outside the medals."
+      },
+      {
+        "name": "Cole Hocker",
+        "country": "USA",
+        "note": "Paris 2024 1500m champion and 2025 world 5000m champion."
+      },
+      {
+        "name": "Josh Kerr",
+        "country": "GBR",
+        "note": "Paris 2024 silver medalist, world mile record holder at 3:42.66 and 2026 Ultimate Championship winner."
+      },
+      {
+        "name": "Jakob Ingebrigtsen",
+        "country": "NOR",
+        "note": "Paris 2024 bronze medalist in the 1500m. Returned in August 2026 after Achilles surgery, so his form is an open question."
+      }
+    ],
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 5,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:19:40.780Z",
+    "inputHash": "1c238c8a12f557a3"
+  },
+  "ATH11": {
+    "blurb": "A teenage javelin thrower from China may be the most intriguing name on the card. Yan Ziyi opened her 2026 season with 71.74m, an Asian and world U20 record that sits second on the all-time list, and she followed it with Diamond League and Asian Games titles.\n\nThe qualifying morning shows you the thrower close up, run-ups and all, while the men's 3000m steeplechase final is the day's medal race. Soufiane El Bakkali is the Paris champion, and the Coliseum will hear every splash at the water jump.\n\nMen's 800m Round 1 puts Emmanuel Wanyonyi on the track, a 1:41.86 championship record holder from the 2025 worlds.",
+    "potentialContendersIntro": "These are projections for the men's steeplechase and 800m and the women's javelin and high jump qualifying. Nothing is confirmed for 2028.",
+    "potentialContenders": [
+      {
+        "name": "Soufiane El Bakkali",
+        "country": "MAR",
+        "note": "Paris 2024 steeplechase champion, a likely contender for the final."
+      },
+      {
+        "name": "Emmanuel Wanyonyi",
+        "country": "KEN",
+        "note": "Paris 2024 champion and 2025 world champion in a championship record of 1:41.86."
+      },
+      {
+        "name": "Djamel Sedjati",
+        "country": "ALG",
+        "note": "Paris 2024 bronze medalist who won the 2026 Ultimate Championship 800m in 1:41.91."
+      },
+      {
+        "name": "Yan Ziyi",
+        "country": "CHN",
+        "note": "Threw 71.74m in 2026, second on the all-time javelin list at a young age. A rising name."
+      },
+      {
+        "name": "Yaroslava Mahuchikh",
+        "country": "UKR",
+        "note": "Paris 2024 high jump champion, a likely contender in qualifying."
+      }
+    ],
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 5,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:19:40.780Z",
+    "inputHash": "982b7c64a2afbe69"
+  },
+  "ATH12": {
+    "blurb": "Sydney McLaughlin-Levrone set the 400m hurdles world record of 50.37 in Paris, took 2026 off to have her daughter, and is expected back in 2027. Whether she's in the Coliseum for this final is one of the great questions of the Games.\n\nIf she isn't, the race still has bite. Anna Cockrell, the Paris silver medalist, led the world in 2026 at 52.13, and Femke Bol has left the hurdles to chase the 800m.\n\nThe hammer final, with Ethan Katzberg's 84.70m championship record, and the pole vault final make this a three-medal evening for people who love variety.",
+    "potentialContendersIntro": "Contenders below are for the women's 400m hurdles, the men's hammer and the women's pole vault finals. All are projections, and McLaughlin-Levrone's return is expected but not confirmed.",
+    "potentialContenders": [
+      {
+        "name": "Sydney McLaughlin-Levrone",
+        "country": "USA",
+        "note": "World record holder at 50.37 and Paris 2024 champion. Took 2026 off and is expected back in 2027."
+      },
+      {
+        "name": "Anna Cockrell",
+        "country": "USA",
+        "note": "Paris 2024 silver medalist who held the 2026 world lead at 52.13."
+      },
+      {
+        "name": "Ethan Katzberg",
+        "country": "CAN",
+        "note": "Paris 2024 hammer champion and 2025 world champion with a championship record of 84.70m."
+      },
+      {
+        "name": "Merlin Hummel",
+        "country": "GER",
+        "note": "Won the 2026 Ultimate Championship hammer with 81.46m, a likely challenger."
+      },
+      {
+        "name": "Katie Moon",
+        "country": "USA",
+        "note": "Paris 2024 silver medalist and three-time world champion, with 4.90m in 2025."
+      }
+    ],
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 5,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:19:40.780Z",
+    "inputHash": "dc7f4d1da3253c85"
+  },
+  "ATH13": {
+    "blurb": "Pedro Pichardo has turned the men's triple jump into a duel of nerves. The Portuguese jumper took Paris silver, then won the 2025 world title, and the Díaz brothers of Spain and Italy are chasing the same pit.\n\nThe heptathlon opens in the same morning with the 100m hurdles and high jump, so the stadium sees a two-day grind begin. The 100m hurdles Round 1 includes world record holder Masai Russell, a fast field for a morning.\n\nMen's 5000m Round 1 and the 800m repechage add running to a session where jumpers and multi-eventers get plenty of time in the sun.",
+    "potentialContendersIntro": "Contenders below are for the men's triple jump final and the women's heptathlon and 100m hurdles. These are projections, not confirmed rosters.",
+    "potentialContenders": [
+      {
+        "name": "Pedro Pichardo",
+        "country": "POR",
+        "note": "Paris 2024 silver medalist and 2025 world champion."
+      },
+      {
+        "name": "Jordan Díaz",
+        "country": "ESP",
+        "note": "Paris 2024 gold medalist, a defending champion hoping to repeat."
+      },
+      {
+        "name": "Andy Díaz",
+        "country": "ITA",
+        "note": "Paris 2024 bronze medalist, a likely finalist."
+      },
+      {
+        "name": "Anna Hall",
+        "country": "USA",
+        "note": "2025 world heptathlon champion, a projected favorite as the event opens."
+      },
+      {
+        "name": "Masai Russell",
+        "country": "USA",
+        "note": "100m hurdles world record holder, nominated for 2026 World Athlete of the Year."
+      }
+    ],
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 5,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:19:40.780Z",
+    "inputHash": "2aa689748c55cf5f"
+  },
+  "ATH14": {
+    "blurb": "Letsile Tebogo told Kenny Bednarek and Noah Lyles in November 2026 to get used to running behind him. By this evening, the men's 200m final could settle the argument in front of a Coliseum crowd that will have waited a week.\n\nThe 110m hurdles final is the other showstopper, with Ja'Kobe Tharp's 12.75 world record. Lyles won his fourth world 200m title in 2025, but his 2026 ended early with injury, so his status is uncertain.\n\nThe women's 10,000m final, a 25-lap grind, adds the long-distance drama, and Agnes Ngetich is the name on the lips of distance fans.",
+    "potentialContendersIntro": "Contenders below cover the men's 200m, the men's 110m hurdles and the women's 10,000m. All 2028 appearances are projections.",
+    "potentialContenders": [
+      {
+        "name": "Kenny Bednarek",
+        "country": "USA",
+        "note": "Paris 2024 silver medalist who won the 2026 Ultimate 200m in 19.52."
+      },
+      {
+        "name": "Letsile Tebogo",
+        "country": "BOT",
+        "note": "Paris 2024 champion and Botswana's first gold in the event, with a rivalry with Bednarek and Lyles."
+      },
+      {
+        "name": "Noah Lyles",
+        "country": "USA",
+        "note": "Four-time world 200m champion who ended 2026 early with injury, so his readiness is uncertain."
+      },
+      {
+        "name": "Ja'Kobe Tharp",
+        "country": "USA",
+        "note": "110m hurdles world record holder at 12.75 and 2026 Ultimate and Diamond League winner."
+      },
+      {
+        "name": "Agnes Ngetich",
+        "country": "KEN",
+        "note": "2026 world half marathon champion in a women-only world record of 1:05:15, a likely contender in the 10,000m."
+      }
+    ],
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 5,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:19:40.780Z",
+    "inputHash": "ebeb89dd81e9f1fe"
+  },
+  "ATH15": {
+    "blurb": "Three sprint finals and a long jump in four hours is the best way to spend a Saturday afternoon. The women's 200m final could belong to Melissa Jefferson-Wooden, whose 21.47 in 2026 sits third on the all-time list.\n\nThe 400m finals bring a different edge. Busang Collen Kebinatshipi ran 43.53 to win the 2025 world title and 43.39 at the 2026 Ultimate Championship, and the women's race could feature Marileidy Paulino.\n\nMeanwhile, Tara Davis-Woodhall's long jump final and the heptathlon's closing 800m run alongside the sprints. Bring a hat, sunscreen and a loud voice.",
+    "potentialContendersIntro": "Contenders are for the women's 200m, the 400m finals and the women's long jump. These are projections, and Sydney McLaughlin-Levrone's return from a 2026 break is expected but unconfirmed.",
+    "potentialContenders": [
+      {
+        "name": "Melissa Jefferson-Wooden",
+        "country": "USA",
+        "note": "2025 world 200m champion and 2026 world leader at 21.47, third on the all-time list."
+      },
+      {
+        "name": "Gabby Thomas",
+        "country": "USA",
+        "note": "Paris 2024 200m champion, a defending gold medalist."
+      },
+      {
+        "name": "Busang Collen Kebinatshipi",
+        "country": "BOT",
+        "note": "2025 world 400m champion in 43.53 and 2026 Ultimate winner in 43.39."
+      },
+      {
+        "name": "Marileidy Paulino",
+        "country": "DOM",
+        "note": "Paris 2024 400m champion who won the 2026 Ultimate Championship 400m."
+      },
+      {
+        "name": "Tara Davis-Woodhall",
+        "country": "USA",
+        "note": "Paris 2024 long jump champion and 2025 world champion with a world-leading 7.13m."
+      }
+    ],
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 5,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:19:40.780Z",
+    "inputHash": "78db88c7b911b2f5"
   },
   "ATH16": {
     "blurb": "Nine hundredths of a second. That's all that separated Emmanuel Wanyonyi, Djamel Sedjati and Marco Arop at the 2025 world championships, and the men's 800m final could be decided by even less.\n\nAround it, the medals keep coming: women's high jump, javelin and 1500m, then the men's 4x100m, where Canada, the Paris 2024 champion, could try to defend a gold nobody saw coming. Watch the javelin runway too, where China's Yan Ziyi has thrown 71.74m, second on the all-time list.\n\nThe Coliseum is an open bowl, and the late-afternoon sun lingers on the track. A tight 800m homestretch in a stadium that has hosted two earlier Games should be loud.",

@@ -629,6 +629,80 @@
     "inputHash": "d00148226fc60235"
   },
   "ATH01": {
+    "agg": 5,
+    "rSig": 4,
+    "rExp": 5,
+    "rStar": 6,
+    "rUniq": 5,
+    "rDem": 6,
+    "scorecard": {
+      "significance": {
+        "score": 4,
+        "explanation": "Qualifying and first-round heats only. Real advancement stakes, but nobody leaves with a medal, even with the women's 100m climb beginning here."
+      },
+      "experience": {
+        "score": 5,
+        "explanation": "Morning sun at the Coliseum with lots of events running at once. Easy to roam and watch, but short on prime-time roar."
+      },
+      "starPower": {
+        "score": 6,
+        "explanation": "Duplantis in pole vault qualifying is the headline, with Camryn Rogers possible in hammer. Top sprinters usually skip the earliest rounds."
+      },
+      "uniqueness": {
+        "score": 5,
+        "explanation": "All four women's 100m rounds share one day, a scheduling first. This is the opening act, though, not the marquee moment."
+      },
+      "demand": {
+        "score": 6,
+        "explanation": "Day one at the Coliseum draws a crowd, and a ticket also gets you in for opening-day buzz. Morning heats are the softer ask."
+      },
+      "aggregate": 5,
+      "overall": "Come early for the novelty of watching a sprinter's whole day begin, plus Duplantis warming up on the runway. Stakes are low, but it's the cheapest way into the Coliseum on opening day."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:43.577Z",
+    "inputHash": "17c57aca5f49dbaf"
+  },
+  "ATH02": {
+    "agg": 8.9,
+    "rSig": 9,
+    "rExp": 9,
+    "rStar": 9,
+    "rUniq": 8,
+    "rDem": 9,
+    "scorecard": {
+      "significance": {
+        "score": 9,
+        "explanation": "Three medal events: the women's 100m final, shot put and men's 10,000m, all on one night. Medals everywhere you look."
+      },
+      "experience": {
+        "score": 9,
+        "explanation": "Opening-night track action at the Coliseum, with a sprint final to anchor it. Peak prime-time energy from a full house."
+      },
+      "starPower": {
+        "score": 9,
+        "explanation": "Melissa Jefferson-Wooden, 10.61 world champion, headlines a 100m with Alfred and Richardson in the mix. Schilder and Jackson add shot put star power."
+      },
+      "uniqueness": {
+        "score": 8,
+        "explanation": "The first women's 100m final ever held on athletics day one, at a historic Coliseum. A true first, short of ceremony-level rarity."
+      },
+      "demand": {
+        "score": 9,
+        "explanation": "Athletics opening night with a 100m final is a headline ticket. Expect fierce competition to get seats."
+      },
+      "aggregate": 8.9,
+      "overall": "A sprint final on the very first night, a 25-lap men's 10,000m and a Schilder-Jackson shot put duel. This is the session that sets the tone for the Coliseum Games."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:43.577Z",
+    "inputHash": "446b20bf7d5f6255"
+  },
+  "ATH03": {
     "agg": 4.9,
     "rSig": 4,
     "rExp": 5,
@@ -638,106 +712,32 @@
     "scorecard": {
       "significance": {
         "score": 4,
-        "explanation": "Opening-morning heats and Round 1 runs. The stakes are advancement rather than medals, but every sprinter here is chasing a Games place."
+        "explanation": "Repechages, qualifying and relay heats with a decathlon underway. Survival rounds, no medals handed out."
       },
       "experience": {
         "score": 5,
-        "explanation": "Early 9am start under Southern California sun. The Coliseum atmosphere is building, but the crowd is still filling in."
+        "explanation": "Sunday morning in the Coliseum sun with a busy infield. Plenty to watch, with less atmosphere than the evening sessions."
       },
       "starPower": {
         "score": 6,
-        "explanation": "Top sprinters often run early rounds, so Jefferson-Wooden or Richardson could appear, though the headliners are less certain than in finals."
+        "explanation": "Femke Bol's 800m debut at these Games is the draw, and Crouser could appear in shot qualifying. Relay heats can bring top US and Dutch names."
       },
       "uniqueness": {
         "score": 5,
-        "explanation": "Day-one card at the Coliseum with several event types. Still one of many routine early rounds, though the opening-day context helps."
+        "explanation": "A repechage round is built-in drama, and mixed relay heats carry some novelty. Otherwise it's a routine morning of rounds."
       },
       "demand": {
         "score": 5,
-        "explanation": "Morning day-one sessions at the Coliseum still sell, but this is one of the easier sessions to book."
+        "explanation": "Morning prelims at a huge venue are an easier ticket. Still a Coliseum day during the Games."
       },
       "aggregate": 4.9,
-      "overall": "A morning mix of 100m heats, distance rounds and field qualifying on day one at the Coliseum. Best for fans who want the Games to open before the medals start; the sprint names are the draw."
+      "overall": "Watch Femke Bol in a do-or-die repechage setting and a decathlon in motion. It's a gentler Coliseum morning for fans who like sport more than spectacle."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:11.504Z",
-    "inputHash": "ebe8e7e43b556699"
-  },
-  "ATH02": {
-    "agg": 9.7,
-    "rSig": 10,
-    "rExp": 10,
-    "rStar": 9,
-    "rUniq": 9,
-    "rDem": 10,
-    "scorecard": {
-      "significance": {
-        "score": 10,
-        "explanation": "Women's 100m final on day one, with the 10,000m and shot put medals also decided. Gold-medal sprint stakes at the top of the program."
-      },
-      "experience": {
-        "score": 10,
-        "explanation": "Evening final at the Coliseum on the opening night of athletics. The open bowl should be at its loudest for the sprint."
-      },
-      "starPower": {
-        "score": 9,
-        "explanation": "Jefferson-Wooden, Alfred and Richardson are all in contention, and the 10,000m adds Chebet-level distance names."
-      },
-      "uniqueness": {
-        "score": 9,
-        "explanation": "Women's 100m final opening the athletics program at the Coliseum is a once-only combination of marquee event and iconic venue."
-      },
-      "demand": {
-        "score": 10,
-        "explanation": "Opening-night finals of the Games' top track event. Expect this to be among the most sought-after sessions."
-      },
-      "aggregate": 9.7,
-      "overall": "Day one's headline night: the women's 100m semifinal and final at the Coliseum, plus the 10,000m and shot put finals. Jefferson-Wooden, Alfred and Richardson lead a sprint final that opens the athletics program."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:22:11.504Z",
-    "inputHash": "9eabd70f845acd67"
-  },
-  "ATH03": {
-    "agg": 4.6,
-    "rSig": 4,
-    "rExp": 5,
-    "rStar": 5,
-    "rUniq": 4,
-    "rDem": 5,
-    "scorecard": {
-      "significance": {
-        "score": 4,
-        "explanation": "Decathlon openers and qualifying rounds, with the mixed 4x400m first round. Real stakes for advancement, though no medals are decided here."
-      },
-      "experience": {
-        "score": 5,
-        "explanation": "Sunday morning at the Coliseum. Good weather and a big bowl, though the field events build slowly for casual viewers."
-      },
-      "starPower": {
-        "score": 5,
-        "explanation": "Decathletes and throwers may compete here, but the top names are more likely in the evening finals."
-      },
-      "uniqueness": {
-        "score": 4,
-        "explanation": "Routine qualifying and decathlon opener in a standard format, even at an iconic venue."
-      },
-      "demand": {
-        "score": 5,
-        "explanation": "Early-morning sessions of multi-event and field qualifying draw specialist fans, and seats still move steadily."
-      },
-      "aggregate": 4.6,
-      "overall": "Sunday morning with decathlon openers, several qualifying rounds and the mixed 4x400m first round. Best for field-event fans who like watching up close; the stars are saved for the evening."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:22:11.504Z",
-    "inputHash": "93044e440bc001ca"
+    "generatedAt": "2026-11-11T14:22:43.577Z",
+    "inputHash": "5b5c23f415c73fcc"
   },
   "ATH04": {
     "agg": 9.7,
@@ -749,180 +749,180 @@
     "scorecard": {
       "significance": {
         "score": 10,
-        "explanation": "Men's 100m final headlines a night that also decides the shot put, hammer and mixed 4x400m medals. Fastest-man stakes at their peak."
+        "explanation": "Men's 100m final plus shot put, hammer and mixed 4x400m finals. Four medal events in one session."
       },
       "experience": {
         "score": 10,
-        "explanation": "Sunday night 100m semifinals and final at the Coliseum. The most electric setting the Games can offer on track."
+        "explanation": "The men's 100m final in a packed Coliseum bowl, with finals on the infield too. Sunday evening doesn't get bigger."
       },
       "starPower": {
         "score": 9,
-        "explanation": "Lyles's injury trims the field, but Bednarek and Thompson keep the 100m a superstar final."
+        "explanation": "Bednarek, Seville, Thompson and maybe Tebogo on the blocks, with Crouser in the ring. Lyles's injury leaves the field open."
       },
       "uniqueness": {
         "score": 9,
-        "explanation": "Men's 100m final at the Coliseum on the second night of athletics, alongside a debut mixed relay final."
+        "explanation": "A wide-open men's 100m at the Coliseum, where Carl Lewis once reigned. Near once-in-a-lifetime atmosphere."
       },
       "demand": {
         "score": 10,
-        "explanation": "Athletics finals night with the men's 100m. Among the hardest tickets in the athletics program."
+        "explanation": "The men's 100m final is the hottest ticket in athletics. Four finals in one sitting adds to the scramble."
       },
       "aggregate": 9.7,
-      "overall": "Sunday night headliner: the men's 100m semifinals and final, with shot put, hammer and mixed 4x400m medals also decided. Bednarek and Thompson keep the fastest-man question wide open."
+      "overall": "The men's 100m final in the Coliseum with no obvious favorite, plus three more medal events. If you only get one track ticket, make it this one."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:11.504Z",
-    "inputHash": "d87bfe643a1cc2b1"
+    "generatedAt": "2026-11-11T14:22:43.577Z",
+    "inputHash": "262831078ab5adc4"
   },
   "ATH05": {
-    "agg": 5.4,
+    "agg": 5.3,
     "rSig": 6,
-    "rExp": 5,
-    "rStar": 6,
-    "rUniq": 4,
-    "rDem": 6,
-    "scorecard": {
-      "significance": {
-        "score": 6,
-        "explanation": "Single medal final in the women's triple jump, with early rounds around it. One live final with real stakes."
-      },
-      "experience": {
-        "score": 5,
-        "explanation": "Monday morning session with the sun climbing over the open bowl. A pleasant setting, but without evening energy."
-      },
-      "starPower": {
-        "score": 6,
-        "explanation": "Triple jump final with a few recognizable names, though the 400m and steeplechase rounds bring less star power."
-      },
-      "uniqueness": {
-        "score": 4,
-        "explanation": "Single triple jump final plus routine early rounds. A standard format at a famous venue."
-      },
-      "demand": {
-        "score": 6,
-        "explanation": "A live medal final in a field event draws steady interest, with the early rounds easing pressure on seats."
-      },
-      "aggregate": 5.4,
-      "overall": "A Monday morning session with the women's triple jump final and early rounds in the 400m, 3000m steeplechase and hurdles repechage. A good pick for fans who want one clean final before the field fills out."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:22:11.504Z",
-    "inputHash": "3c30ff70879fd37f"
-  },
-  "ATH06": {
-    "agg": 9.3,
-    "rSig": 10,
-    "rExp": 9,
-    "rStar": 9,
-    "rUniq": 9,
-    "rDem": 9,
-    "scorecard": {
-      "significance": {
-        "score": 10,
-        "explanation": "Men's pole vault final decides a gold medal in a marquee sport, with the debut mixed 4x100m final on the same night."
-      },
-      "experience": {
-        "score": 9,
-        "explanation": "Evening pole vault final at the Coliseum, where the bar rising under the lights builds real tension."
-      },
-      "starPower": {
-        "score": 9,
-        "explanation": "Duplantis is the headline draw, and the 1500m repechage adds Kerr and Ingebrigtsen names."
-      },
-      "uniqueness": {
-        "score": 9,
-        "explanation": "The debut mixed 4x100m relay final shares a night with a Duplantis-led pole vault final at the Coliseum."
-      },
-      "demand": {
-        "score": 9,
-        "explanation": "Pole vault finals with Duplantis are a sellout draw, and the debut relay adds further pull."
-      },
-      "aggregate": 9.3,
-      "overall": "Monday night's pole vault final with Duplantis, plus the debut mixed 4x100m relay, makes this a must-see session. The 800m and 1500m rounds give middle-distance fans a second layer."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:22:11.504Z",
-    "inputHash": "1d1a8d7bad9f014b"
-  },
-  "ATH07": {
-    "agg": 4.7,
-    "rSig": 4,
     "rExp": 5,
     "rStar": 6,
     "rUniq": 4,
     "rDem": 5,
     "scorecard": {
       "significance": {
-        "score": 4,
-        "explanation": "Qualifying and Round 1 heats across several events. Advancement is the stake, not medals."
+        "score": 6,
+        "explanation": "One medal, the women's triple jump final, anchors an otherwise heat-and-repechage morning. A single non-marquee final."
       },
       "experience": {
         "score": 5,
-        "explanation": "Tuesday morning start at the Coliseum. The hurdles and steeplechase water jump add color to a quieter card."
+        "explanation": "Morning heat at the Coliseum, with jumpers feeding off the crowd's clap. Pleasant, not electric."
       },
       "starPower": {
         "score": 6,
-        "explanation": "Early-round sprints and hurdles may include top athletes, though most headliners wait for the semifinals."
+        "explanation": "LaFond, Pérez Hernández and Yulimar Rojas make the jumping pit worth watching. Track rounds bring Hall and Benjamin-level names to the early rounds."
       },
       "uniqueness": {
         "score": 4,
-        "explanation": "Routine qualifying and heats in a standard format, with the venue doing most of the work."
+        "explanation": "A morning medal final is a mild quirk. Everything else is standard first-round and repechage fare."
       },
       "demand": {
         "score": 5,
-        "explanation": "Morning heats draw specialists and families, with seats easier to find than in the evening finals."
+        "explanation": "Monday morning with one medal on offer. Still the Games, but an easier ticket."
       },
-      "aggregate": 4.7,
-      "overall": "Tuesday morning qualifying and first rounds: women's pole vault and men's triple jump qualifying, plus heats in the 400m, 110m hurdles and steeplechase. Accessible, close-up action for detail-focused fans."
+      "aggregate": 5.3,
+      "overall": "A tight triple jump final with Pérez Hernández, LaFond and Rojas separated by centimeters last time, in a relaxed Monday morning slot. Good value, light on spectacle."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:11.504Z",
-    "inputHash": "691761ac1bfb7002"
+    "generatedAt": "2026-11-11T14:22:43.577Z",
+    "inputHash": "8d5c0e9640e7567f"
   },
-  "ATH08": {
-    "agg": 8.1,
+  "ATH06": {
+    "agg": 8.7,
     "rSig": 9,
     "rExp": 9,
-    "rStar": 7,
-    "rUniq": 6,
+    "rStar": 9,
+    "rUniq": 8,
     "rDem": 8,
     "scorecard": {
       "significance": {
         "score": 9,
-        "explanation": "Four medal finals in one evening, including the women's 800m and 5000m. Gold-medal stakes across the card."
+        "explanation": "Men's pole vault final plus the debut mixed 4x100m final. Medal stakes in the infield and on the track."
       },
       "experience": {
         "score": 9,
-        "explanation": "Evening session at the Coliseum with four finals across the infield and track. The 800m bend should be loud."
+        "explanation": "Evening sun, a pole vault bar rising and a crowd clapping the runway. Relay chaos adds to the show."
       },
       "starPower": {
-        "score": 7,
-        "explanation": "Chebet is out and Kipyegon is absent, but the men's high jump and 800m fields bring recognizable names."
+        "score": 9,
+        "explanation": "Mondo Duplantis and his 6.31m world record are the biggest draw of the whole stadium program. Kerr and Hocker add names in the 1500m repechage."
       },
       "uniqueness": {
-        "score": 6,
-        "explanation": "Four finals and two semifinals in one night is a rich card, though the format is familiar."
+        "score": 8,
+        "explanation": "The first mixed 4x100m relay ever, plus a record-setting vaulter. A genuine debut night at the Coliseum."
       },
       "demand": {
         "score": 8,
-        "explanation": "Multiple finals on a marquee evening at the Coliseum keep this in high demand."
+        "explanation": "Duplantis is a global draw, and a Monday evening final is a priority ticket. Not quite ceremony-level hunger."
       },
-      "aggregate": 8.1,
-      "overall": "Tuesday evening with four finals: women's 800m, women's 5000m, men's high jump and men's discus. A long, varied card at the Coliseum where the 800m final should bring the loudest roar."
+      "aggregate": 8.7,
+      "overall": "Duplantis chasing his own record, plus the first mixed 4x100m relay in Games history. A strong evening for anyone who wants to say they were there."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:11.504Z",
-    "inputHash": "4b0ec496876adb05"
+    "generatedAt": "2026-11-11T14:22:43.577Z",
+    "inputHash": "5106bf3f5138934a"
+  },
+  "ATH07": {
+    "agg": 5,
+    "rSig": 4,
+    "rExp": 5,
+    "rStar": 7,
+    "rUniq": 5,
+    "rDem": 5,
+    "scorecard": {
+      "significance": {
+        "score": 4,
+        "explanation": "Qualifying and first-round heats. Stakes are advancement only, with no medals on the day."
+      },
+      "experience": {
+        "score": 5,
+        "explanation": "A 9:30 start in the Coliseum sun, with hurdles and pole vault close to the action. Relaxed and sport-focused."
+      },
+      "starPower": {
+        "score": 7,
+        "explanation": "Ja'Kobe Tharp, world record holder at 12.75, runs his first round, and Katie Moon vaults in qualifying. Heats that carry real names."
+      },
+      "uniqueness": {
+        "score": 5,
+        "explanation": "Seeing a new world-record hurdler open his Games is a nice hook. Beyond that, it's routine morning heats."
+      },
+      "demand": {
+        "score": 5,
+        "explanation": "Morning heats, no medals, huge stadium. A comparatively easy ticket."
+      },
+      "aggregate": 5,
+      "overall": "You're here for Tharp's first race and a look at Katie Moon finding her rhythm. Early, mellow and a solid pick for track purists."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:43.577Z",
+    "inputHash": "303b2f3dbfc154b3"
+  },
+  "ATH08": {
+    "agg": 8.4,
+    "rSig": 9,
+    "rExp": 9,
+    "rStar": 8,
+    "rUniq": 7,
+    "rDem": 8,
+    "scorecard": {
+      "significance": {
+        "score": 9,
+        "explanation": "Four medal events: women's 800m, women's 5000m, high jump and discus finals. Plus 400m hurdles and 1500m semis."
+      },
+      "experience": {
+        "score": 9,
+        "explanation": "Tuesday evening at the Coliseum with a stacked 800m final. Distance races build a crowd roar on the final bend."
+      },
+      "starPower": {
+        "score": 8,
+        "explanation": "Odira, Werro, Hodgkinson and Femke Bol in one 800m final is elite company. Chebet's return is uncertain."
+      },
+      "uniqueness": {
+        "score": 7,
+        "explanation": "Bol's hurdles-to-800m switch makes this final a one-off storyline. A medal night, but not a signature session."
+      },
+      "demand": {
+        "score": 8,
+        "explanation": "Multiple finals and the best women's 800m field in years. A strong prime-time pull."
+      },
+      "aggregate": 8.4,
+      "overall": "The women's 800m is the most compelling race in the sport right now, and Bol's presence adds a storyline. Strong value for a Tuesday night."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:43.577Z",
+    "inputHash": "2699c0a77b25cf2f"
   },
   "ATH09": {
     "agg": 5.3,
@@ -934,69 +934,69 @@
     "scorecard": {
       "significance": {
         "score": 6,
-        "explanation": "Women's steeplechase final is the one medal decided, with qualifying and repechage rounds around it."
+        "explanation": "The women's 3000m steeplechase final is the lone medal on the morning. The rest is qualifying and repechages."
       },
       "experience": {
         "score": 5,
-        "explanation": "Wednesday morning at the Coliseum. The water jump is a highlight, but the energy stays low before prime time."
+        "explanation": "Wednesday breakfast at the Coliseum, with a steeplechase water jump to watch. A fan's session, not a party."
       },
       "starPower": {
         "score": 6,
-        "explanation": "Steeplechase final with mid-tier names, plus qualifying with few headliners."
+        "explanation": "Tara Davis-Woodhall in long jump qualifying and Kebinatshipi in the 400m repechage. Steeplechase final is light on household names."
       },
       "uniqueness": {
         "score": 4,
-        "explanation": "Standard steeplechase final and qualifying rounds in familiar formats."
+        "explanation": "Steeplechase final in the morning is a standard slot. Repechages are common to the format."
       },
       "demand": {
         "score": 5,
-        "explanation": "A single final at a famous venue draws steady interest, though the morning slot keeps seats easier to find."
+        "explanation": "Morning medal race with repechages is easier to book. The Games scarcity keeps it competitive."
       },
       "aggregate": 5.3,
-      "overall": "Wednesday morning with the women's steeplechase final and qualifying in the men's hammer and women's long jump. A quieter session with one medal, suited to fans who enjoy messier racing."
+      "overall": "A medal at breakfast time, with Davis-Woodhall and Kebinatshipi lurking in early rounds. A good-value pick for steeplechase fans and early risers."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:11.504Z",
-    "inputHash": "6dd1d6660bfa00f0"
+    "generatedAt": "2026-11-11T14:22:43.577Z",
+    "inputHash": "f85e03076dc181fe"
   },
   "ATH10": {
-    "agg": 9,
-    "rSig": 10,
+    "agg": 8.7,
+    "rSig": 9,
     "rExp": 9,
     "rStar": 9,
     "rUniq": 7,
     "rDem": 9,
     "scorecard": {
       "significance": {
-        "score": 10,
-        "explanation": "Men's 1500m final headlines a night that also decides the 400m hurdles, long jump and discus medals."
+        "score": 9,
+        "explanation": "Four medal events, headlined by the men's 400m hurdles and 1500m finals. Women's discus and men's long jump add more."
       },
       "experience": {
         "score": 9,
-        "explanation": "Evening session at the Coliseum with the 1500m bell and hurdles finish. A packed stadium should lift the crowd."
+        "explanation": "Wednesday evening at the Coliseum with a 1500m and 400m hurdles back to back. The crowd noise climbs with each lap."
       },
       "starPower": {
         "score": 9,
-        "explanation": "Ingebrigtsen, Kerr and Hocker headline the 1500m, while Benjamin and Warholm lead the 400m hurdles."
+        "explanation": "Benjamin and Warholm in the hurdles, then Hocker, Kerr and Ingebrigtsen in the 1500m. Rare double rivalry in one night."
       },
       "uniqueness": {
         "score": 7,
-        "explanation": "Two of the sport's best races on one night at the Coliseum, though the format is standard."
+        "explanation": "A rematch of the Paris 1500m podium, with Ingebrigtsen back from surgery. Compelling, but it's one of several finals nights."
       },
       "demand": {
         "score": 9,
-        "explanation": "Marquee 1500m and 400m hurdles finals at the Coliseum keep this among the top tickets."
+        "explanation": "Two rivalry races on one evening make this a priority ticket. Medal nights sell fast."
       },
-      "aggregate": 9,
-      "overall": "Wednesday evening features the men's 1500m and 400m hurdles finals, with women's discus and men's long jump medals also decided. Two of the sport's marquee races headline a packed Coliseum night."
+      "aggregate": 8.7,
+      "overall": "Rai Benjamin versus Warholm and a Hocker-Kerr-Ingebrigtsen 1500m reunion in one evening. One of the best card-for-card sessions of the track week."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:11.504Z",
-    "inputHash": "5161edb98cf3fbfe"
+    "generatedAt": "2026-11-11T14:22:43.577Z",
+    "inputHash": "d7b4bca8ff3fb382"
   },
   "ATH11": {
     "agg": 5.3,
@@ -1008,180 +1008,180 @@
     "scorecard": {
       "significance": {
         "score": 6,
-        "explanation": "Men's steeplechase final is the one medal event, with qualifying and Round 1 heats around it."
+        "explanation": "The men's 3000m steeplechase final is the single medal. Qualifying and Round 1 fill the rest."
       },
       "experience": {
         "score": 5,
-        "explanation": "Thursday morning session at the Coliseum. The water jump adds drama, but the crowd builds slowly."
+        "explanation": "A morning session in the Coliseum sun. Water-jump splashes are fun, and the stadium is open and roomy."
       },
       "starPower": {
         "score": 6,
-        "explanation": "Steeplechase final with names like El Bakkali in the field, though the qualifying rounds draw fewer headliners."
+        "explanation": "Soufiane El Bakkali defends in the steeplechase, and Wanyonyi opens his 800m. Yan Ziyi's javelin qualifying is a name to know."
       },
       "uniqueness": {
         "score": 4,
-        "explanation": "Standard steeplechase final with routine qualifying rounds."
+        "explanation": "A steeplechase final in the morning is a standard slot. Yan Ziyi's debut adds a sliver of intrigue."
       },
       "demand": {
         "score": 5,
-        "explanation": "Single morning final at a famous venue. Steady interest, with seats easier to book than the evening sessions."
+        "explanation": "Morning session with one medal. A comparatively easier ticket."
       },
       "aggregate": 5.3,
-      "overall": "Thursday morning with the men's steeplechase final, plus qualifying in women's javelin and high jump and Round 1 of the men's 800m. Laid back and close to the field action, with the steeplechase as the one medal."
+      "overall": "See El Bakkali defend steeplechase gold and get a close look at Yan Ziyi, the teenage javelin phenom. A fan's morning with some star appeal."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:11.504Z",
-    "inputHash": "bdfae88319f5db0e"
+    "generatedAt": "2026-11-11T14:22:43.577Z",
+    "inputHash": "c21cc539af8c7846"
   },
   "ATH12": {
-    "agg": 8.1,
+    "agg": 8.4,
     "rSig": 9,
     "rExp": 9,
-    "rStar": 7,
-    "rUniq": 6,
+    "rStar": 8,
+    "rUniq": 7,
     "rDem": 8,
     "scorecard": {
       "significance": {
         "score": 9,
-        "explanation": "Three medal finals in one evening, including the women's pole vault and women's 400m hurdles."
+        "explanation": "Three medal finals: women's pole vault, men's hammer and women's 400m hurdles. Plus 400m and 200m semis."
       },
       "experience": {
         "score": 9,
-        "explanation": "Evening session at the Coliseum where pole vault crowds are often among the loudest of the week."
+        "explanation": "Thursday evening at the Coliseum with semis and finals stacked together. Constant action on track and infield."
       },
       "starPower": {
-        "score": 7,
-        "explanation": "McLaughlin-Levrone is out and Bol has moved to the 800m, but the 400m and 200m semis keep recognizable names in play."
+        "score": 8,
+        "explanation": "McLaughlin-Levrone's possible return looms over the hurdles, with Katie Moon in the vault. Katzberg's 84.70m hammer adds credentials."
       },
       "uniqueness": {
-        "score": 6,
-        "explanation": "Three finals and four semifinals on one night at the Coliseum, though each event follows a standard format."
+        "score": 7,
+        "explanation": "The chance of seeing the world-record holder return from motherhood adds a one-off storyline. Still a standard finals night."
       },
       "demand": {
         "score": 8,
-        "explanation": "Multiple medal finals on a prime evening at the Coliseum keep this in strong demand."
+        "explanation": "Three medal events and a star-driven hurdles final. A strong evening ticket."
       },
-      "aggregate": 8.1,
-      "overall": "Thursday evening with three medal finals: women's pole vault, men's hammer and women's 400m hurdles, plus semifinals in the 400m and 200m. Field and track drama packed into one session, with the pole vault crowd setting the tone."
+      "aggregate": 8.4,
+      "overall": "Three finals, plus the question of whether McLaughlin-Levrone is back on the line. Even without her, it's a loaded Thursday night."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:11.504Z",
-    "inputHash": "0da27b3d8929d4f4"
+    "generatedAt": "2026-11-11T14:22:43.577Z",
+    "inputHash": "429cefa8fdb77cc1"
   },
   "ATH13": {
-    "agg": 5.3,
+    "agg": 5.4,
     "rSig": 6,
     "rExp": 5,
-    "rStar": 6,
+    "rStar": 7,
     "rUniq": 4,
     "rDem": 5,
     "scorecard": {
       "significance": {
         "score": 6,
-        "explanation": "Men's triple jump final is the one medal event, with the heptathlon opening alongside it."
+        "explanation": "One medal, the men's triple jump final, anchors a morning of heats and heptathlon opening events."
       },
       "experience": {
         "score": 5,
-        "explanation": "Friday morning at the Coliseum. Good for the open bowl and the triple jump, though prime-time energy is absent."
+        "explanation": "Friday morning with jumps and hurdles in the sun. Plenty to watch, little prime-time electricity."
       },
       "starPower": {
-        "score": 6,
-        "explanation": "Triple jump final with Díaz and Pichardo-level names, while the 5000m heats add Ingebrigtsen-level names."
+        "score": 7,
+        "explanation": "Pichardo and the Díaz brothers in triple jump, and Masai Russell's record-setting hurdles. Ingebrigtsen and Hocker open 5000m heats."
       },
       "uniqueness": {
         "score": 4,
-        "explanation": "Single final with heptathlon openers and early rounds in a standard format."
+        "explanation": "A standard morning slot with a medal final. Heptathlon openers and heats are routine."
       },
       "demand": {
         "score": 5,
-        "explanation": "Morning session with one final and a multi-event opener. Interest is steady, and seats are easier than the evening finals."
+        "explanation": "Morning heats and a single final. An easier ticket by Games standards."
       },
-      "aggregate": 5.3,
-      "overall": "Friday morning opens the women's heptathlon and decides the men's triple jump final, with 5000m and 100m hurdles first rounds and an 800m repechage. A good session for fans who like variety."
+      "aggregate": 5.4,
+      "overall": "Catch the triple jump duel and Masai Russell's first hurdles round without evening-session prices of attention. A well-rounded morning for the sport's regulars."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:11.504Z",
-    "inputHash": "304e498e43d69155"
+    "generatedAt": "2026-11-11T14:22:43.577Z",
+    "inputHash": "b98bb4e51c47c08d"
   },
   "ATH14": {
-    "agg": 9.5,
-    "rSig": 10,
-    "rExp": 10,
+    "agg": 8.7,
+    "rSig": 9,
+    "rExp": 9,
     "rStar": 9,
-    "rUniq": 8,
-    "rDem": 10,
+    "rUniq": 7,
+    "rDem": 9,
     "scorecard": {
       "significance": {
-        "score": 10,
-        "explanation": "Men's 200m final is a gold-medal sprint decider, with the 10,000m and 110m hurdles medals also on the card."
+        "score": 9,
+        "explanation": "Three medal finals: women's 10,000m, men's 110m hurdles and men's 200m. Plus 1500m and 200m semis."
       },
       "experience": {
-        "score": 10,
-        "explanation": "Friday night 200m final at the Coliseum. The bend will be loud as the sprinters come off it."
+        "score": 9,
+        "explanation": "Friday evening at the Coliseum with a 200m final to cap it. Heat and noise rise through the stretch."
       },
       "starPower": {
         "score": 9,
-        "explanation": "Bednarek and Tebogo headline the 200m, with Jefferson-Wooden and Chebet-era distance names around the card."
+        "explanation": "Tebogo, Bednarek and possibly Lyles in the 200m, plus world-record hurdler Tharp. Agnes Ngetich leads the 10,000m."
       },
       "uniqueness": {
-        "score": 8,
-        "explanation": "Men's 200m final at the Coliseum with a live rivalry, alongside three finals on one night."
+        "score": 7,
+        "explanation": "Tebogo's public challenge to Bednarek and Lyles gives the 200m a real storyline. A big night, but not unprecedented."
       },
       "demand": {
-        "score": 10,
-        "explanation": "Finals night with the men's 200m and a 10,000m final. Among the hardest sessions to book."
+        "score": 9,
+        "explanation": "A men's 200m final and a record-setting hurdler make this a hot ticket. Fast sellout expected."
       },
-      "aggregate": 9.5,
-      "overall": "Friday night with the men's 200m final, the women's 10,000m and the men's 110m hurdles final. Bednarek and Tebogo carry the headline sprint, with the 10,000m offering a longer build around the stadium."
+      "aggregate": 8.7,
+      "overall": "Tebogo's trash talk meets the 200m final, with Tharp's hurdles as a second showpiece. The track fan's Friday night."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:11.504Z",
-    "inputHash": "70707d917e134ae4"
+    "generatedAt": "2026-11-11T14:22:43.577Z",
+    "inputHash": "7a60c5fecd0932d0"
   },
   "ATH15": {
-    "agg": 8.8,
+    "agg": 9,
     "rSig": 10,
-    "rExp": 8,
+    "rExp": 9,
     "rStar": 9,
     "rUniq": 7,
     "rDem": 9,
     "scorecard": {
       "significance": {
         "score": 10,
-        "explanation": "Men's 400m and women's 200m finals headline a day with four gold-medal decisions. Peak medal stakes on the track."
+        "explanation": "Four finals in four hours: women's long jump, women's 400m, men's 400m and women's 200m. Plus the heptathlon finish."
       },
       "experience": {
-        "score": 8,
-        "explanation": "Saturday afternoon start at the Coliseum. Heat is a factor, though the four finals keep the stadium lively."
+        "score": 9,
+        "explanation": "Saturday afternoon sprint finals at the Coliseum, with jumpers and heptathletes sharing the stage. A full-stadium party."
       },
       "starPower": {
         "score": 9,
-        "explanation": "Jefferson-Wooden leads the 200m, Hall and the 400m field bring Paris 2024 names, and Hall headlines the heptathlon."
+        "explanation": "Jefferson-Wooden's 21.47 in the 200m, Kebinatshipi's 43.39 in the 400m and Davis-Woodhall's long jump. Plus Paulino and Anna Hall."
       },
       "uniqueness": {
         "score": 7,
-        "explanation": "Four medal finals in one afternoon at the Coliseum, though most individual events follow standard formats."
+        "explanation": "Four sprint and jump finals together make a loaded Saturday. Big, but similar to other finals sessions."
       },
       "demand": {
         "score": 9,
-        "explanation": "Multiple sprint and jump finals in one afternoon keep this among the most sought-after sessions."
+        "explanation": "Weekend afternoon with four medals and sprint stars. A top-tier athletics ticket."
       },
-      "aggregate": 8.8,
-      "overall": "Saturday afternoon's biggest medal session: women's 200m, men's 400m, women's 400m and long jump finals, plus the heptathlon finish. Jefferson-Wooden and Hall headline a card with four decisions in one afternoon."
+      "aggregate": 9,
+      "overall": "Three sprint finals, a long jump and a heptathlon finish on a Saturday afternoon. Bring sunscreen; it's about as much medal action as one session can hold."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:11.504Z",
-    "inputHash": "7d9a60fb72db261b"
+    "generatedAt": "2026-11-11T14:22:43.577Z",
+    "inputHash": "d25d677bc7b5aa88"
   },
   "ATH16": {
     "agg": 9,
@@ -3635,328 +3635,328 @@
     "scorecard": {
       "significance": {
         "score": 4,
-        "explanation": "Group-phase prelim where every result shapes quarterfinal seeding. Real stakes, but no medals are decided here."
+        "explanation": "Group-phase doubleheader where seeding is the only prize; nothing is decided yet, though late qualifiers have everything to prove.}"
       },
       "experience": {
         "score": 6,
-        "explanation": "Afternoon doubleheader gives two games for one ticket. The midday slot trims the arena's night-time roar."
+        "explanation": "Noon tips lose some prime-time electricity, but the halo board and The Wall make two games in one ticket a strong value."
       },
       "starPower": {
         "score": 6,
-        "explanation": "Lineups depend on qualifiers, so top names may not be present. Early-round marquee players sometimes sit out."
+        "explanation": "Early-round men's basketball means NBA-caliber names are likely on the floor, though the star matchups aren't set."
       },
       "uniqueness": {
         "score": 4,
-        "explanation": "A standard group-phase doubleheader in an established sport. The arena is new, but the session format is routine."
+        "explanation": "One of many group-phase sessions at the same arena, so the format is routine even if the setting is fresh."
       },
       "demand": {
         "score": 6,
-        "explanation": "Two national teams for one ticket is good value, and home-soil men's basketball still sells quickly even in the afternoon."
+        "explanation": "Men's basketball carries a high floor, and a two-game midday pass is the easier ticket in the building."
       },
       "aggregate": 5.1,
-      "overall": "Afternoon doubleheader of men's group play at the Intuit Dome, offering two national teams for one ticket. Pairings stay uncertain until the mid-2028 qualifiers finish."
+      "overall": "The scouting-trip ticket: two games, a noon start, and a look at late qualifiers before the bracket tightens. Less drama than the nighttime slots, but easier to book for a first Intuit Dome visit."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-10-30T21:53:44.510Z",
-    "inputHash": "4f0d8011a5ca265d"
+    "generatedAt": "2026-11-11T14:22:43.078Z",
+    "inputHash": "db2fffc9644a8579"
   },
   "BKB17": {
-    "agg": 5.9,
+    "agg": 5.6,
     "rSig": 4,
-    "rExp": 8,
+    "rExp": 7,
     "rStar": 7,
     "rUniq": 4,
     "rDem": 7,
     "scorecard": {
       "significance": {
         "score": 4,
-        "explanation": "Group-phase prelim where the record feeds quarterfinal seeding. Stakes are real but not medal-deciding."
+        "explanation": "Group play, so advancement and seeding only; an early result can still reshape the quarterfinal path."
       },
       "experience": {
-        "score": 8,
-        "explanation": "Early-evening tip in a basketball-only arena with close sightlines. The crowd fills in as the night begins."
+        "score": 7,
+        "explanation": "A 6 PM tip in a purpose-built arena, with the crowd filling in as the evening begins, is the sweet spot for the group phase."
       },
       "starPower": {
         "score": 7,
-        "explanation": "Paris silver and bronze medalists France and Serbia still have to qualify, so star presence hinges on those results."
+        "explanation": "Wembanyama, Schroder, Jokic-type names could show up, and men's basketball is deep with NBA talent at this stage."
       },
       "uniqueness": {
         "score": 4,
-        "explanation": "A single group game is a routine slot. The venue is new, but this session is one of many similar games."
+        "explanation": "Standard group game at a first-time Games arena; the appeal is the names, not the occasion."
       },
       "demand": {
         "score": 7,
-        "explanation": "An evening single game at an 18,000-seat arena is easier to book than a doubleheader but still tight."
+        "explanation": "Early-evening men's basketball with possible big-name teams is a hot ticket even without medal stakes."
       },
-      "aggregate": 5.9,
-      "overall": "A single men's group game at 6 PM, suited to fans who want an evening of elite basketball without a double bill. Star power depends on which teams earn their spots."
+      "aggregate": 5.6,
+      "overall": "Prime early-evening hoops with a chance to see the Wembanyama-led France chase the gold he promised in Paris. It's a group game, but a very good one for a price below knockout rounds."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-10-30T21:53:44.510Z",
-    "inputHash": "ccd3495b26fc9132"
+    "generatedAt": "2026-11-11T14:22:43.078Z",
+    "inputHash": "8f42401f0ad1244b"
   },
   "BKB18": {
-    "agg": 6.1,
-    "rSig": 4,
-    "rExp": 8,
-    "rStar": 7,
-    "rUniq": 4,
-    "rDem": 8,
-    "scorecard": {
-      "significance": {
-        "score": 4,
-        "explanation": "Late group-phase game where seeding is the stake. Medals are still far off for every team in this session."
-      },
-      "experience": {
-        "score": 8,
-        "explanation": "Prime-time 9:30 tip at the Dome, with the Wall at full volume late in the night."
-      },
-      "starPower": {
-        "score": 7,
-        "explanation": "The USA could take the floor chasing a sixth straight title, but the schedule and Curry's participation are unconfirmed."
-      },
-      "uniqueness": {
-        "score": 4,
-        "explanation": "A routine late group game. Plenty of sessions with this format fill the schedule."
-      },
-      "demand": {
-        "score": 8,
-        "explanation": "Late prime-time slot with a possible USA appearance makes this one of the harder men's sessions to book."
-      },
-      "aggregate": 6.1,
-      "overall": "Late Tuesday men's group game at 9:30 PM, where the USA could appear in pursuit of a sixth straight title. The schedule is not confirmed, so the pull rests on a possible marquee lineup."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-10-30T21:53:44.510Z",
-    "inputHash": "22e04a13ba594794"
-  },
-  "BKB19": {
-    "agg": 5.3,
-    "rSig": 4,
-    "rExp": 6,
-    "rStar": 7,
-    "rUniq": 4,
-    "rDem": 6,
-    "scorecard": {
-      "significance": {
-        "score": 4,
-        "explanation": "Penultimate group day. Seeding for the quarterfinals is on the line, though not medal stakes."
-      },
-      "experience": {
-        "score": 6,
-        "explanation": "Afternoon doubleheader at Intuit Dome, a good daytime way to see the building."
-      },
-      "starPower": {
-        "score": 7,
-        "explanation": "Strong 2026 World Cup sides could be playing for position, adding real star appeal."
-      },
-      "uniqueness": {
-        "score": 4,
-        "explanation": "Routine group doubleheader, one of many across the tournament."
-      },
-      "demand": {
-        "score": 6,
-        "explanation": "Doubleheader with seeding stakes. Sells steadily, but is easier to get than the quarterfinals."
-      },
-      "aggregate": 5.3,
-      "overall": "Two group games on the penultimate day of the group phase, with seeding in play. The likely presence of World Cup-level sides lifts it above a standard afternoon doubleheader."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:21:09.990Z",
-    "inputHash": "c3215089dec200a9"
-  },
-  "BKB20": {
-    "agg": 5.5,
-    "rSig": 4,
-    "rExp": 7,
-    "rStar": 7,
-    "rUniq": 4,
-    "rDem": 6,
-    "scorecard": {
-      "significance": {
-        "score": 4,
-        "explanation": "Single group game with seeding implications approaching the quarterfinals."
-      },
-      "experience": {
-        "score": 7,
-        "explanation": "Early-evening Wednesday tip at Intuit Dome, a convenient slot that still feels lively."
-      },
-      "starPower": {
-        "score": 7,
-        "explanation": "WNBA stars could feature for several teams. USA roster status is not confirmed."
-      },
-      "uniqueness": {
-        "score": 4,
-        "explanation": "Routine evening group game in a long tournament."
-      },
-      "demand": {
-        "score": 6,
-        "explanation": "Early evening slot close to quarterfinal stakes. Fans are likely to fill the arena."
-      },
-      "aggregate": 5.5,
-      "overall": "A Wednesday evening group game at Intuit Dome with quarterfinal positioning in view. Easy to fit into a day in Los Angeles, with WNBA-level talent possible."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:21:09.990Z",
-    "inputHash": "5b2b6dc22d4f4cfe"
-  },
-  "BKB21": {
-    "agg": 5.2,
-    "rSig": 4,
-    "rExp": 7,
-    "rStar": 6,
-    "rUniq": 4,
-    "rDem": 5,
-    "scorecard": {
-      "significance": {
-        "score": 4,
-        "explanation": "Late group game on the final group day. Qualification and seeding stakes are real."
-      },
-      "experience": {
-        "score": 7,
-        "explanation": "Late Wednesday tip with group standings tightening inside a loud arena."
-      },
-      "starPower": {
-        "score": 6,
-        "explanation": "Matchups depend on qualifying. Top names are uncertain for this slot."
-      },
-      "uniqueness": {
-        "score": 4,
-        "explanation": "Routine late group game, the last group-day slot for many teams."
-      },
-      "demand": {
-        "score": 5,
-        "explanation": "Late-night slot with some availability. Still expected to sell well."
-      },
-      "aggregate": 5.2,
-      "overall": "A late group game on the last day of group play, with standings still moving. The atmosphere and tight race carry the session more than a set matchup."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:21:09.990Z",
-    "inputHash": "ef51edb58f9bbd77"
-  },
-  "BKB22": {
-    "agg": 5.3,
-    "rSig": 4,
-    "rExp": 6,
-    "rStar": 6,
-    "rUniq": 5,
-    "rDem": 6,
-    "scorecard": {
-      "significance": {
-        "score": 4,
-        "explanation": "Final group day, where quarterfinal berths and seeding are decided."
-      },
-      "experience": {
-        "score": 6,
-        "explanation": "Thursday afternoon doubleheader at Intuit Dome. A daytime session with a finishing-group feel."
-      },
-      "starPower": {
-        "score": 6,
-        "explanation": "Pairings unknown. Strong sides could take the floor, but names are unconfirmed."
-      },
-      "uniqueness": {
-        "score": 5,
-        "explanation": "Final group day with berths on the line gives the session a pivotal feel."
-      },
-      "demand": {
-        "score": 6,
-        "explanation": "Last group-phase doubleheader with quarterfinal stakes. Steady interest from fans and a brisk sell."
-      },
-      "aggregate": 5.3,
-      "overall": "The final group-phase doubleheader, where quarterfinal spots and seeding are settled. The afternoon timing is easy to fit in, and the stakes give it a sharper edge."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:21:09.990Z",
-    "inputHash": "8cfff25525c2343b"
-  },
-  "BKB23": {
-    "agg": 6.1,
+    "agg": 6.4,
     "rSig": 4,
     "rExp": 8,
     "rStar": 8,
-    "rUniq": 4,
-    "rDem": 7,
-    "scorecard": {
-      "significance": {
-        "score": 4,
-        "explanation": "Group-phase prelim where standings matter for quarterfinal seeding. Medal stakes come later in the Games."
-      },
-      "experience": {
-        "score": 8,
-        "explanation": "Early-evening tip in a basketball-only arena with close sightlines. The crowd should grow loud as the evening builds."
-      },
-      "starPower": {
-        "score": 8,
-        "explanation": "Victor Wembanyama and EuroBasket champion Germany headline the possibilities, though both still need to qualify."
-      },
-      "uniqueness": {
-        "score": 4,
-        "explanation": "A single group game is a routine format. The Dome is new, but this session is one of many group slots."
-      },
-      "demand": {
-        "score": 7,
-        "explanation": "The evening slot and prominent names lift demand, though qualification uncertainty keeps it from peaking."
-      },
-      "aggregate": 6.1,
-      "overall": "Single men's group game at 6 PM with the potential for Wembanyama and Germany's EuroBasket title team. Qualification is still open, so the matchup carries uncertainty alongside its star pull."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-10-30T21:53:44.510Z",
-    "inputHash": "f9d0677e5dd0799b"
-  },
-  "BKB24": {
-    "agg": 6.1,
-    "rSig": 4,
-    "rExp": 8,
-    "rStar": 7,
-    "rUniq": 4,
+    "rUniq": 5,
     "rDem": 8,
     "scorecard": {
       "significance": {
         "score": 4,
-        "explanation": "Late group-phase game where seeding is the stake. France's Paris silver medal makes the result interesting, but no medals are decided here."
+        "explanation": "Group-phase game; the stakes are seeding and momentum rather than medals."
       },
       "experience": {
         "score": 8,
-        "explanation": "Prime-time 9:30 tip with the halo board lighting the court. The late-night atmosphere is a highlight."
+        "explanation": "The 9:30 PM tip is when the Dome gets loud, and The Wall behind one basket does the rest."
       },
       "starPower": {
-        "score": 7,
-        "explanation": "Wembanyama, newly named France captain, is a strong draw, but the draw and France's qualification are still pending."
+        "score": 8,
+        "explanation": "If the USA is in this slot, NBA stars share the court, and Schroder or Giannis could be on the other side."
       },
       "uniqueness": {
-        "score": 4,
-        "explanation": "A routine late group session. The arena is new, but the slot follows the standard format."
+        "score": 5,
+        "explanation": "A home team chasing a sixth straight title adds a layer that ordinary group games lack, though the session is still routine."
       },
       "demand": {
         "score": 8,
-        "explanation": "A late-night men's game with Wembanyama in the mix is one of the more sought-after group sessions."
+        "explanation": "Late men's slots with a possible USA appearance are the toughest group-phase tickets to land."
       },
-      "aggregate": 6.1,
-      "overall": "Late Thursday men's group game where France, led by captain Wembanyama, could take the floor. Qualification and the draw are still pending, so the lineup is not yet set."
+      "aggregate": 6.4,
+      "overall": "The late-night men's group game is where the home crowd turns up the volume, with USA, Germany or Greece stars all possible. It runs late, but it is the group-phase session with the most buzz."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-10-30T21:53:44.510Z",
-    "inputHash": "80f9a522c93b7987"
+    "generatedAt": "2026-11-11T14:22:43.078Z",
+    "inputHash": "6cadfde20fc4d100"
+  },
+  "BKB19": {
+    "agg": 5.1,
+    "rSig": 4,
+    "rExp": 6,
+    "rStar": 6,
+    "rUniq": 4,
+    "rDem": 6,
+    "scorecard": {
+      "significance": {
+        "score": 4,
+        "explanation": "Penultimate group day, so seeding and quarterfinal paths are in play, but no medals change hands."
+      },
+      "experience": {
+        "score": 6,
+        "explanation": "Two games at noon in a first-class arena; fewer fireworks than evening but plenty of room to roam."
+      },
+      "starPower": {
+        "score": 6,
+        "explanation": "Women's basketball stars like Breanna Stewart may appear, though a doubleheader spreads the headliners thin."
+      },
+      "uniqueness": {
+        "score": 4,
+        "explanation": "Mid-pool doubleheader with matchups unknown; a routine group-phase day."
+      },
+      "demand": {
+        "score": 6,
+        "explanation": "Midday doubleheaders are the easier ticket in women's basketball, which is climbing fast in popularity."
+      },
+      "aggregate": 5.1,
+      "overall": "A relaxed way to see two women's games and size up who can challenge the USA. Less electric than the night slots, but a smart pick for value."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:43.078Z",
+    "inputHash": "7dac4d2a52e7c695"
+  },
+  "BKB20": {
+    "agg": 5.8,
+    "rSig": 4,
+    "rExp": 7,
+    "rStar": 7,
+    "rUniq": 5,
+    "rDem": 7,
+    "scorecard": {
+      "significance": {
+        "score": 4,
+        "explanation": "Group game; the bracket picture sharpens but no medals are on the line."
+      },
+      "experience": {
+        "score": 7,
+        "explanation": "A 6 PM tip at the Intuit Dome means the crowd arrives early and the arena has a real buzz."
+      },
+      "starPower": {
+        "score": 7,
+        "explanation": "If Stewart, Jackie Young and the American core play, the names are huge, and A'ja Wilson's profile adds to it."
+      },
+      "uniqueness": {
+        "score": 5,
+        "explanation": "Home-soil run at an eight-title streak gives this a charge, even if the opponent is unknown."
+      },
+      "demand": {
+        "score": 7,
+        "explanation": "Evening women's basketball with a potential USA game ranks high, as the sport's surge drives interest."
+      },
+      "aggregate": 5.8,
+      "overall": "The evening slot to catch the eight-time champions, if the schedule puts them here, under coach Kara Lawson. It's a group game but with real home-crowd energy."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:43.078Z",
+    "inputHash": "2c194041227baea1"
+  },
+  "BKB21": {
+    "agg": 5.4,
+    "rSig": 4,
+    "rExp": 7,
+    "rStar": 6,
+    "rUniq": 4,
+    "rDem": 6,
+    "scorecard": {
+      "significance": {
+        "score": 4,
+        "explanation": "Group game with seeding on the line; the field itself isn't yet decided."
+      },
+      "experience": {
+        "score": 7,
+        "explanation": "A 9:30 PM start under the halo board gives late-night energy that a daytime slot can't match."
+      },
+      "starPower": {
+        "score": 6,
+        "explanation": "Field still unset, so this is a mystery; Spain, France, Belgium and Canada are the sorts who could appear."
+      },
+      "uniqueness": {
+        "score": 4,
+        "explanation": "A routine group-phase slot; the mystery of who qualifies is the main selling point."
+      },
+      "demand": {
+        "score": 6,
+        "explanation": "Late women's group games draw solid interest, but this is less competitive than the USA-heavy sessions."
+      },
+      "aggregate": 5.4,
+      "overall": "A wildcard ticket: you won't know the matchup until qualifying ends, and that's half the fun. Late tip, good arena, softer competition for seats than prime slots."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:43.078Z",
+    "inputHash": "d3fa37f0d71c03d3"
+  },
+  "BKB22": {
+    "agg": 5.4,
+    "rSig": 5,
+    "rExp": 6,
+    "rStar": 6,
+    "rUniq": 4,
+    "rDem": 6,
+    "scorecard": {
+      "significance": {
+        "score": 5,
+        "explanation": "Final group day, so seeding and quarterfinal matchups get settled; stakes are real even without medals."
+      },
+      "experience": {
+        "score": 6,
+        "explanation": "A noon doubleheader with the bracket forming gives some tension, though daytime lacks the night-session roar."
+      },
+      "starPower": {
+        "score": 6,
+        "explanation": "With four group winners from the 2026 World Cup potentially in play, top names are likely across two games."
+      },
+      "uniqueness": {
+        "score": 4,
+        "explanation": "A routine doubleheader, though the last day of group play adds consequences."
+      },
+      "demand": {
+        "score": 6,
+        "explanation": "Women's basketball is hot, and seeding-deciding games keep this ticket in solid demand."
+      },
+      "aggregate": 5.4,
+      "overall": "The day the women's bracket takes shape, with two games and consequences attached. A good value pick for fans who want drama without paying knockout-round prices."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:43.078Z",
+    "inputHash": "830c7fad7973f0c3"
+  },
+  "BKB23": {
+    "agg": 5.8,
+    "rSig": 4,
+    "rExp": 7,
+    "rStar": 7,
+    "rUniq": 5,
+    "rDem": 7,
+    "scorecard": {
+      "significance": {
+        "score": 4,
+        "explanation": "Group game; Germany or others are fighting for seeding, not medals."
+      },
+      "experience": {
+        "score": 7,
+        "explanation": "A 6 PM tip at the Dome gives an early-evening atmosphere with the arena filling as play begins."
+      },
+      "starPower": {
+        "score": 7,
+        "explanation": "Schroder and Wagner for Germany, plus possible Giannis, Wembanyama or Curry, make for a quality star lineup."
+      },
+      "uniqueness": {
+        "score": 5,
+        "explanation": "Seeing a World Cup and EuroBasket double champion in a Games setting is a nice hook beyond routine."
+      },
+      "demand": {
+        "score": 7,
+        "explanation": "Men's basketball at 6 PM with a champion in the field makes for a competitive ticket."
+      },
+      "aggregate": 5.8,
+      "overall": "If Germany, the reigning world and European champion, is on court, this is a prime early look at the team most likely to threaten the Americans. A solid evening for hoops fans."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:43.078Z",
+    "inputHash": "e07c4fd62e94786a"
+  },
+  "BKB24": {
+    "agg": 6.4,
+    "rSig": 4,
+    "rExp": 8,
+    "rStar": 8,
+    "rUniq": 5,
+    "rDem": 8,
+    "scorecard": {
+      "significance": {
+        "score": 4,
+        "explanation": "Group-phase game; seeding matters but nothing is decided."
+      },
+      "experience": {
+        "score": 8,
+        "explanation": "A late 9:30 PM start in the Dome, with the crowd warmed up and The Wall loud, is peak group-phase atmosphere."
+      },
+      "starPower": {
+        "score": 8,
+        "explanation": "Wembanyama, France's 22-year-old captain, and Alperen Sengun are the kind of names that fill the building."
+      },
+      "uniqueness": {
+        "score": 5,
+        "explanation": "A Wembanyama-led France in a late slot gives it extra pull, though it is still a group game."
+      },
+      "demand": {
+        "score": 8,
+        "explanation": "Late men's sessions with a global star are among the hardest group-phase tickets to land."
+      },
+      "aggregate": 6.4,
+      "overall": "Wembanyama at night is the draw: a young captain with a gold-medal promise and a Turkish side with Sengun ready to counterpunch. The best bet for a star-heavy group game."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:43.078Z",
+    "inputHash": "1fbc4e01b29597b0"
   },
   "BKB25": {
     "agg": 5.1,
@@ -3968,108 +3968,182 @@
     "scorecard": {
       "significance": {
         "score": 4,
-        "explanation": "Group-phase doubleheader where results shape quarterfinal positions without deciding medals."
+        "explanation": "Group doubleheader with seeding at stake; no medals decided."
       },
       "experience": {
         "score": 6,
-        "explanation": "Afternoon double session with two games in one visit. The plaza and concourse offer breaks between tips."
+        "explanation": "Noon to 4:15 PM, two games, and the Dome's halo board; less intensity than evening but plenty of basketball."
       },
       "starPower": {
         "score": 6,
-        "explanation": "Teams are not confirmed, and German or Turkish EuroBasket names could appear depending on qualifiers."
+        "explanation": "Schroder, Wagner and da Silva could appear if Germany is in the field; the star lineup is unknown across two games."
       },
       "uniqueness": {
         "score": 4,
-        "explanation": "A standard doubleheader in the group phase. It is one of many similar sessions across the schedule."
+        "explanation": "Doubleheader with undefined matchups; the format is standard."
       },
       "demand": {
         "score": 6,
-        "explanation": "Two games for one ticket and good value keep demand high for this afternoon slot."
+        "explanation": "Two men's games for one ticket at midday makes this the more attainable seat."
       },
       "aggregate": 5.1,
-      "overall": "Friday afternoon men's doubleheader with two group games for one ticket. Matchups depend on qualifiers, so the exact teams will be set later."
+      "overall": "Surprise potential is the pitch: a doubleheader where a team like Finland could upset the established order. Not the marquee slot, but great basketball value."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-10-30T21:53:44.510Z",
-    "inputHash": "b1d5a140558bbf1a"
+    "generatedAt": "2026-11-11T14:22:43.078Z",
+    "inputHash": "c180c2d2065e33ca"
   },
   "BKB26": {
-    "agg": 5.9,
+    "agg": 5.8,
     "rSig": 4,
-    "rExp": 8,
-    "rStar": 7,
+    "rExp": 7,
+    "rStar": 8,
     "rUniq": 4,
     "rDem": 7,
     "scorecard": {
       "significance": {
         "score": 4,
-        "explanation": "Group-phase prelim where standings matter, though the medal rounds come later in the tournament."
+        "explanation": "Group game, with seeding at stake and nothing more."
       },
       "experience": {
-        "score": 8,
-        "explanation": "Early-evening tip at the Dome with a loud Wall section for the opening game of the night."
+        "score": 7,
+        "explanation": "An early-evening 6 PM tip on a Friday keeps the Dome buzzing as fans arrive after work."
       },
       "starPower": {
-        "score": 7,
-        "explanation": "Giannis Antetokounmpo and other EuroBasket 2025 names are possible stars if their teams qualify."
+        "score": 8,
+        "explanation": "Giannis Antetokounmpo on a Friday evening is a bona fide global draw, if Greece qualifies."
       },
       "uniqueness": {
         "score": 4,
-        "explanation": "A routine single group game in an established format. The arena is new, but the session is standard."
+        "explanation": "Standard group game; the individual star is the main attraction."
       },
       "demand": {
         "score": 7,
-        "explanation": "An evening men's game with strong European names is a solid draw for basketball fans."
+        "explanation": "Friday evening men's basketball with a possible Giannis game is a hot seat."
       },
-      "aggregate": 5.9,
-      "overall": "Friday evening men's group game featuring a European field that could include Greece, Turkey and Germany. Qualification is still open, so the lineup is not final."
+      "aggregate": 5.8,
+      "overall": "Giannis in a Friday-night setting is reason enough, with Turkey and Germany as potential rivals. Group stage, yes, but with real star wattage."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-10-30T21:53:44.510Z",
-    "inputHash": "ae7f74206c75d5f5"
+    "generatedAt": "2026-11-11T14:22:43.078Z",
+    "inputHash": "3b89a4bc841be723"
   },
   "BKB27": {
-    "agg": 6.2,
-    "rSig": 4,
+    "agg": 6.7,
+    "rSig": 5,
     "rExp": 8,
-    "rStar": 7,
+    "rStar": 8,
     "rUniq": 5,
     "rDem": 8,
     "scorecard": {
       "significance": {
-        "score": 4,
-        "explanation": "Closing group-phase session where teams fight for quarterfinal positions. No medals are decided here."
+        "score": 5,
+        "explanation": "Final night of men's group play, so the knockout bracket is set by these results."
       },
       "experience": {
         "score": 8,
-        "explanation": "Late 9:30 tip that closes the men's group days, with a packed arena at its most energetic."
+        "explanation": "A 9:30 PM Friday tip on the last group night gives the Dome a charged, late-night buzz."
       },
       "starPower": {
-        "score": 7,
-        "explanation": "Wembanyama and Germany, holders of two recent titles, are possible draws if they qualify."
+        "score": 8,
+        "explanation": "Wembanyama's France and Schroder's Germany are the names to circle, with NBA stars across the field."
       },
       "uniqueness": {
         "score": 5,
-        "explanation": "Closing the men's group days adds a sense of finality. It remains a standard group game."
+        "explanation": "Closing the group phase gives extra tension, and a France revenge storyline adds spice."
       },
       "demand": {
         "score": 8,
-        "explanation": "The final late men's group session draws strong team interest and should fill a packed arena."
+        "explanation": "Friday night, final group session, big names: this is among the toughest group tickets."
       },
-      "aggregate": 6.2,
-      "overall": "Late Friday men's game closing the group days at the Intuit Dome. Teams are fighting for quarterfinal spots, and the potential presence of Germany and France adds pull."
+      "aggregate": 6.7,
+      "overall": "The last men's group night is the best of the prelims: bracket spots on the line, France chasing redemption and Germany defending its titles. Late, loud and consequential."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-10-30T21:53:44.510Z",
-    "inputHash": "b7ed418b69f22ef9"
+    "generatedAt": "2026-11-11T14:22:43.078Z",
+    "inputHash": "d3eaf8b5ee947a10"
   },
   "BKB28": {
+    "agg": 6.7,
+    "rSig": 5,
+    "rExp": 8,
+    "rStar": 8,
+    "rUniq": 5,
+    "rDem": 8,
+    "scorecard": {
+      "significance": {
+        "score": 5,
+        "explanation": "Win-or-go-home quarterfinal; the first true knockout, one step from the semifinals."
+      },
+      "experience": {
+        "score": 8,
+        "explanation": "Knockout tension at the Dome on a Saturday afternoon, with The Wall loud for every run."
+      },
+      "starPower": {
+        "score": 8,
+        "explanation": "Quarterfinals draw the best women's players; USA stars or French standouts like Gabby Williams could be here."
+      },
+      "uniqueness": {
+        "score": 5,
+        "explanation": "First knockout round of a streak-chasing tournament, a step up from group play but not a final."
+      },
+      "demand": {
+        "score": 8,
+        "explanation": "Women's knockout basketball in this building is a premium ticket, with the USA's streak driving interest."
+      },
+      "aggregate": 6.7,
+      "overall": "The first do-or-die afternoon, where an upset could rewrite the whole women's bracket. If the Americans are playing, it's an early chance to see the streak tested."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:43.078Z",
+    "inputHash": "601248e45c373ff1"
+  },
+  "BKB29": {
+    "agg": 7.1,
+    "rSig": 5,
+    "rExp": 9,
+    "rStar": 8,
+    "rUniq": 5,
+    "rDem": 9,
+    "scorecard": {
+      "significance": {
+        "score": 5,
+        "explanation": "Quarterfinal elimination game; the winner moves to the semifinals."
+      },
+      "experience": {
+        "score": 9,
+        "explanation": "Saturday night, 8 PM, knockout stakes at the Dome: the best atmosphere before the semifinals."
+      },
+      "starPower": {
+        "score": 8,
+        "explanation": "Evening quarterfinal slot is the likeliest to feature the USA, with Stewart and Wilson-level names possible."
+      },
+      "uniqueness": {
+        "score": 5,
+        "explanation": "Knockout basketball with a 36-game World Cup streak backdrop adds weight, though it is still a quarterfinal."
+      },
+      "demand": {
+        "score": 9,
+        "explanation": "Saturday night women's quarterfinal at a sold-out-tracking arena is among the toughest non-medal tickets."
+      },
+      "aggregate": 7.1,
+      "overall": "Saturday night knockout basketball with the American streak in the background. It's the pick of the quarterfinals for atmosphere and the best chance to see the favorites."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:43.078Z",
+    "inputHash": "f979f3ee823db168"
+  },
+  "BKB30": {
     "agg": 6.1,
     "rSig": 5,
     "rExp": 7,
@@ -4079,106 +4153,32 @@
     "scorecard": {
       "significance": {
         "score": 5,
-        "explanation": "Quarterfinal knockout with lose-and-out stakes. Medal games still lie ahead."
+        "explanation": "Last quarterfinal; winning means a semifinal berth, losing means going home."
       },
       "experience": {
         "score": 7,
-        "explanation": "Afternoon quarterfinal at Intuit Dome. Knockout intensity, but in a daytime slot."
+        "explanation": "Sunday 1 PM family-friendly tip with elimination stakes and The Wall in full voice."
       },
       "starPower": {
         "score": 7,
-        "explanation": "Quarterfinal field likely includes World Cup-level stars, though matchups are still undecided."
+        "explanation": "Belgium, Australia, Japan or Canada could feature; top-level women's players, though not necessarily the USA."
       },
       "uniqueness": {
         "score": 5,
-        "explanation": "First knockout round of the women's tournament. A notable stage, but not a medal game."
+        "explanation": "Closing out the quarterfinal round has some drama, though it is a standard knockout game."
       },
       "demand": {
         "score": 7,
-        "explanation": "Quarterfinal knockout with high stakes. Tickets for a Saturday afternoon knockout tend to move quickly."
+        "explanation": "Sunday afternoon knockout games are a touch easier than Saturday night, but still a high-demand ticket."
       },
       "aggregate": 6.1,
-      "overall": "The first knockout session of the women's tournament, an afternoon quarterfinal where one loss ends a run. Pairings are still open, but the stakes are immediate and the crowd should be full."
+      "overall": "A Sunday-afternoon knockout with spoiler potential: Belgium, Australia or Canada could shake things up. A friendly time slot and elimination stakes make this a smart family choice."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:21:09.990Z",
-    "inputHash": "e3c114fd8233a1cf"
-  },
-  "BKB29": {
-    "agg": 7.1,
-    "rSig": 5,
-    "rExp": 9,
-    "rStar": 8,
-    "rUniq": 6,
-    "rDem": 8,
-    "scorecard": {
-      "significance": {
-        "score": 5,
-        "explanation": "Evening quarterfinal, lose-and-out, with a possible USA push toward a ninth title."
-      },
-      "experience": {
-        "score": 9,
-        "explanation": "Saturday prime-time quarterfinal at Intuit Dome, among the loudest early atmospheres of the tournament."
-      },
-      "starPower": {
-        "score": 8,
-        "explanation": "Quarterfinal field may include World Cup-level stars, and the USA side is chasing a ninth title."
-      },
-      "uniqueness": {
-        "score": 6,
-        "explanation": "Primetime knockout night with the hosts chasing history, though it remains a quarterfinal."
-      },
-      "demand": {
-        "score": 8,
-        "explanation": "Prime-time quarterfinal with the host chasing a ninth title. Among the hottest early tickets in the tournament."
-      },
-      "aggregate": 7.1,
-      "overall": "A Saturday night quarterfinal at Intuit Dome that doubles as a statement night for the hosts. The primetime slot, the loud arena and the chase for a ninth straight title make it one of the strongest early tickets."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:21:09.990Z",
-    "inputHash": "d68a142013ae0199"
-  },
-  "BKB30": {
-    "agg": 5.7,
-    "rSig": 5,
-    "rExp": 6,
-    "rStar": 7,
-    "rUniq": 5,
-    "rDem": 6,
-    "scorecard": {
-      "significance": {
-        "score": 5,
-        "explanation": "Quarterfinal stakes: a loss ends a team's medal hopes, but the win only advances it to the semis."
-      },
-      "experience": {
-        "score": 6,
-        "explanation": "Sunday afternoon tip at Intuit Dome gives strong sightlines and a lively Wall, though it lacks evening energy."
-      },
-      "starPower": {
-        "score": 7,
-        "explanation": "Early knockout rounds usually feature top women's players, and the USA roster will likely include recognizable names."
-      },
-      "uniqueness": {
-        "score": 5,
-        "explanation": "A standard quarterfinal, but it is the arena's first Games basketball session, which adds some novelty."
-      },
-      "demand": {
-        "score": 6,
-        "explanation": "Women's knockout basketball in a 18,000-seat arena should move quickly, though this is a daytime slot."
-      },
-      "aggregate": 5.7,
-      "overall": "The first women's knockout tip of the tournament, played in an arena built only for basketball. The afternoon slot and unsettled matchups keep it a solid pick rather than a must-have."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:21:09.996Z",
-    "inputHash": "a09a5a1c0bf22144"
+    "generatedAt": "2026-11-11T14:22:43.078Z",
+    "inputHash": "42a4070cb5d4ac24"
   },
   "BKB31": {
     "agg": 6.9,
@@ -22570,300 +22570,300 @@
     "inputHash": "7cf640aa5e585910"
   },
   "TEN01": {
-    "agg": 4.7,
+    "agg": 5.4,
     "rSig": 4,
-    "rExp": 5,
-    "rStar": 5,
-    "rUniq": 5,
+    "rExp": 6,
+    "rStar": 6,
+    "rUniq": 7,
     "rDem": 5,
     "scorecard": {
       "significance": {
         "score": 4,
-        "explanation": "Opening-round mixed doubles, where every team is fighting to advance to the quarterfinals but no medals are decided yet."
+        "explanation": "First-round mixed doubles: one loss and a pair exits a 16-team field, but no medals move yet."
       },
       "experience": {
-        "score": 5,
-        "explanation": "Daytime start on Center Court under open sky. Good seats for a first look at the Carson hard courts, without prime-time energy."
+        "score": 6,
+        "explanation": "Open-air Center Court seats 8,000, but it's a late-morning start on opening day with a smaller early crowd."
       },
       "starPower": {
-        "score": 5,
-        "explanation": "No pairs confirmed yet, so top names may or may not appear in these early matches."
+        "score": 6,
+        "explanation": "Paris champions Siniakova and Machac may defend, and singles names often double up, though no pairs are confirmed."
       },
       "uniqueness": {
-        "score": 5,
-        "explanation": "Mixed doubles now opens the whole tennis program in a new two-day format, which gives the first round extra novelty."
+        "score": 7,
+        "explanation": "Mixed doubles opening the tennis program is new, and this is the first ball struck anywhere in the event."
       },
       "demand": {
         "score": 5,
-        "explanation": "Center Court seating for the program's first day should move quickly, though this opening round is less competitive than the medal sessions."
+        "explanation": "Wednesday daytime round one on a new-format opener; a solid sell but an easier ticket than the singles week."
       },
-      "aggregate": 4.7,
-      "overall": "Tennis opens with three first-round mixed doubles matches on Center Court, the first step in a new two-day format. Seats here are the stadium's main draw, and the matches set the tone for the whole program."
+      "aggregate": 5.4,
+      "overall": "Be there for the first tennis points of the Games, on a hard court days after Wimbledon. Short, sharp matches and format novelty make it a fun Center Court opener, if not a star-studded one."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-10-30T21:52:39.714Z",
-    "inputHash": "c2384390e1d58fad"
+    "generatedAt": "2026-11-11T14:22:43.994Z",
+    "inputHash": "4b8eebd047233885"
   },
   "TEN02": {
-    "agg": 4.6,
+    "agg": 4.9,
     "rSig": 4,
     "rExp": 5,
     "rStar": 5,
-    "rUniq": 5,
-    "rDem": 4,
+    "rUniq": 6,
+    "rDem": 5,
     "scorecard": {
       "significance": {
         "score": 4,
-        "explanation": "First-round mixed doubles where advancement is the stake and medals are still far off."
+        "explanation": "Round-one elimination matches; winners are back for quarterfinals that same evening."
       },
       "experience": {
         "score": 5,
-        "explanation": "Daytime session on a smaller show court. Close-up doubles in the sun, though without the stadium atmosphere."
+        "explanation": "Court 1 puts you near the players, but it's a daytime outer-show-court session."
       },
       "starPower": {
         "score": 5,
-        "explanation": "Court 1 pairings are unannounced, so the level of star power depends on late entries."
+        "explanation": "Fields are unconfirmed; singles regulars may pair up, but names are uncertain at this stage."
       },
       "uniqueness": {
-        "score": 5,
-        "explanation": "A first round in the new opening-day mixed doubles format, which is a fresh start to the tennis program."
+        "score": 6,
+        "explanation": "Early round of a reshaped event; the two-day sprint format is the draw, not the court."
       },
       "demand": {
-        "score": 4,
-        "explanation": "Smaller court keeps demand modest, though Games scarcity still means seats will not be easy to book."
+        "score": 5,
+        "explanation": "Smaller court, daytime Wednesday, three matches; likely to sell but less competitive to book."
       },
-      "aggregate": 4.6,
-      "overall": "Three first-round mixed doubles matches on Court 1 open the tennis program in the afternoon. The compact court puts fans near the net for quick doubles exchanges, with the winners returning later that evening."
+      "aggregate": 4.9,
+      "overall": "A scouting-day pick: three tight matches within earshot of the players, in a format where one loss ends everything. Cheaper thrills than Center Court, with similar intensity."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-10-30T21:52:39.714Z",
-    "inputHash": "d626f02ddd686376"
+    "generatedAt": "2026-11-11T14:22:43.994Z",
+    "inputHash": "6faae5627e5e6c26"
   },
   "TEN03": {
-    "agg": 4,
+    "agg": 4.2,
     "rSig": 4,
     "rExp": 4,
     "rStar": 4,
-    "rUniq": 4,
+    "rUniq": 5,
     "rDem": 4,
     "scorecard": {
       "significance": {
         "score": 4,
-        "explanation": "Two first-round matches where winners advance to the evening quarterfinals, with medals still to come."
+        "explanation": "Two first-round matches; real elimination stakes, no medals nearby."
       },
       "experience": {
         "score": 4,
-        "explanation": "Daytime action on a small court with limited seating. Intimate, but the smallest stage of the opening day."
+        "explanation": "Outer court, daytime, just two matches. Intimate but low-key."
       },
       "starPower": {
         "score": 4,
-        "explanation": "Lower-profile slot on the smallest court, so the names in these first-round matches are less likely to be familiar."
+        "explanation": "Court 2 draws the lowest-profile pairings of the opening round, with no confirmed names."
       },
       "uniqueness": {
-        "score": 4,
-        "explanation": "Routine first-round doubles at a secondary court, though it still opens the new mixed doubles program."
+        "score": 5,
+        "explanation": "Fast-format mixed doubles is new, though this is the smallest slice of it."
       },
       "demand": {
         "score": 4,
-        "explanation": "Small court and limited seats make this an easier booking, though Games scarcity still applies."
+        "explanation": "Smallest court, shortest card of opening day; the easiest ticket of the tennis program."
       },
-      "aggregate": 4,
-      "overall": "Two first-round mixed doubles matches on Court 2 are a relaxed start to the tennis program. Fans sit very close to the baseline, which suits anyone who wants to see Games-level doubles without the crowds."
+      "aggregate": 4.2,
+      "overall": "For sport purists and court-hoppers only: two matches on the quietest court of the opening round. Cheap way to see hard-court tennis, but it's the lesser pick."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-10-30T21:52:39.714Z",
-    "inputHash": "0cecec1668216d94"
+    "generatedAt": "2026-11-11T14:22:43.994Z",
+    "inputHash": "52504d5ef90ce717"
   },
   "TEN04": {
-    "agg": 5.8,
+    "agg": 6,
     "rSig": 5,
     "rExp": 7,
-    "rStar": 6,
-    "rUniq": 5,
-    "rDem": 6,
-    "scorecard": {
-      "significance": {
-        "score": 5,
-        "explanation": "Quarterfinals decide who reaches the semifinals and the medal round, so the stakes are real but not yet medal-deciding."
-      },
-      "experience": {
-        "score": 7,
-        "explanation": "Evening quarterfinals on Center Court as the sun drops. Prime-time energy in a strong open-air venue."
-      },
-      "starPower": {
-        "score": 6,
-        "explanation": "Quarterfinal mixed doubles teams may include tour players, though entries are not confirmed."
-      },
-      "uniqueness": {
-        "score": 5,
-        "explanation": "Quarterfinals are part of the new two-day format, and winners play again the next day, which adds some novelty."
-      },
-      "demand": {
-        "score": 6,
-        "explanation": "Evening Center Court seats are in demand, especially for the first real tension of the tennis program."
-      },
-      "aggregate": 5.8,
-      "overall": "Two evening quarterfinals on Center Court make for a sharp, late opening-day session. Winners return the next morning, and the matches show how fast the new format tests stamina."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-10-30T21:52:39.714Z",
-    "inputHash": "67c3e041ca937128"
-  },
-  "TEN05": {
-    "agg": 5.3,
-    "rSig": 5,
-    "rExp": 6,
-    "rStar": 5,
-    "rUniq": 5,
-    "rDem": 5,
-    "scorecard": {
-      "significance": {
-        "score": 5,
-        "explanation": "Quarterfinal stakes, with winners moving on to the semifinals and a shot at a medal."
-      },
-      "experience": {
-        "score": 6,
-        "explanation": "Evening doubles on a smaller court. Close-up and energetic, though less spectacle than Center Court."
-      },
-      "starPower": {
-        "score": 5,
-        "explanation": "Court 1 quarterfinalists are not yet confirmed, so headline names are uncertain."
-      },
-      "uniqueness": {
-        "score": 5,
-        "explanation": "Evening quarterfinal in the new mixed doubles format, which is fresh but still early in the event."
-      },
-      "demand": {
-        "score": 5,
-        "explanation": "Smaller court and fewer seats make this a less competitive booking than the Center Court quarterfinal."
-      },
-      "aggregate": 5.3,
-      "overall": "Two evening quarterfinals on Court 1 run alongside the Center Court matches. Fans get close to the action, and the winners move on to the July 20 semifinals."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-10-30T21:52:39.714Z",
-    "inputHash": "7d011568509f0d3d"
-  },
-  "TEN06": {
-    "agg": 6,
-    "rSig": 6,
-    "rExp": 6,
     "rStar": 6,
     "rUniq": 6,
     "rDem": 6,
     "scorecard": {
       "significance": {
-        "score": 6,
-        "explanation": "Semifinals decide who plays for gold or bronze, making this the first real medal-race session of the tennis program."
+        "score": 5,
+        "explanation": "Quarterfinals: win and you're a semifinal away from a medal match."
       },
       "experience": {
-        "score": 6,
-        "explanation": "Daytime semifinals on Center Court in an open-air stadium. Solid stakes, though without evening energy."
+        "score": 7,
+        "explanation": "Evening tennis under lights on Center Court, with tired pairs squeezing in a second match."
       },
       "starPower": {
         "score": 6,
-        "explanation": "Semifinal teams may include strong players, though no entries are confirmed."
+        "explanation": "Deeper rounds tend to keep the better-known pairs, but entries remain unconfirmed."
       },
       "uniqueness": {
         "score": 6,
-        "explanation": "Mixed doubles semifinals in the new format, held on the same day as singles opens."
+        "explanation": "Playing quarterfinals the same day as round one is a new twist on the format."
       },
       "demand": {
         "score": 6,
-        "explanation": "Medal-round semifinal on the main court draws strong interest, though seats are easier than the final."
+        "explanation": "Prime-time Center Court with two quarterfinals; a hotter ticket than the day session."
       },
       "aggregate": 6,
-      "overall": "Mixed doubles semifinals on Center Court set up the first gold and bronze matches of the tennis program. Singles starts the same day, so players in both events face a demanding schedule."
+      "overall": "The evening quarterfinals have the best energy of opening day, with players who've already played once and need to survive again. Expect scrappy, hard-fought tennis at night."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-10-30T21:52:39.714Z",
-    "inputHash": "7557688e4ccc1004"
+    "generatedAt": "2026-11-11T14:22:43.994Z",
+    "inputHash": "1d50d88fa5aa4b0a"
   },
-  "TEN07": {
-    "agg": 5.1,
-    "rSig": 4,
+  "TEN05": {
+    "agg": 5.6,
+    "rSig": 5,
     "rExp": 6,
     "rStar": 6,
+    "rUniq": 6,
+    "rDem": 5,
+    "scorecard": {
+      "significance": {
+        "score": 5,
+        "explanation": "Quarterfinal stakes: two matches decide who reaches the semifinals the next morning."
+      },
+      "experience": {
+        "score": 6,
+        "explanation": "Court 1 evening session, close to the action, though without Center Court's size and scale."
+      },
+      "starPower": {
+        "score": 6,
+        "explanation": "Wang and Zhang, the Paris silver medalists, are a possible draw, but nothing is confirmed."
+      },
+      "uniqueness": {
+        "score": 6,
+        "explanation": "Double-duty day makes it special, and a late-night quarterfinal is unusual for the event."
+      },
+      "demand": {
+        "score": 5,
+        "explanation": "Two matches on a secondary court; a solid but less competitive evening ticket."
+      },
+      "aggregate": 5.6,
+      "overall": "A quieter quarterfinal pick with the same compressed drama as Center Court. Closer seats, fewer crowds, and a fatigue factor that can swing any set."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:43.994Z",
+    "inputHash": "6d2f6102911bd1c1"
+  },
+  "TEN06": {
+    "agg": 6.4,
+    "rSig": 6,
+    "rExp": 7,
+    "rStar": 6,
+    "rUniq": 7,
+    "rDem": 6,
+    "scorecard": {
+      "significance": {
+        "score": 6,
+        "explanation": "Win and you're in a gold match; lose and you still play for bronze that night."
+      },
+      "experience": {
+        "score": 7,
+        "explanation": "Center Court at 11 a.m., semifinal tennis with a morning-warm crowd."
+      },
+      "starPower": {
+        "score": 6,
+        "explanation": "Semifinal fields should include recognizable pairs, but nothing is confirmed."
+      },
+      "uniqueness": {
+        "score": 7,
+        "explanation": "Mixed doubles semifinals on day two of the Games' tennis is a new setup, with singles starting alongside."
+      },
+      "demand": {
+        "score": 6,
+        "explanation": "Daytime semifinals with medals one step away, and a good rate of return for tennis fans."
+      },
+      "aggregate": 6.4,
+      "overall": "Four pairs, two spots in a gold match, and a morning crowd on Center Court. Medal-adjacent tennis with a good chance of seeing stars juggling doubles and singles."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:43.994Z",
+    "inputHash": "9acc03d9ca668264"
+  },
+  "TEN07": {
+    "agg": 5.6,
+    "rSig": 4,
+    "rExp": 6,
+    "rStar": 8,
     "rUniq": 5,
+    "rDem": 6,
+    "scorecard": {
+      "significance": {
+        "score": 4,
+        "explanation": "Singles round one: high-level matches but no medal on the line yet."
+      },
+      "experience": {
+        "score": 6,
+        "explanation": "All-day Court 1 session; close sightlines and star-level tennis, with some heat."
+      },
+      "starPower": {
+        "score": 8,
+        "explanation": "Sinner, Alcaraz, Zverev and Djokovic are all possible, and top seeds often open on show courts."
+      },
+      "uniqueness": {
+        "score": 5,
+        "explanation": "Opening day of singles, a first-round session; it's the start, not a landmark."
+      },
+      "demand": {
+        "score": 6,
+        "explanation": "Singles start day with potential big names draws strong interest for a prelim."
+      },
+      "aggregate": 5.6,
+      "overall": "The first chance to see singles stars up close on a hard court, in a smaller stadium than Center Court. Pick it for proximity and potential, and don't expect finals-level drama."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:43.994Z",
+    "inputHash": "2950c8b13674b543"
+  },
+  "TEN08": {
+    "agg": 4.9,
+    "rSig": 4,
+    "rExp": 5,
+    "rStar": 7,
+    "rUniq": 4,
     "rDem": 5,
     "scorecard": {
       "significance": {
         "score": 4,
-        "explanation": "Round 1 opener on the first singles day. Every player is fighting to advance, but the medal stakes sit well down the bracket."
-      },
-      "experience": {
-        "score": 6,
-        "explanation": "Daytime-to-evening schedule on the first show court. Good sightlines and a full day of matches in the sun."
-      },
-      "starPower": {
-        "score": 6,
-        "explanation": "Early-round marquee names may appear, but top players could be adjusting after the grass-to-hard switch and aren't guaranteed."
-      },
-      "uniqueness": {
-        "score": 5,
-        "explanation": "Opening day of singles on a show court is a one-time moment, though first-round matches are standard."
-      },
-      "demand": {
-        "score": 5,
-        "explanation": "Singles opening day on a show court should sell well, though it is less competitive than later sessions."
-      },
-      "aggregate": 5.1,
-      "overall": "Opening day of singles on Court 1, with a full day of first-round matches and a fair chance of seeing big names early. Star appearances aren't confirmed, so the pitch rests on the day and the venue."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:19:06.581Z",
-    "inputHash": "667b78aae85c0b07"
-  },
-  "TEN08": {
-    "agg": 4.4,
-    "rSig": 4,
-    "rExp": 5,
-    "rStar": 5,
-    "rUniq": 4,
-    "rDem": 4,
-    "scorecard": {
-      "significance": {
-        "score": 4,
-        "explanation": "First-round singles where every player is chasing advancement. Real stakes, but not medal-deciding."
+        "explanation": "Round-one singles; one match, one chance, with no medals yet."
       },
       "experience": {
         "score": 5,
-        "explanation": "Smaller court with close seating, but it is a daytime session with less stadium atmosphere."
+        "explanation": "Court 2 offers intimacy over spectacle across a long day session."
       },
       "starPower": {
-        "score": 5,
-        "explanation": "Top players may land here in round one, but the draw placement on a smaller court is uncertain."
+        "score": 7,
+        "explanation": "Rybakina, Swiatek, Sinner and Alcaraz could all appear, though no entries are confirmed."
       },
       "uniqueness": {
         "score": 4,
-        "explanation": "Routine first-round singles on a secondary court, though it is still part of the opening singles day."
+        "explanation": "A routine singles first-round day on an outer court."
       },
       "demand": {
-        "score": 4,
-        "explanation": "Easier to book than the stadium sessions, though the Games scarcity still keeps it in demand."
+        "score": 5,
+        "explanation": "Daytime round one, secondary court; an easier ticket than the stadium sessions."
       },
-      "aggregate": 4.4,
-      "overall": "A close-up look at opening-day singles on a secondary court. The seats sit near the baseline, which makes it a good pick for a relaxed, intimate session with world-class players."
+      "aggregate": 4.9,
+      "overall": "A long day of first-round singles for people who want to see big names without stadium prices. Great for wandering, less so for must-see drama."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:19:06.581Z",
-    "inputHash": "8168e5d1c1b2a15f"
+    "generatedAt": "2026-11-11T14:22:43.994Z",
+    "inputHash": "7174d595a661d87c"
   },
   "TEN09": {
     "agg": 4.4,
@@ -22875,32 +22875,32 @@
     "scorecard": {
       "significance": {
         "score": 4,
-        "explanation": "Round 1 singles with qualifiers, wild cards and universality places in the mix. Advancement is the stake."
+        "explanation": "Early-round singles for advancement; the stakes are real but far from medals."
       },
       "experience": {
         "score": 5,
-        "explanation": "Multiple outer courts side by side, daytime and open-air. The walkability is the appeal, not the setting."
+        "explanation": "Roam eight outer courts with open seating and no stairs; relaxed, up close, but unglamorous."
       },
       "starPower": {
         "score": 5,
-        "explanation": "Seeded players are on the schedule, but a big name landing on an outer court is never guaranteed."
+        "explanation": "Top names tend to land on bigger courts, but world-level players fill the outer ones."
       },
       "uniqueness": {
         "score": 4,
-        "explanation": "Standard first-round format spread across several courts, a routine session of a Games tennis day."
+        "explanation": "Outer-court first-round tennis is the routine backbone of the event."
       },
       "demand": {
         "score": 4,
-        "explanation": "Lower-profile courts make this the easier booking on the opening day, though still in high demand."
+        "explanation": "Outer courts, daytime; likely the easiest tennis ticket of the opening week."
       },
       "aggregate": 4.4,
-      "overall": "A walk-around day of first-round singles across the outer courts, where you can move between matches. Star power is uncertain, so the appeal is discovery and variety."
+      "overall": "A grounds-pass style day: wander between courts, watch a surprise or two, stay as long as you like. It's the budget route into Games tennis."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:19:06.581Z",
-    "inputHash": "8cb0653828aa1ba8"
+    "generatedAt": "2026-11-11T14:22:43.994Z",
+    "inputHash": "a4d5346a0168295f"
   },
   "TEN10": {
     "agg": 7.7,
@@ -22912,71 +22912,145 @@
     "scorecard": {
       "significance": {
         "score": 8,
-        "explanation": "Gold and bronze mixed doubles finals decide the first tennis medals of the Games, with two medal events on one night."
+        "explanation": "Bronze and gold in mixed doubles, the first tennis medals of the Games."
       },
       "experience": {
         "score": 8,
-        "explanation": "Evening medal matches on Center Court run late into the night. Lively, high-stakes doubles in a strong venue."
+        "explanation": "Night medal matches on Center Court; atmosphere should build toward a near-midnight finish."
       },
       "starPower": {
         "score": 7,
-        "explanation": "Top mixed doubles teams can reach the final, though no pairs have been confirmed yet."
+        "explanation": "Medal pairs will likely include well-known players, though no pairs are confirmed."
       },
       "uniqueness": {
         "score": 8,
-        "explanation": "First tennis medals of the Games, played as the opening medal session in a new program order."
+        "explanation": "Mixed doubles medals as the tennis opener is new, and this is the first hardware of the event."
       },
       "demand": {
         "score": 7,
-        "explanation": "Medal finals on Center Court carry strong ticket demand, though the opening-week slot is less established."
+        "explanation": "Prime-time medal matches on Center Court, a hot ticket even if not the marquee final."
       },
       "aggregate": 7.7,
-      "overall": "The bronze and gold mixed doubles matches on Center Court deliver the first tennis medals of the Games. The evening finish gives it a memorable close to the opening days of the tennis program."
+      "overall": "First medals of the tennis tournament, awarded under the lights after a 36-hour sprint. The format is new, the fatigue is real, and the crowd should be loud."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-10-30T21:52:39.714Z",
-    "inputHash": "fb49713cacfc8e21"
+    "generatedAt": "2026-11-11T14:22:43.994Z",
+    "inputHash": "33d200e9ebfb8e08"
   },
   "TEN11": {
-    "agg": 5.1,
+    "agg": 5.8,
+    "rSig": 4,
+    "rExp": 7,
+    "rStar": 8,
+    "rUniq": 4,
+    "rDem": 7,
+    "scorecard": {
+      "significance": {
+        "score": 4,
+        "explanation": "Singles round one, with advancement the only stake."
+      },
+      "experience": {
+        "score": 7,
+        "explanation": "Center Court in the afternoon sun; big stage, strong tennis, and all-day variety."
+      },
+      "starPower": {
+        "score": 8,
+        "explanation": "Center Court usually gets the top seeds: Zverev, Sinner, Rybakina or Gauff if they're entered."
+      },
+      "uniqueness": {
+        "score": 4,
+        "explanation": "Early-round singles on the main court; a routine day within the draw."
+      },
+      "demand": {
+        "score": 7,
+        "explanation": "Center Court with star seeds draws serious interest even in round one."
+      },
+      "aggregate": 5.8,
+      "overall": "The best place to catch top seeds early, on the main court, without finals-week prices. A solid pick for fans who want star tennis and a big stadium."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:43.994Z",
+    "inputHash": "84d263297bc41146"
+  },
+  "TEN12": {
+    "agg": 5.3,
     "rSig": 4,
     "rExp": 6,
+    "rStar": 7,
+    "rUniq": 5,
+    "rDem": 5,
+    "scorecard": {
+      "significance": {
+        "score": 4,
+        "explanation": "Round one in singles and doubles; advancement only."
+      },
+      "experience": {
+        "score": 6,
+        "explanation": "Nine hours of mixed singles and doubles on Court 1, close to the players."
+      },
+      "starPower": {
+        "score": 7,
+        "explanation": "Errani and Paolini, Ebden and Peers, and singles stars could show up."
+      },
+      "uniqueness": {
+        "score": 5,
+        "explanation": "Doubles begins here, with Paris champion storylines, though it's still a first round."
+      },
+      "demand": {
+        "score": 5,
+        "explanation": "Show-court day pass with variety; strong but not frantic demand."
+      },
+      "aggregate": 5.3,
+      "overall": "Doubles opens with Paris gold medalists as an intriguing subplot, plus singles to fill the day. A good pick for variety on a show court."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:43.994Z",
+    "inputHash": "f9fb5823204e2920"
+  },
+  "TEN13": {
+    "agg": 4.9,
+    "rSig": 4,
+    "rExp": 5,
     "rStar": 6,
     "rUniq": 5,
     "rDem": 5,
     "scorecard": {
       "significance": {
         "score": 4,
-        "explanation": "Second day of first-round singles, where players are competing for advancement rather than medals."
+        "explanation": "Early rounds in singles and doubles; real stakes for advancement."
       },
       "experience": {
-        "score": 6,
-        "explanation": "Center Court daytime session with an 8,000-seat open-air stadium and bright, warm conditions."
+        "score": 5,
+        "explanation": "Court 2 gives a casual, close-up day with mixed formats."
       },
       "starPower": {
         "score": 6,
-        "explanation": "Early-round session on the main court, so top seeds could appear, though the schedule is not confirmed."
+        "explanation": "Combined-ranking entry means singles stars could land in doubles here."
       },
       "uniqueness": {
         "score": 5,
-        "explanation": "Main-court singles on the second day of round one, a solid but routine session."
+        "explanation": "Star singles players teaming into doubles is a quirk of the entry rules."
       },
       "demand": {
         "score": 5,
-        "explanation": "Main-stadium singles on a weekday daytime slot should sell steadily without the pull of evening matches."
+        "explanation": "Secondary court with a long card; steady but gentler demand."
       },
-      "aggregate": 5.1,
-      "overall": "Center Court's first singles day session, with early-round matches in the main stadium during daylight. Expect a relaxed afternoon in the sun rather than a marquee showdown."
+      "aggregate": 4.9,
+      "overall": "Odd pairings of singles stars and specialists make this secondary court a sleeper. It's a laid-back day with a decent chance of a surprise."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:19:06.581Z",
-    "inputHash": "3cde1f0b5d830246"
+    "generatedAt": "2026-11-11T14:22:43.994Z",
+    "inputHash": "e5f7be50d01f77d8"
   },
-  "TEN12": {
+  "TEN14": {
     "agg": 4.4,
     "rSig": 4,
     "rExp": 5,
@@ -22986,143 +23060,69 @@
     "scorecard": {
       "significance": {
         "score": 4,
-        "explanation": "Round 1 of singles and doubles, with teams and players competing for early advancement only."
+        "explanation": "Outer-court round one, where the draw gets cut down."
       },
       "experience": {
         "score": 5,
-        "explanation": "Full Friday mixing singles and doubles on a show court, with daytime heat and a busy schedule."
+        "explanation": "Eight outer courts, open seating, and close-up tennis that reward wandering."
       },
       "starPower": {
         "score": 5,
-        "explanation": "Doubles pairs include Paris 2024 medalists in the field, but their participation for 2028 is not confirmed."
+        "explanation": "Top names rarely land here, but world-level players and specialists fill the courts."
       },
       "uniqueness": {
         "score": 4,
-        "explanation": "Doubles first round on a show court is a standard format, though the Paris 2024 gold pair is a draw."
+        "explanation": "Typical outer-court early-round day of the tournament."
       },
       "demand": {
         "score": 4,
-        "explanation": "A mixed singles and doubles session on a show court gives plenty of matches for the price of one ticket."
+        "explanation": "Outer-court grounds access; the easiest tennis ticket of the day."
       },
       "aggregate": 4.4,
-      "overall": "A packed Friday on Court 1 that combines singles first-round matches with the opening day of women's and men's doubles. Doubles pairs from Paris 2024 may appear, and the court's closeness makes it lively."
+      "overall": "A wander-and-watch day at the back of the complex, with doubles tiebreaks inches from the line. Not star-driven, but one of the best-value tennis days."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:19:06.581Z",
-    "inputHash": "9ff9d1801f5d0a93"
-  },
-  "TEN13": {
-    "agg": 4.2,
-    "rSig": 4,
-    "rExp": 4,
-    "rStar": 5,
-    "rUniq": 4,
-    "rDem": 4,
-    "scorecard": {
-      "significance": {
-        "score": 4,
-        "explanation": "Opening doubles and first-round singles, where advancement is the stake and no medals are decided."
-      },
-      "experience": {
-        "score": 4,
-        "explanation": "Small court with a daytime schedule. Close seating helps, but the setting is modest."
-      },
-      "starPower": {
-        "score": 5,
-        "explanation": "Doubles teams from Paris 2024 may compete here, though the pairings and participation are unconfirmed."
-      },
-      "uniqueness": {
-        "score": 4,
-        "explanation": "Standard doubles first round alongside singles, a typical early-round session."
-      },
-      "demand": {
-        "score": 4,
-        "explanation": "Smaller court means fewer seats, but the Games scarcity still makes this a competitive booking."
-      },
-      "aggregate": 4.2,
-      "overall": "Up-close doubles and singles on a smaller court, with seats almost on top of the lines. It suits fans who want quick exchanges and the chance to see Paris 2024 medal pairs early."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:19:06.581Z",
-    "inputHash": "ed8be134c3a65a42"
-  },
-  "TEN14": {
-    "agg": 4,
-    "rSig": 4,
-    "rExp": 4,
-    "rStar": 4,
-    "rUniq": 4,
-    "rDem": 4,
-    "scorecard": {
-      "significance": {
-        "score": 4,
-        "explanation": "Early-round singles and doubles where players fight for advancement, not medals."
-      },
-      "experience": {
-        "score": 4,
-        "explanation": "Outer courts in daytime with a busy, variable atmosphere. Walkable, but without a stadium feel."
-      },
-      "starPower": {
-        "score": 4,
-        "explanation": "Early-round matches on outer courts could feature unknowns or wild cards, with no guarantee of big names."
-      },
-      "uniqueness": {
-        "score": 4,
-        "explanation": "Routine doubles and singles first round across several courts, typical for the first week of play."
-      },
-      "demand": {
-        "score": 4,
-        "explanation": "Outer courts are the most accessible option, though the Games scarcity keeps it in demand."
-      },
-      "aggregate": 4,
-      "overall": "A broad sampling of first-round singles and doubles across the outer courts. The field runs deep with specialists and wild cards, which suits fans who like discovery over star power."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:19:06.581Z",
-    "inputHash": "aa7eddfe515327a7"
+    "generatedAt": "2026-11-11T14:22:43.994Z",
+    "inputHash": "19b6ea8d7fb0b4ba"
   },
   "TEN15": {
-    "agg": 6.1,
+    "agg": 6.2,
     "rSig": 4,
     "rExp": 8,
-    "rStar": 7,
+    "rStar": 8,
     "rUniq": 5,
     "rDem": 7,
     "scorecard": {
       "significance": {
         "score": 4,
-        "explanation": "Round 1 singles in the evening, where advancement is on the line and medals are not."
+        "explanation": "First-round singles; stakes are advancement only."
       },
       "experience": {
         "score": 8,
-        "explanation": "Prime-time session under the lights in the 8,000-seat stadium, where the open-air crowd cools into a lively atmosphere."
+        "explanation": "Center Court at night with softened light and a long session; prime-time energy."
       },
       "starPower": {
-        "score": 7,
-        "explanation": "Evening sessions draw the biggest names, though the specific matchups for this slot are not confirmed."
+        "score": 8,
+        "explanation": "Evening Center Court slots usually go to marquee names: Djokovic, Rybakina or Zheng if entered."
       },
       "uniqueness": {
         "score": 5,
-        "explanation": "Round 1 singles at the main stadium, so the setting is special but the round is routine."
+        "explanation": "A big-night first round; atmosphere is special but the round is routine."
       },
       "demand": {
         "score": 7,
-        "explanation": "Prime-time main-court singles will fill quickly once a star is scheduled, so expect strong competition for seats."
+        "explanation": "Prime-time Center Court with probable star seeds; one of the hotter early-round tickets."
       },
-      "aggregate": 6.1,
-      "overall": "The best evening pick of opening week, with first-round singles under the lights in the main stadium. Star names could appear, and the crowd energy makes it the strongest Friday option."
+      "aggregate": 6.2,
+      "overall": "The best early-round tennis atmosphere: a night session under the lights with a chance at a household name. Worth it for the glow and the potential star turn."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:19:06.581Z",
-    "inputHash": "ed1e407805da605c"
+    "generatedAt": "2026-11-11T14:22:43.994Z",
+    "inputHash": "39c957770a219373"
   },
   "TEN16": {
     "agg": 5.1,
@@ -28527,413 +28527,228 @@
     "inputHash": "7ad0860df94fbf50"
   },
   "VVO31": {
-    "agg": 5.5,
+    "agg": 5,
     "rSig": 4,
-    "rExp": 7,
+    "rExp": 6,
     "rStar": 6,
-    "rUniq": 5,
-    "rDem": 6,
+    "rUniq": 4,
+    "rDem": 5,
     "scorecard": {
       "significance": {
         "score": 4,
-        "explanation": "Pool-round match where Brazil's bronze-medal pedigree is on display, though no medals are decided yet."
+        "explanation": "Group-stage match where advancement is the only prize. Real stakes for a team like Brazil, but no medals in play on a Saturday evening."
       },
       "experience": {
-        "score": 7,
-        "explanation": "Saturday evening crowd in a compact bowl, where the noise carries from every seat."
+        "score": 6,
+        "explanation": "Saturday 5 PM start in an air-conditioned 18,000-seat bowl built around one court. Good volleyball atmosphere, not yet the prime-time peak."
       },
       "starPower": {
         "score": 6,
-        "explanation": "Paris 2024 bronze medalist Brazil and a U.S. women's team led by Erik Sullivan add real pull."
+        "explanation": "Early-round marquee sport, and the draw is open. Brazil, Paris bronze medalists, would anchor the card, with a deep field of continental champions around them."
       },
       "uniqueness": {
-        "score": 5,
-        "explanation": "Standard pool round; Brazil's appearance adds interest but the format is routine."
+        "score": 4,
+        "explanation": "One of many prelim sessions in Anaheim. A fine arena, but nothing about this slot is singular."
       },
       "demand": {
-        "score": 6,
-        "explanation": "Saturday evening women's slot with Brazil and the host U.S. in the mix, expected to sell quickly."
+        "score": 5,
+        "explanation": "Opening weekend of the tournament means interest is solid. Still an easier ticket than the knockout rounds."
       },
-      "aggregate": 5.5,
-      "overall": "Saturday evening women's pool play with Brazil, Paris 2024 bronze medalists, and possibly the host U.S. women. A full, noisy house is expected in an arena with close sightlines."
+      "aggregate": 5,
+      "overall": "A Saturday-evening way into the volleyball tournament, with a shot at a Brazil side stinging from two straight Nations League final losses. Pick it for a low-pressure first look at the field, not for medal drama."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:15.278Z",
-    "inputHash": "78f7cae55c799a39"
+    "generatedAt": "2026-11-11T14:22:44.462Z",
+    "inputHash": "25ef6f071de90e87"
   },
   "VVO32": {
-    "agg": 5.5,
+    "agg": 5,
     "rSig": 4,
-    "rExp": 7,
+    "rExp": 6,
     "rStar": 6,
-    "rUniq": 5,
-    "rDem": 6,
+    "rUniq": 4,
+    "rDem": 5,
     "scorecard": {
       "significance": {
         "score": 4,
-        "explanation": "Late pool match for Turkiye, which beat Italy in the European final and is fighting for position."
+        "explanation": "Pool play, so the stakes are seeding and advancement. Nothing is decided, but nothing is wasted either."
       },
       "experience": {
-        "score": 7,
-        "explanation": "Late-night session that feels like a big night out, with plenty of atmosphere in the arena."
+        "score": 6,
+        "explanation": "A 9 PM start under the lights gives the arena a late-night buzz. Anaheim's home-gym familiarity for the Americans adds energy."
       },
       "starPower": {
         "score": 6,
-        "explanation": "Melissa Vargas, 2025 Worlds best opposite, headlines a strong Turkiye roster."
+        "explanation": "Turkiye brings Melissa Vargas, best opposite at the 2025 Worlds, and is the reigning Nations League champion. Whether they appear here depends on the draw."
       },
       "uniqueness": {
-        "score": 5,
-        "explanation": "Late women's pool match with a strong European contender, routine in format at a new venue."
+        "score": 4,
+        "explanation": "A routine group match in a long preliminary schedule. Turkiye's rise adds a little narrative color."
       },
       "demand": {
-        "score": 6,
-        "explanation": "Late Saturday slot with a marquee Turkiye draw, competitive for fans wanting prime-time volleyball."
+        "score": 5,
+        "explanation": "Late-evening prelim in a popular indoor sport. Likely to fill, but less contested than knockout sessions."
       },
-      "aggregate": 5.5,
-      "overall": "A Saturday late women's pool match with Turkiye, the 2025 Worlds runner-up with Melissa Vargas and Eda Erdem. A late-night finish at Honda Center with plenty of atmosphere."
+      "aggregate": 5,
+      "overall": "The late slot suits a team with real nerve, and Turkiye's comeback habit makes them worth catching if the draw lands them here. A good night session without any elimination pressure."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:15.278Z",
-    "inputHash": "6d0a607a9ebd6763"
+    "generatedAt": "2026-11-11T14:22:44.462Z",
+    "inputHash": "8e970ba2944c2bbb"
   },
   "VVO33": {
-    "agg": 4.9,
+    "agg": 4.7,
     "rSig": 4,
     "rExp": 5,
     "rStar": 5,
     "rUniq": 6,
-    "rDem": 5,
+    "rDem": 4,
     "scorecard": {
       "significance": {
         "score": 4,
-        "explanation": "Pool-round match for Thailand, where advancement is still on the line in its first Games tournament."
+        "explanation": "Morning pool match with advancement on the line. Real stakes for the athletes, no medal in play."
       },
       "experience": {
         "score": 5,
-        "explanation": "Sunday morning family session with colorful fan sections and clear sightlines."
+        "explanation": "A 9 AM start on Sunday means a morning crowd and a quieter bowl. Still a live Games match in a polished arena."
       },
       "starPower": {
         "score": 5,
-        "explanation": "Thailand's debut gives the session a story, though its roster is less globally known."
+        "explanation": "Thailand is a debut nation without many globally known names. The rest of the field remains uncertain."
       },
       "uniqueness": {
         "score": 6,
-        "explanation": "Thailand's first-ever Games women's volleyball tournament is a meaningful debut in its own right."
+        "explanation": "Thailand may be playing its first Summer Games women's match ever. A debut nation lifts a prelim above routine."
       },
       "demand": {
-        "score": 5,
-        "explanation": "Sunday morning slot that is easier to book, but still expected to sell."
+        "score": 4,
+        "explanation": "Sunday-morning prelim of a field still taking shape. Among the easier tickets, though still a scarce Games seat."
       },
-      "aggregate": 4.9,
-      "overall": "Sunday morning women's pool play featuring Thailand, qualifying for its first-ever Games women's tournament. A family-friendly start to the day with colorful fan sections."
+      "aggregate": 4.7,
+      "overall": "Go early to watch a debut nation take its first Games steps, with Thailand's comeback story as the hook. It's a softer ticket in both stakes and competition, but a sweet one for volleyball purists."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:15.278Z",
-    "inputHash": "e5e9de1fc78570bc"
+    "generatedAt": "2026-11-11T14:22:44.462Z",
+    "inputHash": "e42d8ba21a6966b1"
   },
   "VVO34": {
-    "agg": 4.9,
+    "agg": 5.1,
     "rSig": 4,
-    "rExp": 5,
+    "rExp": 6,
     "rStar": 5,
     "rUniq": 6,
     "rDem": 5,
     "scorecard": {
       "significance": {
         "score": 4,
-        "explanation": "Pool-round match where Egypt's first Games women's tournament carries real advancement stakes."
+        "explanation": "Group play where results shape the bracket. Every set counts toward seeding, but no one is eliminated."
       },
       "experience": {
-        "score": 5,
-        "explanation": "Afternoon slot with close sightlines, a good daytime look at a first-time competitor."
+        "score": 6,
+        "explanation": "Sunday at 1 PM is a comfortable family-friendly slot in a climate-controlled arena. Good energy, short of evening pitch."
       },
       "starPower": {
         "score": 5,
-        "explanation": "A possible U.S. appearance raises the pull, but the draw depends on the schedule."
+        "explanation": "Egypt arrives without household names. The opposition could include the host Americans under Erik Sullivan."
       },
       "uniqueness": {
         "score": 6,
-        "explanation": "Egypt's first Games women's volleyball appearance gives this afternoon session its hook."
+        "explanation": "Egypt's women make their first Games volleyball appearance. A debut-nation prelim is a notch above routine."
       },
       "demand": {
         "score": 5,
-        "explanation": "Afternoon slot with a possible U.S. appearance, an easier booking than the evening sessions."
-      },
-      "aggregate": 4.9,
-      "overall": "Sunday afternoon women's pool play with Egypt's first Games appearance in the women's tournament, possibly against a major contender. Close sightlines make it a good chance to see a first-timer up close."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:22:15.278Z",
-    "inputHash": "1aac62e5a05a28bd"
-  },
-  "VVO35": {
-    "agg": 5.8,
-    "rSig": 4,
-    "rExp": 7,
-    "rStar": 7,
-    "rUniq": 5,
-    "rDem": 7,
-    "scorecard": {
-      "significance": {
-        "score": 4,
-        "explanation": "Pool-round match among qualified powers, with advancement and seeding in play."
-      },
-      "experience": {
-        "score": 7,
-        "explanation": "Sunday prime-time evening session in a full arena, one of the strongest women's slots of the weekend."
-      },
-      "starPower": {
-        "score": 7,
-        "explanation": "Turkiye and Brazil are both qualified, and Melissa Vargas, named 2026 VNL final MVP, adds star pull."
-      },
-      "uniqueness": {
-        "score": 5,
-        "explanation": "Early-round match between recent finalists; the format is routine, though the rematch angle adds intrigue."
-      },
-      "demand": {
-        "score": 7,
-        "explanation": "Sunday evening slot with two qualified contenders, among the more competitive women's bookings."
-      },
-      "aggregate": 5.8,
-      "overall": "A Sunday evening women's pool session with qualified powers Turkiye and Brazil, plus a possible Italy appearance if it qualifies. The evening slot and marquee field make it a strong ticket."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:22:15.278Z",
-    "inputHash": "bf24fd126fa0548d"
-  },
-  "VVO36": {
-    "agg": 5.1,
-    "rSig": 4,
-    "rExp": 7,
-    "rStar": 5,
-    "rUniq": 4,
-    "rDem": 5,
-    "scorecard": {
-      "significance": {
-        "score": 4,
-        "explanation": "Women's preliminary round, where teams are fighting for quarterfinal spots rather than medals. Real stakes, but not medal-deciding."
-      },
-      "experience": {
-        "score": 7,
-        "explanation": "Late-night 9 PM start in an enclosed, air-conditioned bowl gives the session a prime-time feel for a solid spectator sport."
-      },
-      "starPower": {
-        "score": 5,
-        "explanation": "Preliminary rounds may or may not feature the biggest names, with the U.S., Brazil and Turkiye among the early qualifiers."
-      },
-      "uniqueness": {
-        "score": 4,
-        "explanation": "A standard preliminary session in an established sport at a non-landmark arena. Routine by Games standards."
-      },
-      "demand": {
-        "score": 5,
-        "explanation": "Late-evening preliminary that will still sell well, though easier to book than the knockout sessions."
+        "explanation": "Sunday afternoon in a popular sport, and the Americans may be on the card. Likely to sell, with less urgency than knockouts."
       },
       "aggregate": 5.1,
-      "overall": "A late-night women's preliminary at Honda Center, offering an easy entry point to the tournament. Its appeal rests on prime-time energy and the chance to see teams fighting for quarterfinal spots."
+      "overall": "A debut team hearing its first Games crowd, plus a chance the Americans show up. A fun Sunday-afternoon pick that rewards curiosity more than it delivers drama."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:15.284Z",
-    "inputHash": "b1c05e35d28fe2b7"
+    "generatedAt": "2026-11-11T14:22:44.462Z",
+    "inputHash": "d3343e24f4f069ce"
   },
-  "VVO37": {
-    "agg": 5,
-    "rSig": 5,
-    "rExp": 5,
-    "rStar": 6,
-    "rUniq": 4,
-    "rDem": 5,
-    "scorecard": {
-      "significance": {
-        "score": 5,
-        "explanation": "Single-elimination quarterfinal, where a loss ends the medal hunt. Stakes are high for both sides."
-      },
-      "experience": {
-        "score": 5,
-        "explanation": "A 9 AM start keeps the atmosphere more subdued than an evening match, though the air-conditioned bowl helps."
-      },
-      "starPower": {
-        "score": 6,
-        "explanation": "Quarterfinal lineup depends on qualification, and the two-time defending champions and the 2025 world champions are not yet confirmed."
-      },
-      "uniqueness": {
-        "score": 4,
-        "explanation": "A standard men's quarterfinal in an established sport at a venue that is not landmark-level for the Games."
-      },
-      "demand": {
-        "score": 5,
-        "explanation": "Morning knockout match that should still sell well, though easier to book than the prime-time quarterfinals."
-      },
-      "aggregate": 5,
-      "overall": "An early Monday men's quarterfinal where one defeat means elimination. The field is still being set, so the matchup could change significantly by July."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:22:15.284Z",
-    "inputHash": "caf8f9d58e144e67"
-  },
-  "VVO38": {
-    "agg": 5.4,
-    "rSig": 5,
-    "rExp": 6,
-    "rStar": 7,
-    "rUniq": 4,
-    "rDem": 5,
-    "scorecard": {
-      "significance": {
-        "score": 5,
-        "explanation": "Men's quarterfinal with a single-elimination exit, so the stakes are real for both teams."
-      },
-      "experience": {
-        "score": 6,
-        "explanation": "Early-afternoon start in a full arena of about 18,000 keeps the atmosphere solid without prime-time energy."
-      },
-      "starPower": {
-        "score": 7,
-        "explanation": "Poland has qualified and would bring Wilfredo Leon and Tomasz Fornal, though its bracket slot is not yet confirmed."
-      },
-      "uniqueness": {
-        "score": 4,
-        "explanation": "Standard quarterfinal format at a generic venue, with no landmark or first-time element."
-      },
-      "demand": {
-        "score": 5,
-        "explanation": "Afternoon knockout session that should sell well, particularly to Polish fans if Poland is placed here."
-      },
-      "aggregate": 5.4,
-      "overall": "Poland's Paris 2024 silver-medal team could be the headline in this men's quarterfinal. The bracket placement is not yet set, so the draw will decide whether the big names appear here."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:22:15.284Z",
-    "inputHash": "5a598972aa91c82e"
-  },
-  "VVO39": {
-    "agg": 5.8,
-    "rSig": 5,
+  "VVO35": {
+    "agg": 5.7,
+    "rSig": 4,
     "rExp": 7,
-    "rStar": 6,
+    "rStar": 7,
     "rUniq": 5,
     "rDem": 6,
     "scorecard": {
       "significance": {
-        "score": 5,
-        "explanation": "Men's quarterfinal where the loser is out of medal contention. France's back-to-back title defense depends on this result."
+        "score": 4,
+        "explanation": "Pool-play match, with seeding and advancement as the stakes. Not medal-deciding, but every result counts."
       },
       "experience": {
         "score": 7,
-        "explanation": "Late-afternoon start brings more atmosphere than the morning sessions, with the arena lights and crowd building."
+        "explanation": "Sunday at 5 PM brings an early-evening crowd to an air-conditioned bowl. A rematch atmosphere makes it better than a typical prelim."
       },
       "starPower": {
-        "score": 6,
-        "explanation": "France's Jean Patry and Trevor Clevenot would headline if France qualifies and lands in this slot, but its place is still uncertain."
+        "score": 7,
+        "explanation": "Turkiye and Brazil, both top contenders, plus Melissa Vargas, the 2026 Nations League MVP, could headline. The draw decides who actually plays."
       },
       "uniqueness": {
         "score": 5,
-        "explanation": "Quarterfinal of an established sport, though the possibility of a third straight French title adds some pull."
+        "explanation": "A possible Nations League final rematch lends this slot narrative. Still a group match in a long schedule."
       },
       "demand": {
         "score": 6,
-        "explanation": "Knockout match with a defending-champion storyline, drawing demand above the early-round sessions."
+        "explanation": "Sunday-evening prime slot with top teams potentially on court. Among the more sought-after prelim sessions."
       },
-      "aggregate": 5.8,
-      "overall": "A men's quarterfinal that could feature the two-time defending champions. France still has to qualify, so the bracket and the matchup both depend on the 2027 World Cup and World Ranking."
+      "aggregate": 5.7,
+      "overall": "The best bet of the prelims for volleyball fans: a Sunday-evening slot where contenders like Turkiye and Brazil could collide. No medals yet, but the quality is high."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:15.284Z",
-    "inputHash": "2bd1850021934d56"
+    "generatedAt": "2026-11-11T14:22:44.462Z",
+    "inputHash": "ea237b315bb3e4bc"
   },
-  "VVO40": {
-    "agg": 6.4,
-    "rSig": 5,
-    "rExp": 8,
+  "VVO36": {
+    "agg": 5.8,
+    "rSig": 4,
+    "rExp": 7,
     "rStar": 7,
     "rUniq": 5,
     "rDem": 7,
     "scorecard": {
       "significance": {
-        "score": 5,
-        "explanation": "Single-elimination men's quarterfinal where a loss ends the medal chase for either side."
+        "score": 4,
+        "explanation": "Pool play, so advancement and seeding are the goals. The host's route through the bracket still matters."
       },
       "experience": {
-        "score": 8,
-        "explanation": "Prime-time 9 PM slot in a full arena with a potential home crowd, which makes for high-energy volleyball."
+        "score": 7,
+        "explanation": "Last match of a Sunday night, wrapping near 11:30 PM. A home crowd for the Americans makes it the loudest hour of the day."
       },
       "starPower": {
         "score": 7,
-        "explanation": "The host United States is guaranteed a place and could appear here, with Karch Kiraly coaching the team."
+        "explanation": "The Paris silver-medal Americans, guaranteed as hosts, are the draw. Erik Sullivan's side is a marquee name in a loaded field."
       },
       "uniqueness": {
         "score": 5,
-        "explanation": "Quarterfinal in an established sport, lifted slightly by the chance to see the host team in a late-night slot."
+        "explanation": "The home team playing late on opening weekend carries a special atmosphere. It is still a group match."
       },
       "demand": {
         "score": 7,
-        "explanation": "A host-nation possibility in a prime-time quarterfinal should attract strong local demand."
+        "explanation": "Sunday night with the host nation likely in the arena. Expect a more competitive ticket than most pool sessions."
       },
-      "aggregate": 6.4,
-      "overall": "A late-night men's quarterfinal that could put the host United States on Honda Center's floor. The U.S. squad is guaranteed a place, but its opponent in this slot is still undecided."
+      "aggregate": 5.8,
+      "overall": "If you want the home crowd at full volume, this is the prelim to pick. The Americans have a Paris score to settle, and the late slot is built for it."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:15.284Z",
-    "inputHash": "36bcf03c3b6e7f66"
+    "generatedAt": "2026-11-11T14:22:44.462Z",
+    "inputHash": "a9c1d4ae6288bcfc"
   },
-  "VVO41": {
-    "agg": 5,
-    "rSig": 5,
-    "rExp": 5,
-    "rStar": 5,
-    "rUniq": 5,
-    "rDem": 5,
-    "scorecard": {
-      "significance": {
-        "score": 5,
-        "explanation": "Women's quarterfinal where the loser exits the medal race. Several debutant teams are fighting for a place in the semifinals."
-      },
-      "experience": {
-        "score": 5,
-        "explanation": "A 9 AM start keeps the session morning-paced, though the enclosed bowl keeps the atmosphere comfortable."
-      },
-      "starPower": {
-        "score": 5,
-        "explanation": "Several newcomers, including Thailand and Egypt in their first Games appearance, make this slot less of a star showcase."
-      },
-      "uniqueness": {
-        "score": 5,
-        "explanation": "Quarterfinal of an established sport, but with debut and returning teams like Thailand, Egypt and Canada, it has a fresh feel."
-      },
-      "demand": {
-        "score": 5,
-        "explanation": "Morning knockout match that should still sell well, though it is easier to book than the evening quarterfinals."
-      },
-      "aggregate": 5,
-      "overall": "An early-morning women's quarterfinal featuring debutants and returning teams. The matchup is not yet set and depends on preliminary results, so the field could look very different by July."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:22:15.284Z",
-    "inputHash": "402dfbd1ebbd65fa"
-  },
-  "VVO42": {
+  "VVO37": {
     "agg": 5.5,
     "rSig": 5,
     "rExp": 6,
@@ -28943,143 +28758,328 @@
     "scorecard": {
       "significance": {
         "score": 5,
-        "explanation": "Women's quarterfinal with single-elimination stakes, and the loser is out of the medal race."
+        "explanation": "Single-elimination quarterfinal: lose and the medal dream ends. Short of semifinal weight, but no safety net."
       },
       "experience": {
         "score": 6,
-        "explanation": "Early-afternoon start in a full arena gives a solid live experience without the prime-time push."
+        "explanation": "A 9 AM start for a knockout match gives a fresh but quieter crowd. The one-court arena still crackles with elimination tension."
       },
       "starPower": {
         "score": 7,
-        "explanation": "Turkey's Melissa Vargas, the 2026 VNL MVP, is a marquee name and could feature in this slot."
+        "explanation": "Poland, Japan's Ran Takahashi and the host Americans are all in the mix. Italy's world champions may or may not make the field."
       },
       "uniqueness": {
         "score": 4,
-        "explanation": "Standard quarterfinal format at a generic venue, with no landmark element for this session."
+        "explanation": "Standard quarterfinal at a generic arena. Whether Italy qualifies is the only wrinkle."
       },
       "demand": {
         "score": 6,
-        "explanation": "Knockout match featuring a team in form, drawing demand above the early-round sessions."
+        "explanation": "Knockout volleyball on a Monday morning. Strong interest, softer than the evening quarterfinals."
       },
       "aggregate": 5.5,
-      "overall": "Turkey, the 2026 VNL and European champion, could be the team to beat in this women's quarterfinal. The bracket placement has not been confirmed, so the opponent depends on preliminary standings."
+      "overall": "Early-morning nerves and no second chances make this a purist's quarterfinal. Come for the elimination tension; the evening matches carry more star wattage."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:15.284Z",
-    "inputHash": "916ea3f29670794c"
+    "generatedAt": "2026-11-11T14:22:44.462Z",
+    "inputHash": "c437f3364d895c3f"
   },
-  "VVO43": {
-    "agg": 5.8,
+  "VVO38": {
+    "agg": 5.9,
     "rSig": 5,
-    "rExp": 7,
-    "rStar": 7,
-    "rUniq": 4,
-    "rDem": 6,
-    "scorecard": {
-      "significance": {
-        "score": 5,
-        "explanation": "Women's quarterfinal where a loss ends the medal hunt. Brazil and Italy are both chasing a podium finish."
-      },
-      "experience": {
-        "score": 7,
-        "explanation": "Late-afternoon start brings a lively crowd, with the seating close to the floor to amplify the rallies."
-      },
-      "starPower": {
-        "score": 7,
-        "explanation": "Brazil's Paris 2024 bronze-medal team and the reigning champions could both appear, though Italy's qualification is not yet confirmed."
-      },
-      "uniqueness": {
-        "score": 4,
-        "explanation": "Standard quarterfinal in an established sport, with the appeal coming from the teams rather than the session itself."
-      },
-      "demand": {
-        "score": 6,
-        "explanation": "Knockout match featuring storied programs, which should attract strong interest from volleyball fans."
-      },
-      "aggregate": 5.8,
-      "overall": "A women's quarterfinal that could feature Brazil and Italy, two of the sport's most storied programs. Italy still needs to qualify, so the matchup remains open until the preliminary results are in."
-    },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
-    "batchId": null,
-    "generatedAt": "2026-11-11T11:22:15.284Z",
-    "inputHash": "ebb0c008cf6136a9"
-  },
-  "VVO44": {
-    "agg": 6.1,
-    "rSig": 5,
-    "rExp": 8,
-    "rStar": 6,
+    "rExp": 6,
+    "rStar": 8,
     "rUniq": 4,
     "rDem": 7,
     "scorecard": {
       "significance": {
         "score": 5,
-        "explanation": "Last of four women's quarterfinals that day, with single-elimination stakes that send one team into the semifinals."
+        "explanation": "Knockout quarterfinal with a semifinal berth on the line. One loss ends the run."
       },
       "experience": {
-        "score": 8,
-        "explanation": "Late 9 PM slot in an arena that hosts evening crowds, giving the session a big-night atmosphere."
+        "score": 6,
+        "explanation": "Monday at 1 PM is a comfortable afternoon slot. The tension of single elimination lifts it above a prelim."
       },
       "starPower": {
-        "score": 6,
-        "explanation": "Could feature the host United States, the Paris 2024 silver medalists, though the bracket placement is not yet set."
+        "score": 8,
+        "explanation": "Poland arrives with Wilfredo Leon, Tomasz Fornal and libero Jakub Popiwczak. Back-to-back Nations League champions are a big draw in any quarterfinal."
       },
       "uniqueness": {
         "score": 4,
-        "explanation": "Standard quarterfinal format at a generic venue. The host-nation angle lifts it slightly but not into rarity territory."
+        "explanation": "A standard-format quarterfinal at a generic venue. The Paris silver medalists add a little extra gloss."
       },
       "demand": {
         "score": 7,
-        "explanation": "A possible host-nation appearance in a prime-time quarterfinal should draw strong demand."
+        "explanation": "Poland is the sport's most consistent winner and travels with a loud fan base. Strong knockout demand."
       },
-      "aggregate": 6.1,
-      "overall": "The evening women's quarterfinal and the last of four that day, sending one team into the semifinals. The United States could appear here, with the matchup depending on the preliminary results."
+      "aggregate": 5.9,
+      "overall": "Poland has been the best team in men's volleyball since Paris, and a knockout round is where they get another run at the gold France took from them. A good afternoon pick for star power."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:15.284Z",
-    "inputHash": "f9b4875d7ffc8846"
+    "generatedAt": "2026-11-11T14:22:44.462Z",
+    "inputHash": "3fb0e1dceac5bb73"
   },
-  "VVO45": {
-    "agg": 6,
-    "rSig": 6,
-    "rExp": 6,
-    "rStar": 6,
+  "VVO39": {
+    "agg": 6.3,
+    "rSig": 5,
+    "rExp": 7,
+    "rStar": 8,
     "rUniq": 5,
     "rDem": 7,
     "scorecard": {
       "significance": {
-        "score": 6,
-        "explanation": "Men's semifinal that guarantees at least a bronze medal for the winners and eliminates the losers from the gold race."
+        "score": 5,
+        "explanation": "Single-elimination quarterfinal where one loss ends the medal chase. The drama is the bracket, not a trophy."
       },
       "experience": {
-        "score": 6,
-        "explanation": "Late-morning semifinal at a full arena, with solid energy but without the evening atmosphere."
+        "score": 7,
+        "explanation": "Monday 5 PM is an early-evening knockout with the crowd filling in. A strong atmosphere for high-level volleyball."
       },
       "starPower": {
-        "score": 6,
-        "explanation": "Qualified teams such as Japan, Cuba and Brazil offer recognizable names, but the semifinal lineup is not yet set."
+        "score": 8,
+        "explanation": "Jean Patry, Trevor Clevenot and setter Antoine Brizard could be chasing a three-peat. Bulgaria's Aleksandar Nikolov is a scoring threat."
       },
       "uniqueness": {
         "score": 5,
-        "explanation": "Men's semifinal in an established sport at a generic venue, with the medal stakes as the main draw."
+        "explanation": "France chasing a historic three-peat adds a storyline. The format itself is routine."
       },
       "demand": {
         "score": 7,
-        "explanation": "Medal-guaranteeing semifinal with an arena that should fill, making it a strong pick for serious volleyball fans."
+        "explanation": "Evening knockout with reigning champion France in the mix. Strong demand, short of semifinals."
+      },
+      "aggregate": 6.3,
+      "overall": "A quarterfinal with dynasty stakes: France, if it qualifies, is gunning for a third straight gold. The early-evening crowd and the star finishers make this a strong pick."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:44.462Z",
+    "inputHash": "befecf64e3480065"
+  },
+  "VVO40": {
+    "agg": 6.7,
+    "rSig": 5,
+    "rExp": 8,
+    "rStar": 8,
+    "rUniq": 5,
+    "rDem": 8,
+    "scorecard": {
+      "significance": {
+        "score": 5,
+        "explanation": "A quarterfinal where a loss means going home. Not a medal match, but the pressure is real."
+      },
+      "experience": {
+        "score": 8,
+        "explanation": "Monday at 9 PM, the last match of the day, with Anaheim's volleyball bowl packed. A late-night knockout with the host team is peak atmosphere here."
+      },
+      "starPower": {
+        "score": 8,
+        "explanation": "The Paris bronze-medal Americans, led by Karch Kiraly, are the headline. Ranked fourth in the world in October 2026 and a Nations League silver medalist."
+      },
+      "uniqueness": {
+        "score": 5,
+        "explanation": "Home-nation knockout night at their training base. It still sits in a standard quarterfinal format."
+      },
+      "demand": {
+        "score": 8,
+        "explanation": "Late knockout night with the host Americans likely on court. Probably the hottest quarterfinal ticket of the day."
+      },
+      "aggregate": 6.7,
+      "overall": "As close to a home-court night as indoor volleyball gets: the U.S. men under Karch Kiraly in a late-night knockout. If you want noise and nerves, this is the quarterfinal."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:44.462Z",
+    "inputHash": "4dbfc3dd3c34c393"
+  },
+  "VVO41": {
+    "agg": 5.7,
+    "rSig": 5,
+    "rExp": 6,
+    "rStar": 7,
+    "rUniq": 5,
+    "rDem": 6,
+    "scorecard": {
+      "significance": {
+        "score": 5,
+        "explanation": "Women's quarterfinal where a win books a Thursday semifinal. A loss ends the medal chase at breakfast time."
+      },
+      "experience": {
+        "score": 6,
+        "explanation": "A 9 AM Tuesday start gives it a quieter crowd. The knockout stakes keep the court tense."
+      },
+      "starPower": {
+        "score": 7,
+        "explanation": "Brazil, Turkiye, Canada and the host Americans are all possible. Italy's Paola Egonu depends on qualification."
+      },
+      "uniqueness": {
+        "score": 5,
+        "explanation": "Debut nations like Thailand and Egypt could still be alive. Otherwise a standard knockout slot."
+      },
+      "demand": {
+        "score": 6,
+        "explanation": "Morning quarterfinal of a popular tournament. Good interest, with an easier path to a seat than the evening matches."
+      },
+      "aggregate": 5.7,
+      "overall": "A breakfast-hour knockout where the underdog stories, Canada's return, Thailand and Egypt, could actually collide with contenders. The earliest quarterfinal slot is the easier ticket."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:44.462Z",
+    "inputHash": "41549872a53a58b4"
+  },
+  "VVO42": {
+    "agg": 6,
+    "rSig": 5,
+    "rExp": 6,
+    "rStar": 8,
+    "rUniq": 5,
+    "rDem": 7,
+    "scorecard": {
+      "significance": {
+        "score": 5,
+        "explanation": "Quarterfinal where the loser goes home. Medal contention narrows to eight teams."
+      },
+      "experience": {
+        "score": 6,
+        "explanation": "Tuesday 1 PM is a comfortable afternoon with a knockout edge. Strong volleyball, but not the evening roar."
+      },
+      "starPower": {
+        "score": 8,
+        "explanation": "Melissa Vargas and Paola Egonu each scored 28 in the 2026 European final. Turkey is in, and Italy could be."
+      },
+      "uniqueness": {
+        "score": 5,
+        "explanation": "A possible Turkey-Italy rematch of two recent 3-2 finals. The format itself is routine."
+      },
+      "demand": {
+        "score": 7,
+        "explanation": "Star-studded knockout volleyball on a Tuesday afternoon. Strong, though evening matches will be harder to get."
       },
       "aggregate": 6,
-      "overall": "A men's semifinal that guarantees a medal for the winner and sends the loser to the bronze match. Participants depend on the quarterfinal results, which are not yet known."
+      "overall": "If the bracket lines up, this is Vargas against Egonu again, with two recent five-set finals as the backdrop. A great afternoon for fans who want star scorers."
     },
-    "model": "claude-haiku-5-5",
-    "promptVersion": 6,
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
     "batchId": null,
-    "generatedAt": "2026-11-11T11:22:15.284Z",
-    "inputHash": "0560167d470deecb"
+    "generatedAt": "2026-11-11T14:22:44.462Z",
+    "inputHash": "e7f681fec6dedf15"
+  },
+  "VVO43": {
+    "agg": 6.3,
+    "rSig": 5,
+    "rExp": 7,
+    "rStar": 8,
+    "rUniq": 5,
+    "rDem": 7,
+    "scorecard": {
+      "significance": {
+        "score": 5,
+        "explanation": "Quarterfinal where a loss ends the run. Medal hopes are alive only for the winner."
+      },
+      "experience": {
+        "score": 7,
+        "explanation": "Tuesday 5 PM sees the crowd building for a knockout match. Early-evening energy in a volleyball-built arena."
+      },
+      "starPower": {
+        "score": 8,
+        "explanation": "Brazil, Italy and the Paris silver-medal Americans all live in this bracket. Three Paris podium teams make for top-end talent."
+      },
+      "uniqueness": {
+        "score": 5,
+        "explanation": "Brazil trying to break a silver-medal streak adds a theme. The quarterfinal format is standard."
+      },
+      "demand": {
+        "score": 7,
+        "explanation": "Early-evening knockout with possible Paris medalists. Strong demand, just under semifinal level."
+      },
+      "aggregate": 6.3,
+      "overall": "Brazil needs a knockout win to shed its near-miss label, and the Paris podium teams are all floating around this bracket. A good early-evening ticket with real pedigree."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:44.462Z",
+    "inputHash": "402c73aedacb0a47"
+  },
+  "VVO44": {
+    "agg": 6.5,
+    "rSig": 5,
+    "rExp": 8,
+    "rStar": 8,
+    "rUniq": 5,
+    "rDem": 7,
+    "scorecard": {
+      "significance": {
+        "score": 5,
+        "explanation": "Last quarterfinal of the day, deciding the final semifinalist. Win and you play Thursday; lose and you're out."
+      },
+      "experience": {
+        "score": 8,
+        "explanation": "Tuesday at 9 PM, the day's closer, with the arena at full volume. Late-night knockout volleyball is the best slot of the day."
+      },
+      "starPower": {
+        "score": 8,
+        "explanation": "The host Americans, Giovanni Guidetti's Canada, and possibly Paola Egonu's Italy are in play. Strong names across the draw."
+      },
+      "uniqueness": {
+        "score": 5,
+        "explanation": "The U.S. hosting Games volleyball for a third time adds some history. The match itself is a standard quarterfinal."
+      },
+      "demand": {
+        "score": 7,
+        "explanation": "Late-night knockout with the host nation possible. One of the day's hotter tickets."
+      },
+      "aggregate": 6.5,
+      "overall": "The last quarterfinal of the day has the best slot, with the day narrowing to one match. Pick it for the late-night energy and a possible Egonu or home-team showing."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:44.462Z",
+    "inputHash": "414fd50a7f3e3ab7"
+  },
+  "VVO45": {
+    "agg": 7.2,
+    "rSig": 7,
+    "rExp": 7,
+    "rStar": 8,
+    "rUniq": 6,
+    "rDem": 8,
+    "scorecard": {
+      "significance": {
+        "score": 7,
+        "explanation": "Semifinal in a marquee sport: win and you play for gold Saturday, lose and it's bronze on Friday."
+      },
+      "experience": {
+        "score": 7,
+        "explanation": "A Wednesday 11 AM semifinal brings high stakes but a daytime crowd. Great volleyball in a packed bowl."
+      },
+      "starPower": {
+        "score": 8,
+        "explanation": "Wilfredo Leon, Ran Takahashi and Brazil's three-time champions could meet. France and Italy may also be in the field."
+      },
+      "uniqueness": {
+        "score": 6,
+        "explanation": "Medal-adjacent knockout, and Cuba's return adds interest. A semifinal in an established sport at a generic venue."
+      },
+      "demand": {
+        "score": 8,
+        "explanation": "Men's volleyball semifinal with top contenders on court. Medal proximity makes this a competitive ticket."
+      },
+      "aggregate": 7.2,
+      "overall": "This is where volleyball turns into a medal race, with Poland's Leon and Japan's Takahashi as the headline matchup. Daytime, but with the tension of a semifinal."
+    },
+    "model": "claude-sonnet-5-5",
+    "promptVersion": 8,
+    "batchId": null,
+    "generatedAt": "2026-11-11T14:22:44.462Z",
+    "inputHash": "3e2e70570839fa16"
   },
   "VVO46": {
     "agg": 6.7,
