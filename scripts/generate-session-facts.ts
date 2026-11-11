@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import pLimit from 'p-limit'
 
+import type { SessionSource } from '../src/types/session.js'
 import { createAnthropicClient } from './lib/anthropic-client.js'
 import { TRUNCATED_MESSAGE } from './lib/claude-research.js'
 import {
@@ -195,7 +196,10 @@ async function main() {
       ),
     )
   } else {
-    const truncated: GroundingJob[] = []
+    // Sessions to ask about again on the Messages API: whole batch items that ran out
+    // of tokens (a batch item can't be split after the fact), and sessions a response
+    // left out. fetchGroundingBatch splits and re-asks further as needed.
+    const reruns: { job: GroundingJob; sessions: SessionSource[]; truncated: boolean }[] = []
     await fetchGroundingViaBatches(client, jobs, model, {
       onSportComplete: async ({ sport, outcomes, elapsedSec }) => {
         let grounded = 0
@@ -203,27 +207,31 @@ async function main() {
         const errors = new Set<string>()
         for (const { job, results, error } of outcomes) {
           if (error) errors.add(error)
-          if (error === TRUNCATED_MESSAGE) truncated.push(job)
           await save(results)
           grounded += results.length
           const got = new Set(results.map((r) => r.id))
-          for (const s of job.batch) if (!got.has(s.id)) missing.push(s.id)
+          const left = job.batch.filter((s) => !got.has(s.id))
+          for (const s of left) missing.push(s.id)
+          if (error === TRUNCATED_MESSAGE)
+            reruns.push({ job, sessions: job.batch, truncated: true })
+          else if (!error && left.length > 0) reruns.push({ job, sessions: left, truncated: false })
         }
         const tail = missing.length > 0 ? ` ✗ missing ${missing.join(',')}` : ''
         const fail = errors.size > 0 ? ` (${[...errors].join('; ')})` : ''
         console.log(`    ✓ ${sport} done in ${elapsedSec}s — grounded ${grounded}${fail}${tail}`)
       },
     })
-    // A batch item can't be split after the fact, so rerun the ones that ran out of
-    // tokens on the Messages API in halves (which split further if they need to).
-    if (truncated.length > 0) {
-      console.log(`Rerunning ${truncated.length} truncated batch(es) in smaller requests`)
-      for (const job of truncated) {
-        const mid = Math.ceil(job.batch.length / 2)
-        for (const half of [job.batch.slice(0, mid), job.batch.slice(mid)]) {
+    if (reruns.length > 0) {
+      console.log(
+        `Re-asking about ${reruns.length} truncated or incomplete batch(es) in smaller requests`,
+      )
+      for (const { job, sessions: list, truncated } of reruns) {
+        const mid = Math.ceil(list.length / 2)
+        const parts = truncated && list.length > 1 ? [list.slice(0, mid), list.slice(mid)] : [list]
+        for (const part of parts) {
           const results = await fetchGroundingBatch(
             client,
-            half,
+            part,
             job.sport,
             model,
             job.extraInstructions,
@@ -231,9 +239,9 @@ async function main() {
           )
           await save(results)
           const got = new Set(results.map((r) => r.id))
-          const missing = half.filter((s) => !got.has(s.id)).map((s) => s.id)
+          const missing = part.filter((s) => !got.has(s.id)).map((s) => s.id)
           const tail = missing.length > 0 ? ` ✗ missing ${missing.join(',')}` : ''
-          console.log(`  ${job.sport} (${half.length}) ✓ ${results.length} grounded${tail}`)
+          console.log(`  ${job.sport} (${part.length}) ✓ ${results.length} grounded${tail}`)
         }
       }
     }

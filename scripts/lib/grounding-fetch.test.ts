@@ -72,4 +72,74 @@ describe('fetchGroundingBatch', () => {
     // 8 → 4 + 4 → four requests of 2, with no retries of a request that already ran out.
     expect(stream).toHaveBeenCalledTimes(1 + 2 + 4)
   })
+
+  // Responds with a record covering `answered(ids)` of the sessions in each request.
+  function recordingClient(
+    sessions: SessionSource[],
+    answer: (ids: string[]) => { id: string; materialChange: boolean; facts: string[] }[],
+  ) {
+    return fakeClient((params) => {
+      const prompt = String(params.messages[0].content)
+      const ids = sessions.map((s) => s.id).filter((id) => prompt.includes(id))
+      const record = {
+        sessions: answer(ids).map((a) => ({
+          id: a.id,
+          materialChange: a.materialChange,
+          groundingFacts: a.facts,
+          relatedNews: [],
+          sourceUrls: [],
+        })),
+      }
+      return message('tool_use', [{ type: 'tool_use', id: 'toolu_1', name: 'record_grounding', input: record }])
+    })
+  }
+
+  it('asks again about sessions a response left out', async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {})
+    // Requests covering more than two sessions only answer for the first two.
+    const { client, stream } = recordingClient(batch, (ids) =>
+      ids.slice(0, 2).map((id) => ({ id, materialChange: true, facts: [`Fact about ${id}`] })),
+    )
+
+    const results = await fetchGroundingBatch(client, batch, 'Football (Soccer)', 'm')
+
+    expect(results.map((r) => r.id).sort()).toEqual(batch.map((s) => s.id).sort())
+    // 8 → 6 left out, asked in halves of 3 → each leaves 1 out, asked once more.
+    expect(stream).toHaveBeenCalledTimes(1 + 2 + 2)
+  })
+
+  it('stops re-asking after the retry limit', async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {})
+    const { client, stream } = recordingClient(batch, () => [])
+
+    const results = await fetchGroundingBatch(client, batch, 'Football (Soccer)', 'm')
+
+    expect(results).toEqual([])
+    // 8 → halves of 4 → halves of 2, then give up.
+    expect(stream).toHaveBeenCalledTimes(1 + 2 + 4)
+  })
+
+  it('never returns a changed brief with no facts', async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {})
+    const pair = batch.slice(0, 2)
+    // "No change" for a session with no stored brief counts as changed, so it's empty too.
+    const { client } = recordingClient(pair, (ids) =>
+      ids.map((id) => ({ id, materialChange: id === pair[0].id, facts: [] })),
+    )
+
+    const results = await fetchGroundingBatch(client, pair, 'Football (Soccer)', 'm', undefined, undefined, 0)
+
+    expect(results).toEqual([])
+  })
+
+  it('keeps "no change" for a session that has a stored brief', async () => {
+    const [session] = batch
+    const previous = new Map([[session.id, { facts: ['Old fact'], newsTitles: [], gatheredAt: '2026-10-30' }]])
+    const { client } = recordingClient([session], (ids) => ids.map((id) => ({ id, materialChange: false, facts: [] })))
+
+    const results = await fetchGroundingBatch(client, [session], 'Football (Soccer)', 'm', undefined, previous)
+
+    expect(results).toHaveLength(1)
+    expect(results[0].materialChange).toBe(false)
+  })
 })
