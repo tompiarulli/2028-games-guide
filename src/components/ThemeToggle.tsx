@@ -1,26 +1,32 @@
 import { Sun, Moon } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useSyncExternalStore } from 'react'
 
 const STORAGE_KEY = '28games_session_guide_theme'
+const darkQuery = '(prefers-color-scheme: dark)'
 
-export function ThemeToggle() {
-  const [dark, setDark] = useState(true)
+// The theme lives on <html data-theme>, set before paint by the init script in __root.tsx;
+// without it, the OS preference applies.
+function subscribe(onChange: () => void) {
+  const observer = new MutationObserver(onChange)
+  observer.observe(document.documentElement, { attributeFilter: ['data-theme'] })
+  const media = window.matchMedia(darkQuery)
+  media.addEventListener('change', onChange)
+  return () => {
+    observer.disconnect()
+    media.removeEventListener('change', onChange)
+  }
+}
 
-  useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored === 'light') {
-      setDark(false)
-    } else if (stored === 'dark') {
-      setDark(true)
-    } else {
-      setDark(window.matchMedia('(prefers-color-scheme: dark)').matches)
-    }
-  }, [])
+function isDark() {
+  const theme = document.documentElement.getAttribute('data-theme')
+  return theme ? theme === 'dark' : window.matchMedia(darkQuery).matches
+}
+
+export function ThemeToggle({ className }: { className?: string }) {
+  const dark = useSyncExternalStore(subscribe, isDark, () => true)
 
   function toggle() {
-    const next = !dark
-    setDark(next)
-    const theme = next ? 'dark' : 'light'
+    const theme = dark ? 'light' : 'dark'
     localStorage.setItem(STORAGE_KEY, theme)
     const doc = document.documentElement
     doc.setAttribute('data-theme-switching', '')
@@ -30,11 +36,7 @@ export function ThemeToggle() {
   }
 
   return (
-    <button
-      className="border-border bg-surface text-ink2 hover:border-gold hover:bg-surface2 hover:text-gold absolute top-4 right-5 z-5 flex size-9 cursor-pointer items-center justify-center rounded-lg border transition-all duration-150 max-md:top-3 max-md:right-3"
-      onClick={toggle}
-      title="Toggle light/dark mode"
-    >
+    <button className={className} onClick={toggle} title="Toggle light/dark mode">
       {dark ? <Sun size={18} /> : <Moon size={18} />}
     </button>
   )
