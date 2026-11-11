@@ -76,7 +76,7 @@ pnpm generate:session-scores --sport=Archery --no-batch
 pnpm refresh ATH04 --skip-grounding --prompt "Tighten the blurb"
 ```
 
-All three stages use Anthropic prompt caching and Messages Batches by default. Stage 1 runs Claude with the web search tool, 20 sessions of one sport per request and at most 15 searches each. A batched request whose search turn pauses can't be resumed, so those sessions stay due — rerun the command, or use `--no-batch` for the stragglers. Per-sport log lines report completion so you can watch the run.
+All three stages use Anthropic prompt caching and Messages Batches by default. Stage 1 runs Claude with the web search tool, 20 sessions of one sport per request and at most 15 searches each. A batched request whose search turn pauses can't be resumed, so those sessions stay due — rerun the command, or use `--no-batch` for the stragglers. A request that runs out of output tokens (sports with long briefs, like Football) is rejected instead of saved partially, then split in half and rerun on the Messages API until each part fits. Per-sport log lines report completion so you can watch the run.
 
 Every generate script and `pnpm refresh` ends with a usage summary: requests, tokens, cache hits, web searches, and an estimated cost from list prices. Output that uses a trademarked term (see `containsBannedTerm` in `scripts/lib/session-content.ts`) is rejected: the session or fact entry stays due and is retried on the next run.
 

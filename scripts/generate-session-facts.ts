@@ -2,6 +2,7 @@ import 'dotenv/config'
 import pLimit from 'p-limit'
 
 import { createAnthropicClient } from './lib/anthropic-client.js'
+import { TRUNCATED_MESSAGE } from './lib/claude-research.js'
 import {
   type GroundingEntry,
   chunk as chunkList,
@@ -194,6 +195,7 @@ async function main() {
       ),
     )
   } else {
+    const truncated: GroundingJob[] = []
     await fetchGroundingViaBatches(client, jobs, model, {
       onSportComplete: async ({ sport, outcomes, elapsedSec }) => {
         let grounded = 0
@@ -201,6 +203,7 @@ async function main() {
         const errors = new Set<string>()
         for (const { job, results, error } of outcomes) {
           if (error) errors.add(error)
+          if (error === TRUNCATED_MESSAGE) truncated.push(job)
           await save(results)
           grounded += results.length
           const got = new Set(results.map((r) => r.id))
@@ -211,6 +214,29 @@ async function main() {
         console.log(`    ✓ ${sport} done in ${elapsedSec}s — grounded ${grounded}${fail}${tail}`)
       },
     })
+    // A batch item can't be split after the fact, so rerun the ones that ran out of
+    // tokens on the Messages API in halves (which split further if they need to).
+    if (truncated.length > 0) {
+      console.log(`Rerunning ${truncated.length} truncated batch(es) in smaller requests`)
+      for (const job of truncated) {
+        const mid = Math.ceil(job.batch.length / 2)
+        for (const half of [job.batch.slice(0, mid), job.batch.slice(mid)]) {
+          const results = await fetchGroundingBatch(
+            client,
+            half,
+            job.sport,
+            model,
+            job.extraInstructions,
+            job.previous,
+          )
+          await save(results)
+          const got = new Set(results.map((r) => r.id))
+          const missing = half.filter((s) => !got.has(s.id)).map((s) => s.id)
+          const tail = missing.length > 0 ? ` ✗ missing ${missing.join(',')}` : ''
+          console.log(`  ${job.sport} (${half.length}) ✓ ${results.length} grounded${tail}`)
+        }
+      }
+    }
   }
 
   printUsageSummary()

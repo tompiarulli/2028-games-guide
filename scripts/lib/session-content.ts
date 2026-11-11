@@ -23,6 +23,8 @@ import type {
 } from '../../src/types/session.js'
 import {
   RESEARCH_DEFAULT_MODEL,
+  TruncatedResponseError,
+  assertNotTruncated,
   buildResearchParams,
   extractRecord,
   extractSearchSources,
@@ -80,8 +82,12 @@ export const GROUNDING_BATCH_SIZE = 20
 // Web search cap per grounding request ($10 per 1,000 searches). A batch request
 // covers up to GROUNDING_BATCH_SIZE sessions of one sport.
 export const GROUNDING_BATCH_MAX_SEARCHES = 15
-// Room for up to 20 full briefs in one record_grounding call, plus thinking.
-const GROUNDING_BATCH_MAX_TOKENS = 32000
+// The model's maximum: up to 20 full briefs in one record_grounding call, plus
+// thinking (which counts toward the cap). 32K cut off sports with long briefs like
+// Football. Only generated tokens are billed, so headroom is free, while a lower cap
+// pays for the cut-off attempt and then again for the split. A request that still
+// runs out is split (see fetchGroundingBatch).
+const GROUNDING_BATCH_MAX_TOKENS = 128000
 export const GROUNDING_SINGLE_MAX_SEARCHES = 5
 export const WRITING_BATCH_SIZE = 15
 export const SCORING_BATCH_SIZE = 15
@@ -738,6 +744,17 @@ export async function fetchGroundingBatch(
       const content = await runResearch(client, params)
       return parseGroundingMessage(content, sessionIds, previousIds)
     } catch (err) {
+      // The same request would run out of tokens again, so split it instead.
+      if (err instanceof TruncatedResponseError && sessions.length > 1) {
+        const mid = Math.ceil(sessions.length / 2)
+        console.error(`    Grounding for [${ids}] hit max_tokens; splitting in two`)
+        const fetchHalf = (half: SessionSource[]) =>
+          fetchGroundingBatch(client, half, sport, model, extraInstructions, previous)
+        return [
+          ...(await fetchHalf(sessions.slice(0, mid))),
+          ...(await fetchHalf(sessions.slice(mid))),
+        ]
+      }
       const msg = err instanceof Error ? err.message : String(err)
       console.error(`    Grounding attempt ${attempt}/${MAX_RETRIES} failed for [${ids}]: ${msg}`)
       if (attempt < MAX_RETRIES) await new Promise((r) => setTimeout(r, RETRY_DELAY_MS * attempt))
@@ -1132,6 +1149,7 @@ async function runMessageBatchesBySport<TJob extends { sport: string }, TResult>
           continue
         }
         try {
+          assertNotTruncated(item.result.message.stop_reason)
           outcome.results = parseMessage(item.result.message.content, outcome.job)
         } catch (err) {
           outcome.error = err instanceof Error ? err.message : String(err)
