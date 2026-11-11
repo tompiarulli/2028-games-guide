@@ -66,8 +66,11 @@ export const ANTHROPIC_SCORING_DEFAULT_MODEL = 'claude-sonnet-5-5'
 // doesn't silently change how much the stage thinks.
 const WRITING_EFFORT = 'high'
 const SCORING_EFFORT = 'medium'
-const WRITING_MAX_TOKENS = 16000
-const SCORING_MAX_TOKENS = 16000
+// The model's maximum. 16K cut off Athletics writing (several events per session,
+// 15 sessions per request). Only generated tokens are billed, so the headroom is
+// free; a cut-off response is rejected rather than saved (see assertNotTruncated).
+const WRITING_MAX_TOKENS = 128000
+const SCORING_MAX_TOKENS = 128000
 export const GROUNDING_VERSION = 3
 export const WRITING_VERSION = 5
 export const SCORING_VERSION = 8
@@ -979,8 +982,10 @@ export async function generateWriting(
   const params = buildWritingRequest(sessions, sport, grounding, model, extraInstructions)
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      const response = await client.messages.create(params)
+      // Streamed because the SDK requires it for a max_tokens this large.
+      const response = await client.messages.stream(params).finalMessage()
       recordUsage(response.model, response.usage, false)
+      assertNotTruncated(response.stop_reason)
       return parseWritingMessage(response.content)
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
@@ -1505,8 +1510,10 @@ export async function generateScoring(
   const params = buildScoringRequest(sessions, sport, grounding, writing, model, extraInstructions)
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      const response = await client.messages.create(params)
+      // Streamed because the SDK requires it for a max_tokens this large.
+      const response = await client.messages.stream(params).finalMessage()
       recordUsage(response.model, response.usage, false)
+      assertNotTruncated(response.stop_reason)
       return parseScoringMessage(response.content)
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)

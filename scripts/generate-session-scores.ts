@@ -166,11 +166,13 @@ async function main() {
       onSportComplete: async ({ sport, outcomes, elapsedSec }) => {
         let scored = 0
         let failed = 0
+        const errors = new Set<string>()
         const missing: string[] = []
         const toUpsert: Parameters<typeof upsertScoring>[0] = []
         for (const { job, results, error } of outcomes) {
           if (error) {
             failed += 1
+            errors.add(error)
             for (const s of job.batch) missing.push(s.id)
             continue
           }
@@ -195,7 +197,7 @@ async function main() {
           }
         }
         const tail = missing.length > 0 ? ` ✗ missing ${missing.join(',')}` : ''
-        const fail = failed > 0 ? ` (${failed} batch error(s))` : ''
+        const fail = failed > 0 ? ` (${failed} batch error(s): ${[...errors].join('; ')})` : ''
         console.log(`    ✓ ${sport} done in ${elapsedSec}s — scored ${scored}${fail}${tail}`)
       },
     })
