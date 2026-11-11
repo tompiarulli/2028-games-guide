@@ -678,6 +678,10 @@ function parseGroundingMessage(
         : []),
       ...relatedNews.map((n) => n.sourceUrl),
     ]
+    // A "changed" brief with no facts would overwrite the stored one with nothing
+    // (this includes "no change" for a session that has no stored brief). Leave the
+    // session out so it's asked about again instead.
+    if (materialChange && facts.length === 0) continue
     results.push({
       id: item.id,
       groundingFacts: facts,
@@ -726,6 +730,11 @@ export async function fetchGrounding(
   return results.find((r) => r.id === session.id) ?? null
 }
 
+// How many times to re-ask about sessions a response left out. Claude sometimes
+// lumps near-identical sessions (e.g. a sport's group-stage days) together and
+// records only a few of them; asking again in smaller requests gets the rest.
+const OMISSION_RETRIES = 2
+
 export async function fetchGroundingBatch(
   client: Anthropic,
   sessions: SessionSource[],
@@ -733,27 +742,48 @@ export async function fetchGroundingBatch(
   model: string,
   extraInstructions?: string,
   previous?: Map<string, PreviousBrief>,
+  omissionRetries = OMISSION_RETRIES,
 ): Promise<GroundingData[]> {
   if (sessions.length === 0) return []
   const params = buildGroundingRequest(sessions, sport, model, extraInstructions, previous)
   const sessionIds = new Set(sessions.map((s) => s.id))
   const previousIds = previousIdsFor(sessions, previous)
   const ids = sessions.map((s) => s.id).join(',')
+  const fetchInHalves = async (list: SessionSource[], retries: number) => {
+    const mid = Math.ceil(list.length / 2)
+    const halves = list.length > 1 ? [list.slice(0, mid), list.slice(mid)] : [list]
+    const out: GroundingData[] = []
+    for (const half of halves) {
+      out.push(
+        ...(await fetchGroundingBatch(
+          client,
+          half,
+          sport,
+          model,
+          extraInstructions,
+          previous,
+          retries,
+        )),
+      )
+    }
+    return out
+  }
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
       const content = await runResearch(client, params)
-      return parseGroundingMessage(content, sessionIds, previousIds)
+      const results = parseGroundingMessage(content, sessionIds, previousIds)
+      const got = new Set(results.map((r) => r.id))
+      const omitted = sessions.filter((s) => !got.has(s.id))
+      if (omitted.length === 0 || omissionRetries === 0) return results
+      console.error(
+        `    Grounding for [${ids}] left out ${omitted.map((s) => s.id).join(',')}; asking again`,
+      )
+      return [...results, ...(await fetchInHalves(omitted, omissionRetries - 1))]
     } catch (err) {
       // The same request would run out of tokens again, so split it instead.
       if (err instanceof TruncatedResponseError && sessions.length > 1) {
-        const mid = Math.ceil(sessions.length / 2)
         console.error(`    Grounding for [${ids}] hit max_tokens; splitting in two`)
-        const fetchHalf = (half: SessionSource[]) =>
-          fetchGroundingBatch(client, half, sport, model, extraInstructions, previous)
-        return [
-          ...(await fetchHalf(sessions.slice(0, mid))),
-          ...(await fetchHalf(sessions.slice(mid))),
-        ]
+        return fetchInHalves(sessions, omissionRetries)
       }
       const msg = err instanceof Error ? err.message : String(err)
       console.error(`    Grounding attempt ${attempt}/${MAX_RETRIES} failed for [${ids}]: ${msg}`)
