@@ -23,6 +23,23 @@ export const RESEARCH_EFFORT = 'medium'
 // next run.
 const MAX_CONTINUATIONS = 5
 
+// A response that ran out of output tokens. Its record tool call is cut off
+// mid-JSON, and the SDK still hands back whatever parsed, so a partial answer
+// (sessions missing, or a session with an empty brief) would otherwise look
+// like a normal one. Callers can retry with a smaller request.
+export const TRUNCATED_MESSAGE = 'Response hit max_tokens before finishing'
+
+export class TruncatedResponseError extends Error {
+  constructor() {
+    super(TRUNCATED_MESSAGE)
+    this.name = 'TruncatedResponseError'
+  }
+}
+
+export function assertNotTruncated(stopReason: string | null) {
+  if (stopReason === 'max_tokens') throw new TruncatedResponseError()
+}
+
 export interface RecordTool {
   name: string
   description: string
@@ -106,6 +123,7 @@ export async function runResearch(
     const response = await client.messages.stream({ ...params, messages }).finalMessage()
     recordUsage(response.model, response.usage, false)
     content.push(...response.content)
+    assertNotTruncated(response.stop_reason)
     if (response.stop_reason === 'refusal') {
       throw new Error(`Refused (${response.stop_details?.category ?? 'no category'})`)
     }
