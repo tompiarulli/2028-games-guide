@@ -82,11 +82,12 @@ export const GROUNDING_BATCH_SIZE = 20
 // Web search cap per grounding request ($10 per 1,000 searches). A batch request
 // covers up to GROUNDING_BATCH_SIZE sessions of one sport.
 export const GROUNDING_BATCH_MAX_SEARCHES = 15
-// Room for up to 20 full briefs in one record_grounding call, plus thinking (which
-// counts toward the cap). 32K cut off sports with long briefs like Football. Only
-// generated tokens are billed, so headroom is free; a request that still runs out
-// is split (see fetchGroundingBatch).
-const GROUNDING_BATCH_MAX_TOKENS = 64000
+// The model's maximum: up to 20 full briefs in one record_grounding call, plus
+// thinking (which counts toward the cap). 32K cut off sports with long briefs like
+// Football. Only generated tokens are billed, so headroom is free, while a lower cap
+// pays for the cut-off attempt and then again for the split. A request that still
+// runs out is split (see fetchGroundingBatch).
+const GROUNDING_BATCH_MAX_TOKENS = 128000
 export const GROUNDING_SINGLE_MAX_SEARCHES = 5
 export const WRITING_BATCH_SIZE = 15
 export const SCORING_BATCH_SIZE = 15
