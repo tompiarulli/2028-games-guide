@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 
 const STORAGE_KEY = '28games_session_guide_theme'
 
-export function ThemeToggle() {
+export function ThemeToggle({ className }: { className?: string }) {
   const [dark, setDark] = useState(true)
 
   useEffect(() => {
@@ -30,11 +30,7 @@ export function ThemeToggle() {
   }
 
   return (
-    <button
-      className="border-border bg-surface text-ink2 hover:border-gold hover:bg-surface2 hover:text-gold absolute top-4 right-5 z-5 flex size-9 cursor-pointer items-center justify-center rounded-lg border transition-all duration-150 max-md:top-3 max-md:right-3"
-      onClick={toggle}
-      title="Toggle light/dark mode"
-    >
+    <button className={className} onClick={toggle} title="Toggle light/dark mode">
       {dark ? <Sun size={18} /> : <Moon size={18} />}
     </button>
   )
