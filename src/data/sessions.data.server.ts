@@ -1,3 +1,5 @@
+import { createHash } from 'node:crypto'
+
 import sessionContentData from '@/data/session-content.json'
 import sessionFactsData from '@/data/session-facts.json'
 import sessionScoresData from '@/data/session-scores.json'
@@ -20,6 +22,7 @@ import type {
 export interface SessionsPage {
   items: Session[]
   nextOffset: number | null
+  dataVersion: string
   total: number
   sports: string[]
   zones: string[]
@@ -86,6 +89,9 @@ function toSession(source: SessionSource): Session {
 // cost is trivial and we avoid redoing the join on every request.
 const sessions: Session[] = sessionSources.map(toSession)
 const sessionsById = new Map(sessions.map((s) => [s.id, s]))
+// Pages are sliced by offset, so the client checks that every page it holds came from the
+// same session data before trusting the offsets to line up.
+const dataVersion = createHash('sha256').update(JSON.stringify(sessions)).digest('hex').slice(0, 12)
 
 const sports = [...new Set(sessions.map((s) => s.sport).filter(Boolean))].sort()
 const zones = [...new Set(sessions.map((s) => s.zone).filter(Boolean))].sort()
@@ -109,6 +115,7 @@ export async function getSessionsPageData({
   return {
     items,
     nextOffset,
+    dataVersion,
     total: sorted.length,
     sports,
     zones,
