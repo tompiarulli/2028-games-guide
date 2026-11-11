@@ -45,7 +45,22 @@ function SessionPicker() {
   const sessionsQuery = useSuspenseInfiniteQuery(sessionsInfiniteQueryOptions(search))
   const pages = sessionsQuery.data.pages
   const firstPage = pages[0]
-  const sessions = useMemo(() => pages.flatMap((page) => page.items), [pages])
+  // Pages are offset-based, so a page fetched against newer data than the cached first page
+  // (CDN-cached HTML from a previous deploy, or a dev server reloading regenerated JSON) can
+  // repeat or skip sessions that shifted across the page boundary. When that happens, refetch
+  // every loaded page from the current data; until it lands, keep the first occurrence of
+  // each session so keys stay unique.
+  const dataVersionMismatch = pages.some((page) => page.dataVersion !== firstPage.dataVersion)
+  useEffect(() => {
+    if (dataVersionMismatch && !sessionsQuery.isFetching) void sessionsQuery.refetch()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataVersionMismatch, sessionsQuery.isFetching, sessionsQuery.refetch])
+  const sessions = useMemo(() => {
+    const seen = new Set<string>()
+    return pages.flatMap((page) =>
+      page.items.filter((session) => !seen.has(session.id) && seen.add(session.id)),
+    )
+  }, [pages])
   const filters = useMemo(() => routeSearchToFilters(search), [search])
   const sort = useMemo(() => routeSearchToSort(search), [search])
   const selectedSessionId = search.session ?? null
