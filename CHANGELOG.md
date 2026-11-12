@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.1](https://github.com/tompiarulli/2028-games-guide/compare/v1.13.0...v1.13.1) (2026-11-12)
+
+
+### Bug Fixes
+
+* **checkly:** run monitors from US locations only ([#241](https://github.com/tompiarulli/2028-games-guide/issues/241)) ([0704efb](https://github.com/tompiarulli/2028-games-guide/commit/0704efba1c79b1f0480f4f84ce14048e4492efa0))
+
 ## [1.13.0](https://github.com/tompiarulli/2028-games-guide/compare/v1.12.0...v1.13.0) (2026-11-12)
 
 
