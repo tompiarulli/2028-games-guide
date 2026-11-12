@@ -78,7 +78,7 @@ export function Nav() {
         <ThemeToggle className={headerButtonClass} />
       </div>
       <h1 className="font-display relative mb-1.5 text-[2.2rem] leading-[1.1] font-normal -tracking-[0.03em] max-md:text-[1.6rem]">
-        <em className="text-gold italic">2028 Games</em> Session Guide
+        <em className="text-gold italic">2028 LA Games</em> Session Guide
       </h1>
       <p className="text-ink3 relative mx-auto mt-2 max-w-[600px] text-[0.72rem] leading-normal font-normal max-md:px-2">
         This is an{' '}
