@@ -10,7 +10,7 @@ export default defineConfig({
   checks: {
     activated: true,
     frequency: Frequency.EVERY_10M,
-    locations: ['us-east-1', 'eu-west-1'],
+    locations: ['us-east-1', 'us-west-1'],
     tags: ['28games'],
     checkMatch: '__checks__/**/*.check.ts',
     ignoreDirectoriesMatch: [
