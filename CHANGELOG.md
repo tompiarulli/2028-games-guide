@@ -1,5 +1,58 @@
 # Changelog
 
+## [1.13.0](https://github.com/tompiarulli/2028-games-guide/compare/v1.12.0...v1.13.0) (2026-11-12)
+
+
+### Features
+
+* **agents:** add remote MCP server, JSON API and llms.txt ([#213](https://github.com/tompiarulli/2028-games-guide/issues/213)) ([37db59d](https://github.com/tompiarulli/2028-games-guide/commit/37db59d714e51cece450cdb4920b2b6c637f60db))
+* **brand:** redesign favicon as a flat gold medal ([#217](https://github.com/tompiarulli/2028-games-guide/issues/217)) ([68ea09b](https://github.com/tompiarulli/2028-games-guide/commit/68ea09bd31814c1c4de0b72d3fa89fb2bff31f4b))
+* **nav:** add AI assistant setup dialog ([#216](https://github.com/tompiarulli/2028-games-guide/issues/216)) ([30a3920](https://github.com/tompiarulli/2028-games-guide/commit/30a3920cbffbb679971392d40f7ef40729e0407d))
+* **nav:** change the headline to 2028 LA Games Session Guide ([#240](https://github.com/tompiarulli/2028-games-guide/issues/240)) ([01ebdf7](https://github.com/tompiarulli/2028-games-guide/commit/01ebdf767fd4d49c53fbb0c7eb762c2b05b78b2a))
+
+
+### Bug Fixes
+
+* **content:** raise the writing and scoring output caps to the maximum ([#236](https://github.com/tompiarulli/2028-games-guide/issues/236)) ([c5b0e27](https://github.com/tompiarulli/2028-games-guide/commit/c5b0e27846560b950ee64174eb3ad052fb64f3d2))
+* **content:** re-ask about sessions grounding leaves out ([#235](https://github.com/tompiarulli/2028-games-guide/issues/235)) ([0042fc8](https://github.com/tompiarulli/2028-games-guide/commit/0042fc8adeb4834b769adfb65c5e98e8642d41e0))
+* **content:** split grounding requests that run out of tokens ([#234](https://github.com/tompiarulli/2028-games-guide/issues/234)) ([6b84d17](https://github.com/tompiarulli/2028-games-guide/commit/6b84d174a04f46b6a987e971cb2863c9267aa31c))
+* **content:** write engaging blurbs and score with sonnet ([#233](https://github.com/tompiarulli/2028-games-guide/issues/233)) ([2db766c](https://github.com/tompiarulli/2028-games-guide/commit/2db766cb4a08c8dbcff30358102062052a62881f))
+* **deps:** update tanstack ([#218](https://github.com/tompiarulli/2028-games-guide/issues/218)) ([6acdef1](https://github.com/tompiarulli/2028-games-guide/commit/6acdef14406c2a23daa378c7b5b49c189a34f343))
+* **sessions:** refetch list pages fetched from mixed data versions ([#239](https://github.com/tompiarulli/2028-games-guide/issues/239)) ([9b33ac3](https://github.com/tompiarulli/2028-games-guide/commit/9b33ac3edd4da92fa44812aa99e642e33549b014))
+* **theme:** pick the toggle icon in CSS so it doesn't swap on load ([#230](https://github.com/tompiarulli/2028-games-guide/issues/230)) ([9fe4221](https://github.com/tompiarulli/2028-games-guide/commit/9fe4221be396ab53c3ad23537db76ef39aaff5cb))
+
+
+### Documentation
+
+* **readme:** add Claude and ChatGPT app setup guide ([#215](https://github.com/tompiarulli/2028-games-guide/issues/215)) ([5a255a4](https://github.com/tompiarulli/2028-games-guide/commit/5a255a4f5e0979a742c4318fd81b65183708d051))
+* **readme:** add screenshot capture script and refresh screenshot ([#222](https://github.com/tompiarulli/2028-games-guide/issues/222)) ([4e38319](https://github.com/tompiarulli/2028-games-guide/commit/4e383195afefc433c8a5384266948924d5248b38))
+* **readme:** add the checkly monitoring badge ([#221](https://github.com/tompiarulli/2028-games-guide/issues/221)) ([8bf814d](https://github.com/tompiarulli/2028-games-guide/commit/8bf814d398d5e2a71d9779c2bf9f9ceb4f7cdbff))
+* **readme:** rewrite the intro around what the guide does ([#223](https://github.com/tompiarulli/2028-games-guide/issues/223)) ([5b4e405](https://github.com/tompiarulli/2028-games-guide/commit/5b4e4050c35f8e457cbda5ea568ef6c3b108e779))
+
+
+### Build System
+
+* move to node 26 lts ([#231](https://github.com/tompiarulli/2028-games-guide/issues/231)) ([99c600e](https://github.com/tompiarulli/2028-games-guide/commit/99c600e64a2d3a07415fad11ed231fc593600cfa))
+
+
+### CI
+
+* **lighthouse:** take the badge median from 5 production runs ([#238](https://github.com/tompiarulli/2028-games-guide/issues/238)) ([1bc4602](https://github.com/tompiarulli/2028-games-guide/commit/1bc4602bc0a9db2f69d42c5650419d33e8ba4828))
+* **monitoring:** monitor production with checkly and playwright ([#220](https://github.com/tompiarulli/2028-games-guide/issues/220)) ([a7ccbff](https://github.com/tompiarulli/2028-games-guide/commit/a7ccbff4c604955a8681da234a5382b4314063f7))
+
+
+### Miscellaneous
+
+* **data:** regenerate session content and scores with the new prompts ([#237](https://github.com/tompiarulli/2028-games-guide/issues/237)) ([5cdc889](https://github.com/tompiarulli/2028-games-guide/commit/5cdc8892be3dd00e578c75597ef037e4d2648d75))
+* **data:** scheduled content refresh 2026-11-11 ([#232](https://github.com/tompiarulli/2028-games-guide/issues/232)) ([84f339e](https://github.com/tompiarulli/2028-games-guide/commit/84f339ed5740a62b0bdd33659be5163c25313d54))
+* **deps:** update dependency @anthropic-ai/sdk to ^0.137.0 ([#219](https://github.com/tompiarulli/2028-games-guide/issues/219)) ([fa33842](https://github.com/tompiarulli/2028-games-guide/commit/fa338426af3869748efc715af44fbedec87bb644))
+* **deps:** update dependency lucide-react to v1.70.0 ([#224](https://github.com/tompiarulli/2028-games-guide/issues/224)) ([9f033c5](https://github.com/tompiarulli/2028-games-guide/commit/9f033c5ebc10b3e4d02f5f41e0a378daed9b92d8))
+* **deps:** update dependency resend to v6.37.0 ([#225](https://github.com/tompiarulli/2028-games-guide/issues/225)) ([2aac676](https://github.com/tompiarulli/2028-games-guide/commit/2aac676647775e57efe2e0caf482df4d1022dc50))
+* **deps:** update dependency vite to v8.3.6 ([#229](https://github.com/tompiarulli/2028-games-guide/issues/229)) ([638738c](https://github.com/tompiarulli/2028-games-guide/commit/638738c0ca99a4f9fb04fe4d29d8b62133c7cde9))
+* **deps:** update oxc tooling ([#226](https://github.com/tompiarulli/2028-games-guide/issues/226)) ([62972fd](https://github.com/tompiarulli/2028-games-guide/commit/62972fd79ceaf9b561f8c670871498855d66dc5b))
+* **deps:** update pnpm to v12.16.1 ([#227](https://github.com/tompiarulli/2028-games-guide/issues/227)) ([903ee4b](https://github.com/tompiarulli/2028-games-guide/commit/903ee4bc2d5898a2ae9349a9b12b6726a78e3621))
+* **deps:** update pnpm/action-setup digest to 73e4699 ([#228](https://github.com/tompiarulli/2028-games-guide/issues/228)) ([0a52ed7](https://github.com/tompiarulli/2028-games-guide/commit/0a52ed713f2bfcb3d13ba380f22c2c7abc05b20a))
+
 ## [1.12.0](https://github.com/tompiarulli/2028-games-guide/compare/v1.11.0...v1.12.0) (2026-10-31)
 
 
