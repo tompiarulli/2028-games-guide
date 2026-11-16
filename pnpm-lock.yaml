@@ -265,7 +265,7 @@ importers:
         version: 10.1.0(supports-color@8.1.1)
       dotenv:
         specifier: ^18.0.0
-        version: 18.0.9
+        version: 18.0.10
       jsdom:
         specifier: ^30.0.0
         version: 30.1.3
@@ -2738,8 +2738,8 @@ packages:
     resolution: {integrity: sha512-BTJ9aZYL3vCfZlZOBLy9v8TUqWGQ0pzFnygKwFZt5udj6viBoFIBviKPUoZLDCPn1FoXffv6McQFDenrm5Krfw==}
     engines: {node: '>=20'}
 
-  dotenv@18.0.9:
-    resolution: {integrity: sha512-3fVOW4cB02R066PUSwn8O4TJyz9NckQl7F81blIbaq9jKBm2tSmOKky7ZHIXzGvkVPXCSn6jkpziBPZdGFs8Tw==}
+  dotenv@18.0.10:
+    resolution: {integrity: sha512-89FAA1xchzK2mxVWdr5F/0rldwiueXs6zJM86rO66EzekR1iBdiXRthyG+m5GvkJaFH3C2LESzamTkgndmLT2A==}
     engines: {node: '>=12'}
     hasBin: true
 
@@ -6331,7 +6331,7 @@ snapshots:
       ci-info: 4.4.0
       conf: 15.1.0
       debug: 4.4.3(supports-color@8.1.1)
-      dotenv: 18.0.9
+      dotenv: 18.0.10
       execa: 10.2.1
       git-repo-info: 2.1.1
       glob: 13.0.6
@@ -6525,7 +6525,7 @@ snapshots:
     dependencies:
       type-fest: 5.10.0
 
-  dotenv@18.0.9: {}
+  dotenv@18.0.10: {}
 
   dunder-proto@1.0.1:
     dependencies:
