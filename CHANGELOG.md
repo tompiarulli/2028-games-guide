@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.13.2](https://github.com/tompiarulli/2028-games-guide/compare/v1.13.1...v1.13.2) (2026-11-28)
+
+
+### Miscellaneous
+
+* **deps:** update dependency dotenv to v18.0.10 ([#243](https://github.com/tompiarulli/2028-games-guide/issues/243)) ([600f0af](https://github.com/tompiarulli/2028-games-guide/commit/600f0af2e4ec2582ab26b9366664d6e4db984b21))
+* **deps:** update dependency vite to v8.3.8 ([#244](https://github.com/tompiarulli/2028-games-guide/issues/244)) ([c2a1589](https://github.com/tompiarulli/2028-games-guide/commit/c2a15893f0f8dec2e4b5929a152c365d6444c520))
+
 ## [1.13.1](https://github.com/tompiarulli/2028-games-guide/compare/v1.13.0...v1.13.1) (2026-11-12)
 
 
